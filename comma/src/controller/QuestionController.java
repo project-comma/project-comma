@@ -1,8 +1,13 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,15 +24,25 @@ public class QuestionController {
 	private IQuestionService qService;
 	
 	@RequestMapping("questionList.do")//질문리스트
-	public ModelAndView questionList() {
+	public void questionList(HttpServletResponse response) throws IOException {
 		
 		
-		ModelAndView mav = new ModelAndView();
+		
 		ArrayList<HashMap<String, Object>> result = qService.read();
-		System.out.println(result);
+//		System.out.println(result);
+		JSONArray jarr = new JSONArray();
+		for (int i = 0; i < result.size(); i++) {
+			JSONObject jo = new JSONObject();
+			jo.put("id", result.get(i).get("id"));
+			jo.put("title", result.get(i).get("title"));
+			jo.put("date", result.get(i).get("date"));
+			jarr.put(jo);
+		}
+		
+		response.getWriter().println(jarr);
 		
 		
-		return mav;
+		
 	}
 	
 	

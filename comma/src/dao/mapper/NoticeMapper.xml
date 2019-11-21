@@ -23,7 +23,7 @@
   	select * from notice_board where number= #{number}
   </select>
   
-  <select id="selectList" resultType="java.util.ArrayList">
+  <select id="selectAll" resultType="java.util.HashMap">
   	select * from notice_board
   </select>
   
