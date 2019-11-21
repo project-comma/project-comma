@@ -27,7 +27,7 @@
   	select * from question_board
   </select>
   
-  <select id="searchList" resultType="java.util.ArrayList">
+  <select id="searchList" resultType="java.util.HashMap">
   	select * from question_board
   </select>
   

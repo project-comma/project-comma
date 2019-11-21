@@ -117,6 +117,16 @@
 				alert("밖놉")
 
 		})
+		
+		
+		
+		
+		
+	
+	
+		
+		
+		
 
 	})
 </script>
@@ -222,7 +232,7 @@
 
 						<li class="nav-item">
 							<h4>
-								<a class="nav-link" href="centro.do">고객센터</a>
+								<a class="nav-link" id="centroBtn" href="notice.do">고객센터</a>
 							</h4>
 						</li>
 

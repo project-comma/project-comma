@@ -1,9 +1,14 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +27,33 @@ public class NoticeController {
 	
 	
 	@RequestMapping("noticeList.do")//공지리스트
-	public ModelAndView noticeList() {
+	public void noticeList(HttpServletResponse response) throws IOException {
 		
 		
-		ModelAndView mav = new ModelAndView();
+		System.out.println("들어옴?????");
+		
 		ArrayList<HashMap<String, Object>> result = nService.read();
-		System.out.println(result);
+//		System.out.println("들어옴?2");
+//		System.out.println(result);
+		JSONArray jarr = new JSONArray();
 		
-		return mav;
+		
+		for (int i = 0; i < result.size(); i++) {
+			JSONObject jo = new JSONObject();
+			jo.put("id", result.get(i).get("id"));
+			jo.put("title", result.get(i).get("title"));
+			jo.put("date", result.get(i).get("date"));
+			jarr.put(jo);
+			
+		}
+
+		response.getWriter().println(jarr);
+
+		
+		
+		
+		
+		
 	}
 	
 	//공지사항 상세정보
@@ -37,6 +61,7 @@ public class NoticeController {
 	public ModelAndView notice() {
 
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("centro");
 		return mav;
 	}
 		
