@@ -17,7 +17,7 @@
 
 
     <h2 style="margin-left: 500px; display: inline-block;  margin-bottom: 50px;">리뷰</h2>
-    <button type="button" class="btn btn-outline-secondary" style="display: inline-block; margin-left: 900px;" onclick="pReview_write_open()">리뷰 작성</button>
+    <button type="button" class="btn btn-outline-secondary" style="display: inline-block; margin-left: 850px;" onclick="pReview_write_open()">리뷰 작성</button>
 
     <div class="container">
 

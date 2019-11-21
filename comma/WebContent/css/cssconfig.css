@@ -198,7 +198,7 @@ pre {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	z-index: 100;
+	z-index: 98;
 	border-radius: 3px;
 }
 
@@ -214,7 +214,7 @@ pre {
 	top: 50%;
 	transform: translate(-50%, -50%);
 	background-color: white;
-	z-index: 100;
+	z-index: 99;
 }
 
 .popup_small {
@@ -230,6 +230,7 @@ pre {
 	transform: translate(-50%, -50%);
 	background-color: white;
 	border: 1px solid black;
+	z-index: 97;
 }
 
 .text_1 {
@@ -255,10 +256,48 @@ pre {
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
-	z-index: 99;
+	z-index: 2;
 }
 
 .democlass {
-	z-index: 98;
+	z-index: 1;
 	position: relative;
 }
+
+.maindim {
+	position: fixed;
+	width: 1200;
+	height: 500px;
+	background: rgba(0, 0, 0, 0.5);
+}
+.scroll{
+	
+	scroll-behavior:smooth;
+	
+}
+
+#s_nav1::before,
+#s_nav2::before,
+#s_nav3::before,
+#s_nav4::before,
+#s_nav5::before,
+#s_nav6::before
+ {
+  display: block;
+  content: " ";
+  margin-top: -65px;
+  height: 65px;
+  visibility: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
