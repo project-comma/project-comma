@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="dao.IRequestClassDao">
+  
+  <insert id="insertRequestClass" parameterType="java.util.HashMap" >
+  	insert into request_class_board (id, c_category, content, c_type,
+  	c_location, r_status, c_startday, c_starttime, c_classtime, c_member)values 
+  	(#{id}, #{c_category}, #{content}, #{c_type}, #{c_location}, #{r_status},
+  	#{c_startday}, #{c_starttime}, #{c_classtime}, #{c_member})
+  </insert>
+  
+  <delete id="deleteRequestClass" parameterType="int">
+	delete from request_class_board where number = #{number}  
+  </delete>
+  
+  <update id="updateRequestClass" parameterType="java.util.HashMap">
+  	update request_class_board set c_category= #{c_category}, content= #{content}, c_type= #{c_type},
+  	c_location= #{c_location}, r_status= #{r_status}, c_startday= #{c_startday},
+  	c_starttime= #{c_starttime}, c_classtime= #{c_classtime}, c_member= #{c_member} where number= #{number}
+  </update>
+  
+  <select id="select" resultType="java.util.HashMap" parameterType="String">
+  	select * from request_class_board where number= #{number}
+  </select>
+  
+  <select id="selectList" resultType="java.util.ArrayList" parameterType="java.util.HashMap">
+  	select * from request_class_board
+  </select>
+  
+  </mapper>

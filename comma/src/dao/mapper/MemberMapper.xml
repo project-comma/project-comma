@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="dao.IMemberDao">
+  
+  <insert id="insertMember" parameterType="java.util.HashMap">
+  	insert into member (id,name,email,password,gender,state)
+  	values (#{id}, #{name}, #{email}, #{password}, #{gender}, 1)
+  
+  </insert>
+  
+  <delete id="deleteMember" parameterType="java.util.HashMap">
+  	delete from member where id = #{id}
+  
+  </delete>
+  
+  <update id="updateMember"  parameterType="java.util.HashMap">
+  	update member set image= #{image}, t_idcard= #{t_idcard}, t_career= #{t_career},
+    t_license= #{t_license}, t_sns= #{t_sns} where id = #{id}
+  
+  </update>
+  
+<!--   <update id="updateMember" parameterType="java.util.HashMap"> -->
+<!--   	update member set email= #{email}, password= #{password}, -->
+<!--   	p_number= #{p_number} where id = #{id} -->
+  
+<!--   </update> -->
+  
+  
+  
+  <select id="selectMember" resultType="java.util.HashMap" parameterType="String">
+  	select * from member where id = #{id}
+  
+  </select>
+  
+  <select id="listMember" resultType="java.util.ArrayList">
+  	select * from member
+  
+  </select>
+  
+  
+  <!-- 총 회원수 구하기 -->
+  <select id="getCount" resultType="int">
+  	select count(#{name}) from member
+  </select>
+
+	  
+  
+  
+  </mapper>
