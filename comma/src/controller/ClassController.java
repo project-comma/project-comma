@@ -27,7 +27,7 @@ public class ClassController {
 //		List<HashMap<String, Object>> result = cService.popList();
 //		result.get(0);
 		ArrayList<HashMap<String, Object>> result = cService.popList();
-		System.out.println(result.get(0).get("c_score"));
+		
 
 		return "main";
 	}
