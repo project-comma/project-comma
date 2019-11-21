@@ -18,8 +18,8 @@
 	<jsp:include page="alert/delete_alert.jsp"></jsp:include>
 	<jsp:include page="alert/req_delete.jsp"></jsp:include>
 	<jsp:include page="alert/dropMember.jsp"></jsp:include>
-	
-	
+
+
 
 	<br>
 	<div align="center">
@@ -57,7 +57,8 @@ phy555@naver.com
 								value="정보변경" onclick="location.href='changeInfo_tForm.do'">
 							<input type="button" class="btn btn-light" id="modify_info"
 								value="실시간톡" onclick="location.href='talk.do'"> <input
-								type="button" class="btn btn-light" id="modify_info" value="탈퇴" onclick="drop_member_open(${id})">
+								type="button" class="btn btn-light" id="modify_info" value="탈퇴"
+								onclick="drop_member_open(${id})">
 
 						</div>
 					</td>
@@ -72,23 +73,27 @@ phy555@naver.com
 					style="border-bottom: 1px solid #555; width: 1200px;">
 					<ul id="myt_nav" class="navbar-nav" style="display: inline-block;">
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 20px;">등록된
-								클래스</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 20px;">
+								<a href="#t_nav1" style="color: grey;">등록된 클래스</a>
+							</h4>
 						</li>
 
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 20px;">수업
-								완료된 클래스</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 20px;">
+								<a href="#t_nav2" style="color: grey;">수업 완료된 클래스</a>
+							</h4>
 						</li>
 
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 20px;">클래스별
-								리뷰</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 20px;">
+								<a href="#t_nav3" style="color: grey;">클래스별 리뷰</a>
+							</h4>
 						</li>
 
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 20px;">요청
-								클래스</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 20px;">
+								<a href="#t_nav4" style="color: grey;">요청 클래스</a>
+							</h4>
 						</li>
 
 					</ul>
@@ -96,7 +101,7 @@ phy555@naver.com
 			</nav>
 
 			<br>
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;">등록된클래스</h3>
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="t_nav1">등록된클래스</h3>
 			<br>
 			<div align="left">
 				<div class=inlineArr>
@@ -105,15 +110,21 @@ phy555@naver.com
 					너만을 위한 마카롱 만들기 (2019-10-22 개설/ 원데이/ 30,000원)<br>
 				</div>
 				<div class=inlineArr>
-					<button type="submit" class="btn btn-outline-secondary mypageT_resisclass_btn"
-					
-						onclick="location.href='classModify.do'"><h6 style="font-size: 13px;">내용수정</h6></button>
-					<button type="submit" class="btn btn-outline-secondary mypageT_resisclass_btn"
-					
-						onclick="del_conf('t_class_del','${c_name}')"><h6 style="font-size: 13px;">수업삭제</h6></button>
-					<button type="submit" class="btn btn-outline-secondary mypageT_resisclass_btn"
-					 onclick="location.href='enroll.do'"><h6 style="font-size: 13px;">학생목록</h6>
-						</button>
+					<button type="submit"
+						class="btn btn-outline-secondary mypageT_resisclass_btn"
+						onclick="location.href='classModify.do'">
+						<h6 style="font-size: 13px;">내용수정</h6>
+					</button>
+					<button type="submit"
+						class="btn btn-outline-secondary mypageT_resisclass_btn"
+						onclick="del_conf('t_class_del','${c_name}')">
+						<h6 style="font-size: 13px;">수업삭제</h6>
+					</button>
+					<button type="submit"
+						class="btn btn-outline-secondary mypageT_resisclass_btn"
+						onclick="location.href='enroll.do'">
+						<h6 style="font-size: 13px;">학생목록</h6>
+					</button>
 				</div>
 			</div>
 			<br> <br>
@@ -128,13 +139,19 @@ phy555@naver.com
 				<div class="inlineArr">
 					<button type="submit"
 						class="btn btn-outline-secondary mypageT_resisclass_btn"
-						onclick="location.href='classModify.do'"><h6 style="font-size: 13px;">내용수정</h6></button>
+						onclick="location.href='classModify.do'">
+						<h6 style="font-size: 13px;">내용수정</h6>
+					</button>
 					<button type="submit"
 						class="btn btn-outline-secondary mypageT_resisclass_btn"
-						onclick="del_conf('t_class_del','${c_name}')"><h6 style="font-size: 13px;">수업삭제</h6></button>
+						onclick="del_conf('t_class_del','${c_name}')">
+						<h6 style="font-size: 13px;">수업삭제</h6>
+					</button>
 					<button type="submit"
 						class="btn btn-outline-secondary mypageT_resisclass_btn"
-						onclick="location.href='enroll.do'"><h6 style="font-size: 13px;">학생목록</h6></button>
+						onclick="location.href='enroll.do'">
+						<h6 style="font-size: 13px;">학생목록</h6>
+					</button>
 				</div>
 			</div>
 
@@ -150,15 +167,21 @@ phy555@naver.com
 					너만을 위한 케익 만들기 (2019-10-22 개설/ 원데이/ 30,000원)<br>
 				</div>
 				<div class="inlineArr">
-					<button type="submit" class="btn btn-outline-secondary mypageT_resisclass_btn"
+					<button type="submit"
+						class="btn btn-outline-secondary mypageT_resisclass_btn"
 						onclick="location.href='classModify.do'">
 						<h6 style="font-size: 13px;">내용수정</h6>
 					</button>
-					<button type="submit" class="btn btn-outline-secondary mypageT_resisclass_btn"
-					
-						onclick="del_conf('t_class_del','${c_name}')"><h6 style="font-size: 13px;">수업삭제</h6></button>
-					<button type="submit" class="btn btn-outline-secondary mypageT_resisclass_btn"
-						onclick="location.href='enroll.do'"><h6 style="font-size: 13px;">학생현황</h6></button>
+					<button type="submit"
+						class="btn btn-outline-secondary mypageT_resisclass_btn"
+						onclick="del_conf('t_class_del','${c_name}')">
+						<h6 style="font-size: 13px;">수업삭제</h6>
+					</button>
+					<button type="submit"
+						class="btn btn-outline-secondary mypageT_resisclass_btn"
+						onclick="location.href='enroll.do'">
+						<h6 style="font-size: 13px;">학생현황</h6>
+					</button>
 				</div>
 
 			</div>
@@ -173,14 +196,21 @@ phy555@naver.com
 
 				</div>
 				<div class="inlineArr">
-					<button type="submit" class="btn btn-outline-secondary mypageT_resisclass_btn"
-				
-						onclick="location.href='classModify.do'"><h6 style="font-size: 13px;">내용수정</h6></button>
-					<button type="submit" class="btn btn-outline-secondary mypageT_resisclass_btn"
-					
-						onclick="del_conf('t_class_del','${c_name}')"><h6 style="font-size: 13px;">수업삭제</h6></button>
-					<button type="submit" class="btn btn-outline-secondary mypageT_resisclass_btn"
-						onclick="location.href='enroll.do'"><h6 style="font-size: 13px;">학생현황</h6></button>
+					<button type="submit"
+						class="btn btn-outline-secondary mypageT_resisclass_btn"
+						onclick="location.href='classModify.do'">
+						<h6 style="font-size: 13px;">내용수정</h6>
+					</button>
+					<button type="submit"
+						class="btn btn-outline-secondary mypageT_resisclass_btn"
+						onclick="del_conf('t_class_del','${c_name}')">
+						<h6 style="font-size: 13px;">수업삭제</h6>
+					</button>
+					<button type="submit"
+						class="btn btn-outline-secondary mypageT_resisclass_btn"
+						onclick="location.href='enroll.do'">
+						<h6 style="font-size: 13px;">학생현황</h6>
+					</button>
 				</div>
 
 			</div>
@@ -387,7 +417,7 @@ phy555@naver.com
 				<div align="left"
 					style="border-top: 1px solid black; border-bottom: 1px solid black; width: 1000px;">
 
-					<h4 style="margin-top: 20px; font-size: 25px; font-weight: 700;">수업
+					<h4 style="margin-top: 20px; font-size: 25px; font-weight: 700;" id="t_nav2">수업
 						완료된 클래스</h4>
 
 					<br>
@@ -423,7 +453,7 @@ phy555@naver.com
 				<br>
 				<div align="left" id="myT_review"
 					style="border-bottom: 1px solid black; width: 1000px;">
-					<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;">클래스
+					<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="t_nav3">클래스
 						별 리뷰</h3>
 
 					<br> <input type="checkbox"> 너만을 위한 마카롱 만들기
@@ -458,7 +488,7 @@ phy555@naver.com
 
 				<div align="left" style="width: 1000px;">
 					<br>
-					<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;">요청클래스</h3>
+					<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="t_nav4">요청클래스</h3>
 					<div align="left"
 						style="margin-top: 10px; margin-left: 25px; width: 450px;">
 						<h4 style="font-weight: 600; font-size: 17px;">검토중</h4>
@@ -551,7 +581,7 @@ phy555@naver.com
 								<span> <img src="img/위치.png"
 									style="width: 30px; height: 30px;">
 								</span> <span> 서울시 종로구 </span>
-							
+
 							</div>
 						</div>
 						<br>
@@ -579,7 +609,7 @@ phy555@naver.com
 							<div style="margin-top: 10px;">
 								<span> <img src="img/위치.png"
 									style="width: 30px; height: 30px;">
-								</span> <span> 서울시 종로구 </span> 
+								</span> <span> 서울시 종로구 </span>
 							</div>
 						</div>
 						<br>

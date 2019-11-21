@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="dim"></div>
+
 	<div align="center">
 		<div align="center" class="popup_wide" id="class_review">
 			<!--닫기창  -->
@@ -74,7 +74,7 @@
 			<!--  등록버튼-->
 			<div>
 				<button type="submit" class="btn btn-outline-secondary"
-					style="margin-top: 20px;">등록</button>
+					style="margin-top: 20px;" onclick="review_write_btn('content')">등록</button>
 			</div>
 		</div>
 	</div>

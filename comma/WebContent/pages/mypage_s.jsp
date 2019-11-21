@@ -16,7 +16,7 @@
 	<jsp:include page="alert/delete_alert.jsp"></jsp:include>
 	<jsp:include page="alert/t_profile.jsp"></jsp:include>
 	<jsp:include page="alert/t_req_accept.jsp"></jsp:include>
-	
+
 
 	<br>
 	<div align="center">
@@ -49,13 +49,13 @@ phy555@naver.com
 							style="vertical-align: midle; height: 40px;">
 							<input type="button" class="btn btn-outline-secondary"
 								id="modify_info" value="정보변경"
-								onclick="location.href='changeInfo_sForm.do'"> <input
+								onclick="location.href='changeInfo_s.do'"> <input
 								type="button" class="btn btn-outline-secondary" id="modify_info"
 								value="실시간톡" onclick="location.href='talk.do'"> <input
 								type="button" class="btn btn-outline-secondary" id="modify_info"
 								value="스케줄"> <input type="button"
 								class="btn btn-outline-secondary" id="modify_info" value="선생님등록"
-								onclick="location.href='t_ResistForm.do'"> <input
+								onclick="location.href='t_Resist.do'"> <input
 								type="button" class="btn btn-outline-secondary" id="modify_info"
 								value="탈퇴">
 
@@ -72,33 +72,34 @@ phy555@naver.com
 					style="border-bottom: 1px solid #555; width: 1200px;">
 					<ul id="myt_nav" class="navbar-nav" style="display: inline-block;">
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">관심
-								클래스</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
+								<a href="#s_nav1" style="color: grey;">관심 클래스</a>
+							</h4>
 						</li>
 
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">결제
-								완료</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
+							<a href="#s_nav2" style="color: grey;">결제 완료</a></h4>
 						</li>
 
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">환불된
-								클래스</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
+							<a href="#s_nav3" style="color: grey;">환불된 클래스</a></h4>
 						</li>
 
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">완료된
-								클래스</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
+							<a href="#s_nav4" style="color: grey;">완료된 클래스</a></h4>
 						</li>
 
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">나의
-								리뷰</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
+							<a href="#s_nav5" style="color: grey;">나의 리뷰</a></h4>
 						</li>
 
 						<li class="nav-item">
-							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">요청
-								클래스</h4>
+							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
+							<a href="#s_nav6" style="color: grey;">요청 클래스</a></h4>
 						</li>
 
 					</ul>
@@ -107,8 +108,7 @@ phy555@naver.com
 
 
 			<br>
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;">관심
-				클래스</h3>
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav1">관심 클래스</h3>
 			<br>
 
 			<div align="left"
@@ -236,7 +236,7 @@ phy555@naver.com
 
 			<!-- 결제 완료된 클래스 -->
 
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;">결제
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav2">결제
 				완료된 클래스</h3>
 			<br>
 
@@ -277,7 +277,8 @@ phy555@naver.com
 
 
 						<div style="width: 300px;" align="center">
-							<input type="button" style="width: 100px;" value="환불 하기" class="btn btn-outline-secondary"
+							<input type="button" style="width: 100px;" value="환불 하기"
+								class="btn btn-outline-secondary"
 								onclick="location.href='refund.do'">
 						</div>
 					</div>
@@ -318,7 +319,8 @@ phy555@naver.com
 
 
 						<div style="width: 300px;" align="center">
-							<input type="button" style="width: 100px;" value="환불 하기" class="btn btn-outline-secondary"
+							<input type="button" style="width: 100px;" value="환불 하기"
+								class="btn btn-outline-secondary"
 								onclick="location.href='refund.do'">
 						</div>
 					</div>
@@ -362,7 +364,8 @@ phy555@naver.com
 					</div>
 
 					<div style="width: 300px;" align="center">
-						<input type="button" style="width: 100px;" value="환불 하기" class="btn btn-outline-secondary"
+						<input type="button" style="width: 100px;" value="환불 하기"
+							class="btn btn-outline-secondary"
 							onclick="location.href='refund.do'">
 					</div>
 				</div>
@@ -373,7 +376,7 @@ phy555@naver.com
 
 			<br>
 			<!-- 환불 완료된 클래스 -->
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;">환불
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav3">환불
 				완료된 클래스</h3>
 			<br>
 
@@ -502,7 +505,7 @@ phy555@naver.com
 			<!-- 완료된클래스 -->
 
 
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;">완료된
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav4">완료된
 				클래스</h3>
 			<br>
 
@@ -543,8 +546,8 @@ phy555@naver.com
 						</div>
 
 						<div style="width: 300px;" align="center">
-							<input type="button" style="width: 100px;" value="리뷰 쓰기" class="btn btn-outline-secondary"
-								onclick="class_review_show()">
+							<input type="button" style="width: 100px;" value="리뷰 쓰기"
+								class="btn btn-outline-secondary" onclick="class_review_show()">
 						</div>
 
 					</div>
@@ -585,8 +588,8 @@ phy555@naver.com
 
 
 						<div style="width: 300px;" align="center">
-							<input type="button" style="width: 100px;" value="리뷰 쓰기" class="btn btn-outline-secondary"
-								onclick="class_review_show()">
+							<input type="button" style="width: 100px;" value="리뷰 쓰기"
+								class="btn btn-outline-secondary" onclick="class_review_show()">
 						</div>
 					</div>
 				</div>
@@ -625,8 +628,8 @@ phy555@naver.com
 						</div>
 
 						<div style="width: 300px;" align="center">
-							<input type="button" style="width: 100px;" value="리뷰 쓰기" class="btn btn-outline-secondary"
-								onclick="class_review_show()">
+							<input type="button" style="width: 100px;" value="리뷰 쓰기"
+								class="btn btn-outline-secondary" onclick="class_review_show()">
 						</div>
 
 					</div>
@@ -640,7 +643,7 @@ phy555@naver.com
 
 			<!-- 나의 리뷰 -->
 
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;">나의
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav5">나의
 				리뷰</h3>
 
 			<br>
@@ -660,7 +663,8 @@ phy555@naver.com
 					</div>
 
 					<div style="display: inline:block; float: right;" align="right">
-						<input type="button" value="삭제" class="btn btn-outline-secondary" style="margin-right: 30px;"
+						<input type="button" value="삭제" class="btn btn-outline-secondary"
+							style="margin-right: 30px;"
 							onclick="del_conf('my_rev_del','${number}')">
 					</div>
 				</div>
@@ -677,7 +681,8 @@ phy555@naver.com
 					</div>
 
 					<div style="display: inline:block; float: right;" align="right">
-						<input type="button" value="삭제" class="btn btn-outline-secondary" style="margin-right: 30px;"
+						<input type="button" value="삭제" class="btn btn-outline-secondary"
+							style="margin-right: 30px;"
 							onclick="del_conf('my_rev_del','${number}')">
 					</div>
 				</div>
@@ -719,7 +724,8 @@ phy555@naver.com
 						</div>
 
 						<div style="width: 300px; margin-top: 20px;" align="center">
-							<input type="button" value="환불 하기"  class="btn btn-outline-secondary"
+							<input type="button" value="환불 하기"
+								class="btn btn-outline-secondary"
 								onclick="location.href='refund.do'">
 						</div>
 
@@ -757,7 +763,8 @@ phy555@naver.com
 						</div>
 
 						<div style="width: 300px; margin-top: 20px;" align="center">
-							<input type="button"  value="환불 하기"  class="btn btn-outline-secondary"
+							<input type="button" value="환불 하기"
+								class="btn btn-outline-secondary"
 								onclick="location.href='refund.do'">
 						</div>
 
@@ -795,7 +802,8 @@ phy555@naver.com
 						</div>
 
 						<div style="width: 300px; margin-top: 20px;" align="center">
-							<input type="button"  value="환불 하기"  class="btn btn-outline-secondary"
+							<input type="button" value="환불 하기"
+								class="btn btn-outline-secondary"
 								onclick="location.href='refund.do'">
 						</div>
 
@@ -812,10 +820,10 @@ phy555@naver.com
 
 			<!-- 요청한 클래스 -->
 
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;">요청한
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav6">요청한
 				클래스</h3>
-				
-				
+
+
 
 			<div align="left"
 				style="width: 1200px; height: 400px; border-bottom: 1px solid black;">
@@ -833,8 +841,8 @@ phy555@naver.com
 					</div>
 
 					<div style="display: inline:block; float: left; margin-left: 20px;">
-						<input type="button" style="width: 120px;" value="삭제" 
-							onclick="del_conf('my_req_del','${number}')">
+						<input type="button" style="width: 120px;" value="삭제"
+							onclick="del_conf('my_req_del',1)">
 					</div>
 
 					<br>
@@ -850,9 +858,10 @@ phy555@naver.com
 
 						<div
 							style="display: inline-block; float: left; margin-left: 10px;">
-							<br> <input type="button" value="선생님 프로필" 
-								style="width: 120px; margin-left: 12px;" onclick="t_profile_open(${id})"> <input
-								type="button" value="선생님 수락" onclick="t_accept_open(${id})"
+							<br> <input type="button" value="선생님 프로필"
+								style="width: 120px; margin-left: 12px;"
+								onclick="t_profile_open(${id})"> <input type="button"
+								value="선생님 수락" onclick="t_accept_open(${id})"
 								style="width: 120px; margin-left: 12px;">
 
 						</div>
@@ -876,8 +885,9 @@ phy555@naver.com
 						<div
 							style="display: inline-block; float: left; margin-left: 10px;">
 							<br> <input type="button" value="선생님 프로필"
-								style="width: 120px; margin-left: 12px;" onclick="t_profile_open(${id})"> <input
-								type="button" value="선생님 수락" onclick="t_accept_open(${id})"
+								style="width: 120px; margin-left: 12px;"
+								onclick="t_profile_open(${id})"> <input type="button"
+								value="선생님 수락" onclick="t_accept_open(${id})"
 								style="width: 120px; margin-left: 12px;">
 
 						</div>
@@ -920,8 +930,9 @@ phy555@naver.com
 						<div
 							style="display: inline-block; float: left; margin-left: 10px;">
 							<br> <input type="button" value="선생님 프로필"
-								style="width: 120px; margin-left: 12px;" onclick="t_profile_open(${id})"> <input
-								type="button" value="선생님 수락" onclick="t_accept_open(${id})"
+								style="width: 120px; margin-left: 12px;"
+								onclick="t_profile_open(${id})"> <input type="button"
+								value="선생님 수락" onclick="t_accept_open(${id})"
 								style="width: 120px; margin-left: 12px;">
 
 						</div>
@@ -945,9 +956,10 @@ phy555@naver.com
 						<div
 							style="display: inline-block; float: left; margin-left: 10px;">
 							<br> <input type="button" value="선생님 프로필"
-								style="width: 120px; margin-left: 12px;" onclick="t_profile_open(${id})"> <input
-								type="button" value="선생님 수락"
-								style="width: 120px; margin-left: 12px;" onclick="t_accept_open(${id})">
+								style="width: 120px; margin-left: 12px;"
+								onclick="t_profile_open(${id})"> <input type="button"
+								value="선생님 수락" style="width: 120px; margin-left: 12px;"
+								onclick="t_accept_open(${id})">
 
 						</div>
 

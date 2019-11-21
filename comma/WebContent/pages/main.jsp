@@ -33,13 +33,13 @@
                 <!-- The slideshow -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="img/la.jpg" alt="Los Angeles" width="800" height="500">
+                        <img src="img/slide1.jpg" alt="Los Angeles" style="height: 600px;">
                     </div>
                     <div class="carousel-item">
-                        <img src="img/chicago.jpg" alt="Chicago" width="800" height="500">
+                        <img src="img/slide2.jpg" alt="Chicago"  style="height: 600px;">
                     </div>
                     <div class="carousel-item">
-                        <img src="img/ny.jpg" alt="New York" width="800" height="500">
+                        <img src="img/slide3.jpg" alt="New York"  style="height: 600px;">
                     </div>
                 </div>
 
