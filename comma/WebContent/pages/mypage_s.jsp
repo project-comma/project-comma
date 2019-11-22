@@ -50,13 +50,13 @@ phy555@naver.com
 							style="vertical-align: midle; height: 40px;">
 							<input type="button" class="btn btn-outline-secondary"
 								id="modify_info" value="정보변경"
-								onclick="location.href='changeInfo_s.do'"> <input
+								onclick="location.href='changeInfo_sForm.do'"> <input
 								type="button" class="btn btn-outline-secondary" id="modify_info"
 								value="실시간톡" onclick="location.href='talk.do'"> <input
 								type="button" class="btn btn-outline-secondary" id="modify_info"
 								value="스케줄"> <input type="button"
 								class="btn btn-outline-secondary" id="modify_info" value="선생님등록"
-								onclick="location.href='t_Resist.do'"> <input
+								onclick="location.href='t_ResistForm.do'"> <input
 								type="button" class="btn btn-outline-secondary" id="modify_info"
 								onclick="drop_member_open('${id}')" value="탈퇴">
 

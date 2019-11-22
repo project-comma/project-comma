@@ -10,8 +10,10 @@ import javax.servlet.http.HttpSession;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,20 +35,26 @@ public class MemberController {
 	}
 
 //	선생님등록 페이지
-	@RequestMapping("t_Resist.do")
-	public String t_Resist(HttpSession session, @RequestParam HashMap<String, Object> params) {
+	@RequestMapping(value="t_Resist.do", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String t_Resist(HttpSession session, @RequestBody HashMap<String, Object> params) {
 
 		String session_id = (String) session.getAttribute("id");
-
-		HashMap<String, Object> mId = mService.MemberInfo(session_id);
-
-		int mState = (int) mId.get("state");
-
-		if (session_id != null && mState == 0) {
-			int result = mService.resistTeacher(session_id, params);
-			System.out.println("컨트롤러에 돌아온 리턴값=" + result);
-		}
+		
+		System.out.println(params);
+//
+//
+//		HashMap<String, Object> mId = mService.MemberInfo(session_id);
+//
+//		int mState = (int) mId.get("state");
+//
+//		
+//
+//		if (session_id != null && mState == 0 ) {
+//			int result = mService.resistTeacher(session_id, params);
+//			System.out.println("컨트롤러에 돌아온 리턴값=" + result);
+//		} 
 		return "main";
+		
 
 	}
 
