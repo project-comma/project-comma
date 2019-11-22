@@ -1,11 +1,15 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -22,28 +26,60 @@ public class ClassController {
 	@Autowired
 	private IClassService cService;
 
+	@RequestMapping("mainForm.do")
+	public ModelAndView main() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main");
+		return mav;
+	}
+
 	// 메인페이지
-	@RequestMapping("main.do")
-	public String main() {
+	@RequestMapping("mainList.do")
+	public void main(HttpServletResponse response) throws IOException {
 		System.out.println("메인들어왓니 ?");
 //		List<HashMap<String, Object>> result = cService.popList();
 //		result.get(0);
 		ArrayList<HashMap<String, Object>> result = cService.popList();
-		
 
-		return "main";
+//		System.out.println(result);
+		JSONArray jarr = new JSONArray();
+		for (int i = 0; i < result.size(); i++) {
+			JSONObject jo = new JSONObject();
+			jo.put("c_name", result.get(i).get("c_name"));
+			jo.put("c_image", result.get(i).get("c_image"));
+			jo.put("c_price", result.get(i).get("c_price"));
+			jarr.put(jo);
+		}
+		response.getWriter().println(jarr);
+
 	}
 
-	// 클래스리스트
+	// 클래스폼페이지 이동
 	@RequestMapping("classList.do")
-	public String classList() {
-		ArrayList<HashMap<String, Object>> result = cService.allList();
-		System.out.println(result);
-		return "classList";
+	public ModelAndView classList() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("classListForm");
+		return mav;
 
 	}
 
+	//클래스 리스트 보여주기
+	@RequestMapping("classAllList.do")
+	public void classAllList(HttpServletResponse response) throws IOException {
+		ArrayList<HashMap<String, Object>> result = cService.allList();
 
+//		System.out.println(result);
+		JSONArray jarr = new JSONArray();
+		for (int i = 0; i < result.size(); i++) {
+			JSONObject jo = new JSONObject();
+			jo.put("c_name", result.get(i).get("c_name"));
+			jo.put("c_image", result.get(i).get("c_image"));
+			jo.put("c_price", result.get(i).get("c_price"));
+			jarr.put(jo);
+		}
+		response.getWriter().println(jarr);
+
+	}
 
 	// 클래스상세내용
 	@RequestMapping("class.do")
@@ -71,29 +107,24 @@ public class ClassController {
 		mav.setViewName("main");
 		return mav;
 	}
-	
-	
 
 	// 클래스 등록폼
 	@RequestMapping("classResistForm.do")
 	public String classResistForm(HttpSession session) {
-		
-		
-		
-		
+
 		return "classResistForm";
 	}
 
 	// 클래스수정
 	@RequestMapping("classModify.do")
 	public ModelAndView classModify(@RequestParam HashMap<String, Object> params) {
-		
+
 		int result = cService.modifyClass(params);
 		System.out.println(result);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(result);
-		
+
 		mav.setViewName("mypage_t");
 		return mav;
 	}
@@ -101,7 +132,7 @@ public class ClassController {
 	// 클래스수정폼
 	@RequestMapping("classModifyForm.do")
 	public ModelAndView classModifyForm(int number) {
-		
+
 		ModelAndView mav = new ModelAndView();
 		HashMap<String, Object> cl = cService.viewClass(number);
 		mav.addObject("class", cl);
@@ -114,10 +145,9 @@ public class ClassController {
 	public void likeClass(String number) {
 		String result = cService.interClass(number);
 		System.out.println(result);
-		
+
 	}
-	
-	
+
 	// 클래스 검색
 	@RequestMapping("searchClass.do")
 	public ModelAndView searchClass(@RequestParam HashMap<String, Object> params) {
@@ -125,16 +155,16 @@ public class ClassController {
 		ArrayList<HashMap<String, Object>> result = cService.searchClass(params);
 		return mav;
 	}
-	
-	//클래스 삭제
+
+	// 클래스 삭제
 	@RequestMapping("deleteClass.do")
 	public String deleteClass(String number) {
 		int result = cService.removeClass(number);
 		System.out.println(result);
 		return "";
 	}
-	
-	//클래스 삭제
+
+	// 클래스 삭제
 	@ResponseBody
 	@RequestMapping("deleteClassForm.do")
 	public Map deleteClassForm(@RequestParam HashMap<String, Object> params) {
@@ -142,22 +172,21 @@ public class ClassController {
 		map.put("controller", "deleteClasssForm");
 		return map;
 	}
-	//수강신청현황
+
+	// 수강신청현황
 	@RequestMapping("enroll.do")
 	public ModelAndView enroll() {
 		ModelAndView mav = new ModelAndView();
-		
-		
+
 		mav.setViewName("enroll");
 		return mav;
 	}
 
-
 	public ModelAndView moveToDeclaration(@RequestParam HashMap<String, Object> params) {
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("declaration_s");
-		
+
 		return mav;
 	}
 }

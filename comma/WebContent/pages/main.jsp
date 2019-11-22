@@ -7,6 +7,13 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <link rel="stylesheet" type="text/css" href="css/cssconfig.css">
+    
+    <!-- JQuery로드 -->
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+	integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+	crossorigin="anonymous">
+	
+</script>
     <style>
         /* Make the image fully responsive */
         .carousel-inner img {
@@ -15,6 +22,56 @@
         }
     </style>
 </head>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	
+	
+	
+	function main() {
+		$.ajax({
+			type : "get",
+			url : "mainList.do",
+			dataType : "json",
+			success : function (arr) {
+// 				alert(arr);
+				
+				for(var i = 0; i < arr.length; i++){
+					var div = $("<div style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
+// 					var img = $("<img width='300px' height='300px'>");
+					var img = $("<div>")
+					img.text(arr[i].c_image);
+					var name = $("<div>");
+					name.text(arr[i].c_name);
+					var price =$("<div>");
+					price.text(arr[i].c_price);
+					div.append(img).append(name).append(price);
+					$("#classList").append(div);
+				}
+				
+			},
+			error : function (xhrReq, status, error) {
+				alert("에러창")
+				console.log(xhrReq + ' / ' + status + ' / ' + error);
+				
+			}
+			
+			
+			
+		})
+	}
+	main();
+
+
+	
+	
+	
+
+})
+
+</script>
 
 <body>
     <jsp:include page="header.jsp"></jsp:include><br><br> 
@@ -54,43 +111,64 @@
         </div>
     </div><br><br>
 
-    <div align="left" style="margin-left: 500px;">
-        <div style="width: 1200px;">
-            <h2 style="font-weight: 900">인기 클래스</h2><br><br>
+<!--     <div align="left" style="margin-left: 500px;"> -->
+<!--         <div style="width: 1200px;"> -->
+<!--             <h2 style="font-weight: 900">인기 클래스</h2><br><br> -->
 
-            <div align="Left">
-                <img src="img/시간.png" id="cook" width="300px" height="300px">
+<!--             <div align="Left"> -->
+<!--                 <img src="img/시간.png" id="cook" width="300px" height="300px"> -->
 
-            </div><br>
+<!--             </div><br> -->
 
-            <table>
-                <tr>
-                    <td>
-                        <div align="Left">
-                            <img src="img/시간.png" id="time" width="80px" height="80px">
-                            <br>
-                            <a style="margin-left: 13px;">사용자</a>
-                        </div>
-                    </td>
+<!--             <table> -->
+<!--                 <tr> -->
+<!--                     <td> -->
+<!--                         <div align="Left"> -->
+<!--                             <img src="img/시간.png" id="time" width="80px" height="80px"> -->
+<!--                             <br> -->
+<!--                             <a style="margin-left: 13px;">사용자</a> -->
+<!--                         </div> -->
+<!--                     </td> -->
 
-                    <td>
-                        <div style="display: inline-block">
-                            <h6>[원데이]베이커리/케익너만을<br>위한 케익 만들기<br>40,000/1인</h6>
-                        </div>
-                        <br><br>
-                        <img src="img/원.png" id="cook" class="icon" width="20px" height="20px">
+<!--                     <td> -->
+<!--                         <div style="display: inline-block"> -->
+<!--                             <h6>[원데이]베이커리/케익너만을<br>위한 케익 만들기<br>40,000/1인</h6> -->
+<!--                         </div> -->
+<!--                         <br><br> -->
+<!--                         <img src="img/원.png" id="cook" class="icon" width="20px" height="20px"> -->
 
-                    </td>
-                </tr>
+<!--                     </td> -->
+<!--                 </tr> -->
 
-            </table>
-
-
-
-        </div>
+<!--             </table> -->
 
 
-    </div>
+
+<!--         </div> -->
+
+
+<!--     </div> -->
+
+		<div align="center">
+			<div align="left" style="width: 1200px;">
+				 <h2>인기 클래스</h2>
+			</div>
+		</div>
+		
+		<div align="center">
+			<div align="left" style="width:1200px "  id="classList" >
+<!-- 				<div style="width:300px; height: 400px;" id="classList"> -->
+<!-- 					<img src="img/시간.png" width="300px" height="300px"> -->
+<!-- 					<img src="img/시간.png" width="80px" height="80px"> -->
+<!-- 					<div>이상훈 </div> -->
+<!-- 					<div>내용내용내용내용내용내용내용내용</div> -->
+<!-- 					<div>가격</div> -->
+<!-- 				</div> -->
+			
+			
+			</div>
+		
+		</div>
 
 </body>
 

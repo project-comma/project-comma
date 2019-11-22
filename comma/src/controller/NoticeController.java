@@ -1,11 +1,14 @@
 package controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.INoticeService;
@@ -56,16 +60,16 @@ public class NoticeController {
 		
 	}
 	
-	//공지사항 상세정보
-	@RequestMapping("notice.do")
-	public ModelAndView notice() {
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("centro");
-		return mav;
-	}
+//	//공지사항 상세정보
+//	@RequestMapping("notice.do")
+//	public ModelAndView notice() {
+//
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("centro");
+//		return mav;
+//	}
 		
-	
+	@ResponseBody
 	@RequestMapping("notice_write.do")//공지사항쓰기
 	public Map notice_write(@RequestParam HashMap<String, Object> params) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -90,6 +94,28 @@ public class NoticeController {
 		int result = nService.modify(params);
 		System.out.println(result);
 		return mav;
+	}
+	
+	@RequestMapping("notice.do")
+	public ModelAndView notice(
+		@RequestParam(defaultValue = "1") int page, HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+
+		HashMap<String, Object> result = nService.getNoticeListPage(params, page);
+		
+
+		
+		mav.addAllObjects(result);
+		mav.addAllObjects(params);
+		
+		mav.setViewName("centro");
+		return mav;
+		
+		
+		
 	}
 	
 }

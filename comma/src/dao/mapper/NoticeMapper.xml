@@ -27,4 +27,22 @@
   	select * from notice_board
   </select>
   
+  <select id="selecNoticePage" parameterType="java.util.HashMap"
+		resultType="notice">
+		select * from notice_board
+		
+		order by number desc limit #{skip}, #{qty}
+	</select>
+
+	<select id="getCount" parameterType="java.util.HashMap"
+		resultType="int">
+
+		select count(*) from notice_board
+		
+		
+
+
+	</select>
+  
+ 
   </mapper>
