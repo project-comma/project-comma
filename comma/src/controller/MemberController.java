@@ -2,12 +2,15 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.IMemberService;
@@ -40,22 +45,39 @@ public class MemberController {
 
 		String session_id = (String) session.getAttribute("id");
 		
+		
+		
 		System.out.println(params);
-//
-//
-//		HashMap<String, Object> mId = mService.MemberInfo(session_id);
-//
-//		int mState = (int) mId.get("state");
-//
-//		
-//
-//		if (session_id != null && mState == 0 ) {
-//			int result = mService.resistTeacher(session_id, params);
-//			System.out.println("컨트롤러에 돌아온 리턴값=" + result);
-//		} 
+		
+//		int result = mService.resistTeacher(session_id, params);
+		
+//		System.out.println("컨트롤러에 돌아온 리턴값=" + result);
+		 
 		return "main";
 		
 
+	}
+	
+	//선생님등록 파일 업로드
+	@RequestMapping("t_ResistFile.do")
+	@ResponseBody
+	public Object t_ResistFile(MultipartHttpServletRequest request, HttpSession session) {
+		
+		
+		System.out.println("드루와드루와~");
+		
+		
+		String id = (String)session.getAttribute("id");
+		
+		HashMap<String, Object> params = mService.MemberInfo(id);
+		
+		
+		
+		
+//		int result = mService.resistProfileImage(params);
+		
+		
+		return "안녕?";
 	}
 
 	// 학생 정보 번경 형식

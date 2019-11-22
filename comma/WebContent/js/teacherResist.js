@@ -17,7 +17,7 @@ function carreerIN(){
 		var delBtn = $('<input type="button" id="delCareerBtn" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="carreerOUT(this)">')
 	
 	var hide = $('<div style="display:none"></div>');
-		var hideInput = $("<input style='display:none' type='hide' name='career' value='"+uni+"'>");
+		var hideInput = $("<input style='display:none' type='hide' name='t_career' value='"+uni+"'>");
 		
 	$(cat).append(catH5);
 	$(car).append(carH5);
@@ -64,7 +64,7 @@ function univIN(){
 		var delBtn = $('<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="carreerOUT(this)">')
 
 	var hide = $('<div style="display:none"></div>');
-		var hideInput = $("<input style='display:none' type='hide' name='education' value='"+uni+"'>");
+		var hideInput = $("<input style='display:none' type='hide' name='t_education' value='"+uni+"'>");
 	
 		
 		$(sc).append(scH5);
@@ -103,7 +103,7 @@ function licIN(){
 		var delBtn = $('<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="licOUT(this)">')
 
 	var hide = $('<div style="display:none"></div>');
-		var hideInput = $("<input style='display:none' type='hide' name='license' value='"+licName+"'>");
+		var hideInput = $("<input style='display:none' type='hide' name='t_license' value='"+licName+"'>");
 	
 		
 		$(lic).append(licH5);
@@ -133,14 +133,33 @@ function Tc_resist(){
 	$.ajax({
 		
 		url:"t_Resist.do",
+		cache: false,
 		type:"POST",
-		contentType:"application/json",
+		contentType:"application/json; charset=UTF-8",
 		data:JSON.stringify(formData),
 		success:function(data){
-			
+			alert("들왔어?");
+			var form = new FormData(document.getElementById("t_resistForm"));
+			$.ajax({
+				url:"t_ResistFile.do",
+				cache: false,
+				data: form,
+				dataType: 'text',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				success: function(response){
+					alert(response);
+				},
+				error: function(jqXHR, error){
+					alert('error : ' + error);
+				}
+			});
 		},
 		error:function(xhr, status, error){
 			alert("["+xhr.status+"]" + error);
 		}
 	});
+	
+	
 }

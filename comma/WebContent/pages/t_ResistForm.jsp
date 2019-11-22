@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%request.setCharacterEncoding("utf-8"); %>    
 <!DOCTYPE html>
 <html>
 
@@ -28,7 +29,7 @@
 	<div align="center">
     <h2 style="font-weight:900">선생님 등록</h2><br>
 
-    <form id="t_resistForm" action="t_Resist.do">
+    <form id="t_resistForm" action="t_Resist.do" enctype="multimart/form-data" accept-charset="UTF-8">
         
         
         <div align="center"><!-- 밑줄 상단 구간 -->
@@ -270,7 +271,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">학교</span>
                     </div>
-                    <input id="schoolInput" type="text" name="edu" class="form-control" placeholder="학교명">
+                    <input id="schoolInput" type="text" class="form-control" placeholder="학교명">
                 </div>
                 
             </div>
@@ -280,7 +281,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">학과</span>
                     </div>
-                    <input id="majorInput" type="text" name="edu" class="form-control" placeholder="학과명">
+                    <input id="majorInput" type="text" class="form-control" placeholder="학과명">
                 </div>
                 
             </div>
@@ -404,7 +405,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">소셜미디어</span>
                     </div>
-                    <input type="text" name="sosial" class="form-control" placeholder="사용하고계시는 소셜 미디어의 주소나 아이디를 입력 해주세요">
+                    <input type="text" name="t_sns" class="form-control" placeholder="사용하고계시는 소셜 미디어의 주소나 아이디를 입력 해주세요">
                 </div>
 
                 
