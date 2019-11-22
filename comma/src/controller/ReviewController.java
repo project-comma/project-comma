@@ -68,8 +68,8 @@ public class ReviewController {
 	@RequestMapping("deleteReviewForm.do")
 	public Map deleteReviewForm(String number) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("delete controller");
-		map.put("contrpller", "deleteReviewForm");
+	
+//		map.put("controller", "deleteReviewForm");
 		return map;
 	}
 
