@@ -204,7 +204,7 @@
 		<div align="center" style="width: 1200px;">
 
 			<img src="img/로고.JPG" style="width: 120px; height: 120px;" id="logo"
-				onclick="location.href='main.do'"> <br> <br>
+				onclick="location.href='mainForm.do'"> <br> <br>
 
 
 			<nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light">

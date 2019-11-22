@@ -134,22 +134,21 @@ $(document).ready(function() {
 			
 			<tr>
 			
-			<td colspan="6" align="center"><c:if test="${start != 1 }">
-					<a href="centro.do?page=1&type=${type }&keyword=${keyword }
-						&startDate=${startDate }&endDate=${endDate }">[처음]</a>
-					<a href="centro.do?page=${start-1 }&type=${type }&keyword=${keyword }
-						&startDate=${startDate }&endDate=${endDate }">[이전]</a>
+			<td colspan="6" align="center">
+			<c:if test="${start != 1 }">
+					<a href="centro.do?page=1">[처음]</a>
+					<a href="centro.do?page=${start-1 }">[이전]</a>
 						
 						
-				</c:if> <c:forEach begin="${start }" end="${end }" var="i">
+				</c:if>
+				 <c:forEach begin="${start }" end="${end }" var="i">
 					<c:choose>
 						<c:when test="${i == current }">
 						[${i }]
 						</c:when>
 
 						<c:when test="${i <= last }">
-						<a href="centro.do?page=${i }&type=${type }&keyword=${keyword }
-						&startDate=${startDate }&endDate=${endDate }">[${i }]</a>
+						<a href="centro.do?page=${i }">[${i }]</a>
 						</c:when>
 						
 						
@@ -158,13 +157,11 @@ $(document).ready(function() {
 					</c:choose>
 
 				</c:forEach> <c:if test="${end < last }">
-					<a href="centro.do?page=${end+1 }&type=${type }&keyword=${keyword }
-						&startDate=${startDate }&endDate=${endDate }">[다음]</a>
-					<a href="centro.do?page=${last}&type=${type }&keyword=${keyword }
-						&startDate=${startDate }&endDate=${endDate }">[마지막]</a>
+					<a href="centro.do?page=${end+1 }">[다음]</a>
+					<a href="centro.do?page=${last}">[마지막]</a>
 				</c:if>
 				</td>
-		</tr>
+			</tr>
 
 <!-- 				<tr> -->
 <!-- 					<td colspan="3"> -->

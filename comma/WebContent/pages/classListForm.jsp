@@ -6,6 +6,62 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+ <!-- JQuery로드 -->
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+	integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+	crossorigin="anonymous">
+	
+</script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	
+	
+	
+	function classList() {
+		$.ajax({
+			type : "get",
+			url : "classAllList.do",
+			dataType : "json",
+			success : function (arr) {
+// 				alert(arr);
+				
+				for(var i = 0; i < arr.length; i++){
+					var div = $("<div style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>")
+// 					var img = $("<img width='300px' height='300px'>");
+					var img = $("<div>")
+					img.text(arr[i].c_image);
+					var name = $("<div>");
+					name.text(arr[i].c_name);
+					var price =$("<div>");
+					price.text(arr[i].c_price);
+					div.append(img).append(name).append(price);
+					$("#classList").append(div);
+				}
+				
+			},
+			error : function (xhrReq, status, error) {
+				alert("에러창")
+				console.log(xhrReq + ' / ' + status + ' / ' + error);
+				
+			}
+			
+			
+			
+		})
+	}
+	classList();
+
+
+	
+	
+	
+
+})
+
+</script>
 
 
 <body>
@@ -258,5 +314,20 @@
 		</div>
 
 	</div>
+	
+	<div align="center">
+			<div align="left" style="width:1200px "  id="classList" >
+<!-- 				<div style="width:300px; height: 400px;" id="classList"> -->
+<!-- 					<img src="img/시간.png" width="300px" height="300px"> -->
+<!-- 					<img src="img/시간.png" width="80px" height="80px"> -->
+<!-- 					<div>이상훈 </div> -->
+<!-- 					<div>내용내용내용내용내용내용내용내용</div> -->
+<!-- 					<div>가격</div> -->
+<!-- 				</div> -->
+			
+			
+			</div>
+		
+		</div>
 </body>
 </html>
