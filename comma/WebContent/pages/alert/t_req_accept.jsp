@@ -26,8 +26,9 @@
 		</div>
 
 		<div>
-			<button type="submit" style="margin-top: 50px;" class="btn btn-outline-secondary"onclick="">수락</button>
-
+			<button type="submit" style="margin-top: 50px;" class="btn btn-outline-secondary"
+			onclick="t_accept_ajax('id')">수락</button>
+<!-- 선생님아이디를 가지고 간다 -->
 		</div>
 
 

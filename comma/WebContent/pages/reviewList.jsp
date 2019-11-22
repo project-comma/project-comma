@@ -32,7 +32,7 @@
                             <img src="img/시간.png" id="time" width="80px" height="80px">
                             <br>
                             <a style="margin-left: 13px;">사용자</a>
-                        </div>
+                        </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                     </td>
 
                     <td>

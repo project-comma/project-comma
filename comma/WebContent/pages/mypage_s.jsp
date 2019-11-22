@@ -16,6 +16,7 @@
 	<jsp:include page="alert/delete_alert.jsp"></jsp:include>
 	<jsp:include page="alert/t_profile.jsp"></jsp:include>
 	<jsp:include page="alert/t_req_accept.jsp"></jsp:include>
+	<jsp:include page="alert/dropMember.jsp"></jsp:include>
 
 
 	<br>
@@ -57,7 +58,7 @@ phy555@naver.com
 								class="btn btn-outline-secondary" id="modify_info" value="선생님등록"
 								onclick="location.href='t_Resist.do'"> <input
 								type="button" class="btn btn-outline-secondary" id="modify_info"
-								value="탈퇴">
+								onclick="drop_member_open('${id}')" value="탈퇴">
 
 						</div>
 					</td>
@@ -79,27 +80,32 @@ phy555@naver.com
 
 						<li class="nav-item">
 							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
-							<a href="#s_nav2" style="color: grey;">결제 완료</a></h4>
+								<a href="#s_nav2" style="color: grey;">결제 완료</a>
+							</h4>
 						</li>
 
 						<li class="nav-item">
 							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
-							<a href="#s_nav3" style="color: grey;">환불된 클래스</a></h4>
+								<a href="#s_nav3" style="color: grey;">환불된 클래스</a>
+							</h4>
 						</li>
 
 						<li class="nav-item">
 							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
-							<a href="#s_nav4" style="color: grey;">완료된 클래스</a></h4>
+								<a href="#s_nav4" style="color: grey;">완료된 클래스</a>
+							</h4>
 						</li>
 
 						<li class="nav-item">
 							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
-							<a href="#s_nav5" style="color: grey;">나의 리뷰</a></h4>
+								<a href="#s_nav5" style="color: grey;">나의 리뷰</a>
+							</h4>
 						</li>
 
 						<li class="nav-item">
 							<h4 style="color: #666666; font-weight: 600; font-size: 15px;">
-							<a href="#s_nav6" style="color: grey;">요청 클래스</a></h4>
+								<a href="#s_nav6" style="color: grey;">요청 클래스</a>
+							</h4>
 						</li>
 
 					</ul>
@@ -108,7 +114,8 @@ phy555@naver.com
 
 
 			<br>
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav1">관심 클래스</h3>
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;"
+				id="s_nav1">관심 클래스</h3>
 			<br>
 
 			<div align="left"
@@ -236,8 +243,8 @@ phy555@naver.com
 
 			<!-- 결제 완료된 클래스 -->
 
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav2">결제
-				완료된 클래스</h3>
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;"
+				id="s_nav2">결제 완료된 클래스</h3>
 			<br>
 
 			<div align="left"
@@ -376,8 +383,8 @@ phy555@naver.com
 
 			<br>
 			<!-- 환불 완료된 클래스 -->
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav3">환불
-				완료된 클래스</h3>
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;"
+				id="s_nav3">환불 완료된 클래스</h3>
 			<br>
 
 			<div align="left"
@@ -505,8 +512,8 @@ phy555@naver.com
 			<!-- 완료된클래스 -->
 
 
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav4">완료된
-				클래스</h3>
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;"
+				id="s_nav4">완료된 클래스</h3>
 			<br>
 
 			<div align="left"
@@ -547,7 +554,7 @@ phy555@naver.com
 
 						<div style="width: 300px;" align="center">
 							<input type="button" style="width: 100px;" value="리뷰 쓰기"
-								class="btn btn-outline-secondary" onclick="class_review_show()">
+								class="btn btn-outline-secondary" onclick="class_review_open()">
 						</div>
 
 					</div>
@@ -589,7 +596,7 @@ phy555@naver.com
 
 						<div style="width: 300px;" align="center">
 							<input type="button" style="width: 100px;" value="리뷰 쓰기"
-								class="btn btn-outline-secondary" onclick="class_review_show()">
+								class="btn btn-outline-secondary" onclick="class_review_open()">
 						</div>
 					</div>
 				</div>
@@ -629,7 +636,7 @@ phy555@naver.com
 
 						<div style="width: 300px;" align="center">
 							<input type="button" style="width: 100px;" value="리뷰 쓰기"
-								class="btn btn-outline-secondary" onclick="class_review_show()">
+								class="btn btn-outline-secondary" onclick="class_review_open()">
 						</div>
 
 					</div>
@@ -643,8 +650,8 @@ phy555@naver.com
 
 			<!-- 나의 리뷰 -->
 
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav5">나의
-				리뷰</h3>
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;"
+				id="s_nav5">나의 리뷰</h3>
 
 			<br>
 
@@ -820,8 +827,8 @@ phy555@naver.com
 
 			<!-- 요청한 클래스 -->
 
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="s_nav6">요청한
-				클래스</h3>
+			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;"
+				id="s_nav6">요청한 클래스</h3>
 
 
 
@@ -860,9 +867,12 @@ phy555@naver.com
 							style="display: inline-block; float: left; margin-left: 10px;">
 							<br> <input type="button" value="선생님 프로필"
 								style="width: 120px; margin-left: 12px;"
-								onclick="t_profile_open(${id})"> <input type="button"
-								value="선생님 수락" onclick="t_accept_open(${id})"
-								style="width: 120px; margin-left: 12px;">
+								onclick="t_profile_open('id')">
+							<!-- 선생님 아이디를 가지고 간다 -->
+							<input type="button" value="선생님 수락"
+								style="width: 120px; margin-left: 12px;"
+								onclick="t_accept_open('id')">
+							<!-- 선생님 아이디를 가지고 간다 -->
 
 						</div>
 
@@ -886,9 +896,10 @@ phy555@naver.com
 							style="display: inline-block; float: left; margin-left: 10px;">
 							<br> <input type="button" value="선생님 프로필"
 								style="width: 120px; margin-left: 12px;"
-								onclick="t_profile_open(${id})"> <input type="button"
-								value="선생님 수락" onclick="t_accept_open(${id})"
-								style="width: 120px; margin-left: 12px;">
+								onclick="t_profile_open('id')"> <input type="button"
+								value="선생님 수락" style="width: 120px; margin-left: 12px;"
+								onclick="t_accept_open('id')">
+							<!-- 선생님 아이디를 가지고 간다 -->
 
 						</div>
 
@@ -931,8 +942,10 @@ phy555@naver.com
 							style="display: inline-block; float: left; margin-left: 10px;">
 							<br> <input type="button" value="선생님 프로필"
 								style="width: 120px; margin-left: 12px;"
-								onclick="t_profile_open(${id})"> <input type="button"
-								value="선생님 수락" onclick="t_accept_open(${id})"
+								onclick="t_profile_open('id')">
+							<!-- 선생님 아이디를 가지고 간다 -->
+							<input type="button" value="선생님 수락"
+								onclick="t_accept_open('id')"
 								style="width: 120px; margin-left: 12px;">
 
 						</div>
@@ -957,9 +970,12 @@ phy555@naver.com
 							style="display: inline-block; float: left; margin-left: 10px;">
 							<br> <input type="button" value="선생님 프로필"
 								style="width: 120px; margin-left: 12px;"
-								onclick="t_profile_open(${id})"> <input type="button"
-								value="선생님 수락" style="width: 120px; margin-left: 12px;"
-								onclick="t_accept_open(${id})">
+								onclick="t_profile_open('id')">
+							<!-- 선생님 아이디를 가지고 간다 -->
+
+							<input type="button" value="선생님 수락"
+								style="width: 120px; margin-left: 12px;"
+								onclick="t_accept_open('id')">
 
 						</div>
 
