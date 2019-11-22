@@ -35,7 +35,7 @@ function delete_ajax() {
 
 		// 나의리뷰 삭제
 	} else if (option === ("my_rev_del")) {
-		console.log("my_rev_del");
+		
 		$.ajax({
 			url : "deleteReviewForm.do",
 			type : "post",
@@ -45,7 +45,7 @@ function delete_ajax() {
 				number : number
 			},
 			dataType : "json",
-			sucess : function(data) {
+			success : function(data) {
 				console.log(data);
 			},
 			error : function() {
