@@ -27,7 +27,7 @@
 			<div>
 				<button type="button" style="margin-top: 50px;"
 					class="btn btn-outline-secondary" id="del_btn"
-					onclick="delete_btn()">삭제</button>
+					onclick="delete_ajax()">삭제</button>
 
 			</div>
 

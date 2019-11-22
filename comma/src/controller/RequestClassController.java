@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.IRequestClassService;
@@ -15,8 +16,6 @@ import util.Commons;
 @Controller
 public class RequestClassController {
 
-	
-	
 	@Autowired
 	private IRequestClassService rService;
 
@@ -24,15 +23,15 @@ public class RequestClassController {
 	@RequestMapping("classReqResist.do")
 	public ModelAndView classReqResist(@RequestParam HashMap<String, Object> params) {
 		ModelAndView mav = new ModelAndView();
-		
+
 		int res = rService.resistRequest(params);
-		
-		if(res==Commons.SUCCESS_RESIST) {
-			
-		}else if(res==Commons.FAIL_RESIST) {
-			
-		}else if(res==Commons.ID_OVERLAP) {
-			
+
+		if (res == Commons.SUCCESS_RESIST) {
+
+		} else if (res == Commons.FAIL_RESIST) {
+
+		} else if (res == Commons.ID_OVERLAP) {
+
 		}
 		mav.setViewName("classReqResist");
 		return mav;
@@ -44,7 +43,6 @@ public class RequestClassController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("classReqList");
 
-		
 		System.out.println("리퀘스트!!");
 		return mav;
 	}
@@ -55,7 +53,6 @@ public class RequestClassController {
 
 		ModelAndView mav = new ModelAndView();
 
-		
 		mav.setViewName("classReq");
 		return mav;
 	}
@@ -73,28 +70,25 @@ public class RequestClassController {
 	@RequestMapping("classReqResistForm.do")
 	public ModelAndView cr_ResistForm(@RequestParam HashMap<String, Object> params) {
 		ModelAndView mav = new ModelAndView();
-		
-		
+
 		mav.setViewName("classReqResist");
 
 		return mav;
 	}
 
 	// 클래스요청삭제
+
+	@ResponseBody
 	@RequestMapping("deleteReq.do")
 	public Map deleteReq(@RequestParam HashMap<String, Object> params) {
-		
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("name", "victolee");
-		
-		//JSONResult
-		//return JSONResult.success(result);
-		
-		 return map;
-		
 
-//		return mav;
+		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("controller", "deleteReq");
+
+		// JSONResult
+		// return JSONResult.success(result);
+
+		return map;
 
 	}
 

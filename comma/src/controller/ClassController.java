@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.IClassService;
@@ -132,6 +134,14 @@ public class ClassController {
 		return "";
 	}
 	
+	//클래스 삭제
+	@ResponseBody
+	@RequestMapping("deleteClassForm.do")
+	public Map deleteClassForm(@RequestParam HashMap<String, Object> params) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("controller", "deleteClasssForm");
+		return map;
+	}
 	//수강신청현황
 	@RequestMapping("enroll.do")
 	public ModelAndView enroll() {

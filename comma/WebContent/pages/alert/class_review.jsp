@@ -74,7 +74,7 @@
 			<!--  등록버튼-->
 			<div>
 				<button type="submit" class="btn btn-outline-secondary"
-					style="margin-top: 20px;" onclick="review_write_btn('content')">등록</button>
+					style="margin-top: 20px;" onclick="review_write_ajax('content')">등록</button>
 			</div>
 		</div>
 	</div>

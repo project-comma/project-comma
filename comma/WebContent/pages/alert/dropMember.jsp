@@ -27,7 +27,7 @@
 			<div>
 				<button type="button" style="margin-top: 50px;"
 					class="btn btn-outline-secondary" id="del_btn"
-					onclick="drop_member_ajax()">탈퇴</button>
+					onclick="drop_member_ajax('id')">탈퇴</button>
 
 			</div>
 
