@@ -31,6 +31,16 @@
   	select * from question_board
   </select>
   
+  <select id="selectQuestionPage" parameterType="java.util.HashMap"
+		resultType="question">
+		select * from question_board order by number desc limit #{skip}, #{qty}
+  </select>
+
+  <select id="getCount" parameterType="java.util.HashMap" resultType="int">
+
+		select count(*) from question_board
+	</select>
+  
   
   
   

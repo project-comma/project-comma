@@ -65,7 +65,7 @@ public class NoticeService implements INoticeService{
 	@Override
 	public int getEndPage(int num) {
 		
-		return ((num-1) / 5 + 1) + 5;
+		return ((num-1) / 5 + 1) * 5;
 	}
 
 	@Override

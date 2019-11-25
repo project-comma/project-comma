@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.IQuestionDao;
+import model.Notice;
 import model.Question;
 
 @Service
@@ -42,8 +43,10 @@ public class QuestionService implements IQuestionService{
 		return result;
 	}
 
+	
+
 	@Override
-	public HashMap<String, Object> getAskListPage(HashMap<String, Object> params, int page) {
+	public HashMap<String, Object> getQuestionListPage(HashMap<String, Object> params, int page) {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("current", page);
 		result.put("start", getStartPage(page));
@@ -51,35 +54,41 @@ public class QuestionService implements IQuestionService{
 		result.put("last", getLastPage(params));
 		
 		params.put("skip", getSkip(page));
-		params.put("qty", 10);
-		result.put("noticeList", dao.selectQuestionPage(params));
+		params.put("qty", 5);
+		result.put("questionList", dao.selectQuestionPage(params));
 		
 		return result;
 	}
 
 	@Override
 	public int getStartPage(int num) {
-		return (num - 1) / 10 * 10 + 1;
+		
+		return (num - 1) / 5 * 5 + 1;
 	}
 
 	@Override
 	public int getEndPage(int num) {
-		return ((num-1) / 10 + 1) + 10;
+		
+		return ((num-1) / 5 + 1) * 5;
 	}
 
 	@Override
 	public int getLastPage(HashMap<String, Object> params) {
-		return (dao.getCount(params) - 1) / 10 + 1;
+		
+		return (dao.getCount(params) - 1) / 5 + 1;
 	}
 
 	@Override
 	public int getSkip(int num) {
-		return (num - 1) * 10;
+		
+		return (num - 1) * 5;
 	}
 
 	@Override
 	public Question getQuestion(int num) {
+		
 		return dao.selectOne(num);
+		
 	}
 
 }
