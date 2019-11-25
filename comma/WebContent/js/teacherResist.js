@@ -163,3 +163,62 @@ function Tc_resist(){
 	
 	
 }
+
+function profileChange(me){
+	
+	alert(me.files[0].name);
+	
+	
+	var file = me.files[0];
+	
+	var reader = new FileReader();
+	
+	reader.onload = function(e){
+		var myphoto = $("#my_prophoto");
+		
+		myphoto.attr('src', e.target.result);
+		
+	}
+	
+	reader.readAsDataURL(file);
+	
+	
+}
+
+
+
+
+function birthCheck(me){
+	
+	var patt = "/^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/ ";
+	
+	var birth = $("#tr_birth");
+	
+	var res = birth.val().match(patt);
+	
+	if(res==false){
+		alert("생년월일!");
+	}else{
+		alert(birth.val());
+		alert(res);
+		alert("아니야!")
+	}
+	
+	
+}
+
+
+function phoneCheck(me){
+	
+	var patt = "/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i";
+	
+	var res = me.val().match(patt);
+}
+
+function accountCheck(me){
+	
+	var patt = "/^\d{3}-\d{3,4}-\d{4}$/";
+	
+	var res = me.val().match(patt);
+}
+

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import service.IMemberService;
 
@@ -49,7 +50,7 @@ public class MemberController {
 		
 		System.out.println(params);
 		
-//		int result = mService.resistTeacher(session_id, params);
+		int result = mService.resistTeacher(session_id, params);
 		
 //		System.out.println("컨트롤러에 돌아온 리턴값=" + result);
 		 
@@ -74,10 +75,18 @@ public class MemberController {
 		
 		
 		
-//		int result = mService.resistProfileImage(params);
+		int result = mService.resistProfileImage(id, request);
 		
 		
 		return "안녕?";
+	}
+	
+	@RequestMapping("profileImageView.do")
+	public View profileView(String id) {
+		
+		View view = new DownloadView(mService.getProfileImage(id));
+		
+		return view;
 	}
 
 	// 학생 정보 번경 형식

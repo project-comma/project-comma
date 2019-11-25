@@ -126,7 +126,7 @@ public class MemberService implements IMemberService{
 		try {
 			prof.transferTo(attachFile);
 			
-			params.put("image", prof);
+			params.put("image", fileName);
 			
 			
 		} catch (Exception e) {
@@ -139,6 +139,24 @@ public class MemberService implements IMemberService{
 		return 1;
 	}
 	
+	
+	public File getProfileImage(String id) {
+		
+		
+		HashMap<String, Object> mem = dao.selectMember(id);
+		
+		String fileName = (String)mem.get("image");
+		
+		if(fileName==null) {
+			
+			System.out.println("프로필이 없어 ㅠㅠ");
+			return new File("C:/image/defaultProfile/pro.jpg");
+		}
+		
+		String path = "C:/image/";
+		
+		return new File(path + fileName);
+	}
 
 	@Override
 	public int Login(String id, String password) {//로그인

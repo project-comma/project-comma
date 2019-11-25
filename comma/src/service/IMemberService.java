@@ -22,6 +22,9 @@ public interface IMemberService {
 	public int resistTeacher(String id, HashMap<String, Object> params);
 	
 	public int resistProfileImage(String id, MultipartHttpServletRequest request);
+	
+	public File getProfileImage(String id);
+	
 	public int Login(String id, String password);
 	
 	public int modeChange(HashMap<String, Object> params);
