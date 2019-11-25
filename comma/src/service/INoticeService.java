@@ -21,4 +21,6 @@ public interface INoticeService {
 	public int getSkip(int num);
 	public Notice getNotice(int num);
 	
+	
+	
 }

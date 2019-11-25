@@ -18,7 +18,7 @@ public interface IQuestionService {
 	public int modify(HashMap<String, Object> params);
 	public ArrayList<HashMap<String, Object>> read();
 	
-	public HashMap<String, Object> getAskListPage
+	public HashMap<String, Object> getQuestionListPage
 	(HashMap<String, Object> params, int page);
 	
 	public int getStartPage(int num);

@@ -30,35 +30,31 @@ public class NoticeController {
 	private INoticeService nService;
 	
 	
-	@RequestMapping("noticeList.do")//공지리스트
-	public void noticeList(HttpServletResponse response) throws IOException {
-		
-		
-		System.out.println("들어옴?????");
-		
-		ArrayList<HashMap<String, Object>> result = nService.read();
-//		System.out.println("들어옴?2");
-//		System.out.println(result);
-		JSONArray jarr = new JSONArray();
-		
-		
-		for (int i = 0; i < result.size(); i++) {
-			JSONObject jo = new JSONObject();
-			jo.put("id", result.get(i).get("id"));
-			jo.put("title", result.get(i).get("title"));
-			jo.put("date", result.get(i).get("date"));
-			jarr.put(jo);
-			
-		}
-
-		response.getWriter().println(jarr);
-
-		
-		
-		
-		
-		
-	}
+//	@RequestMapping("noticeList.do")//공지리스트
+//	public void noticeList(HttpServletResponse response) throws IOException {
+//		
+//		
+//		System.out.println("들어옴?????");
+//		
+//		ArrayList<HashMap<String, Object>> result = nService.read();
+//
+//		JSONArray jarr = new JSONArray();
+//		
+//		
+//		for (int i = 0; i < result.size(); i++) {
+//			JSONObject jo = new JSONObject();
+//			jo.put("id", result.get(i).get("id"));
+//			jo.put("title", result.get(i).get("title"));
+//			jo.put("date", result.get(i).get("date"));
+//			jarr.put(jo);
+//			
+//		}
+//
+//		response.getWriter().println(jarr);
+//		
+//		
+//		
+//	}
 	
 //	//공지사항 상세정보
 //	@RequestMapping("notice.do")
@@ -96,21 +92,29 @@ public class NoticeController {
 		return mav;
 	}
 	
+
 	@RequestMapping("notice.do")
-	public ModelAndView notice(
-		@RequestParam(defaultValue = "1") int page, HttpSession session) {
+	public ModelAndView noticeList(
+		@RequestParam(defaultValue = "1") int page,
+//		@RequestParam(required = false) Date startDate,
+//		@RequestParam(required = false) Date endDate,
+		HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
-
+		
+		
+		
+		
+		
 		HashMap<String, Object> result = nService.getNoticeListPage(params, page);
 		
-
+//		session.setAttribute("test", params);
 		
 		mav.addAllObjects(result);
 		mav.addAllObjects(params);
-		
+		System.out.println(result);
 		mav.setViewName("centro");
 		return mav;
 		
