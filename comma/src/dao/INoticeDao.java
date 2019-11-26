@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import model.Notice;
 
 public interface INoticeDao {
@@ -21,3 +23,4 @@ public interface INoticeDao {
 	
 	public List<Notice> selectNoticePage(HashMap<String, Object> params);
 }
+	

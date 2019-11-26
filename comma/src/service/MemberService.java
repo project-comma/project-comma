@@ -266,4 +266,10 @@ public class MemberService implements IMemberService{
 		
 		
 	}
+
+	@Override
+	public int modifyMember_s(String id, HashMap<String, Object> params) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

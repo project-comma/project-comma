@@ -11,7 +11,7 @@
  <h2 align="center">선생님 정보 변경</h2><br>
 
 
-	<form action="changeInfo_t.do">
+	<form action="changeInfo_t.do" enctype="multipart/form-data">
 		<div align="center">
 			<div align="left" style="width: 1200px">
 				<div align="center" style="margin-top: 50px">
