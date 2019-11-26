@@ -18,6 +18,7 @@ function del_conf(keyword, id) {// 삭제 확인
 function delete_ajax() {
 	// 클래스요청삭제
 	if (option === ("my_req_del")) {
+
 		$.ajax({
 			url : "deleteReq.do",
 			type : "post",
