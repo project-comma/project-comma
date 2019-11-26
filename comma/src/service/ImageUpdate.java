@@ -39,7 +39,7 @@ public class ImageUpdate implements IimageUpdate  {
 			e.printStackTrace();
 		}
 		
-		dao.imageUpdate(member);
+		//dao.imageUpdate(member);
 		
 		
 		return member.getId();
