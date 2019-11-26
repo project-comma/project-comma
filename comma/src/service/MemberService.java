@@ -84,8 +84,47 @@ public class MemberService implements IMemberService{
 		
 		System.out.println("서비스="+params);
 		System.out.println("서비스id=" + id);
-		params.put("id", id);
 		
+		String t_career = "";
+		String t_education = "";
+		String t_license = "";
+		
+		ArrayList<String> career = (ArrayList<String>)params.get("t_careerObject");
+		
+		for(String s : career) {
+			if(!t_career.equals("")) {
+				t_career += "-";
+			}
+			t_career += s;
+			System.out.println(s);
+		}
+		
+		ArrayList<String> edu = (ArrayList<String>)params.get("t_educationObject");
+		
+		for(String s : edu) {
+			
+			if(!t_education.equals("")) {
+				t_education += "-";
+			}
+			t_education += s;
+		}
+		
+		ArrayList<String> lic = (ArrayList<String>)params.get("t_licenseObject");
+		
+		for(String s : lic) {
+			
+			if(!t_license.equals("")) {
+				t_license += "-";
+			}
+			
+			t_license += s;
+		}
+		
+		
+		params.put("id", id);
+		if(!t_career.equals(""))params.put("t_career", t_career);
+		if(!t_education.equals("")) params.put("t_education", t_education);
+		if(!t_license.equals("")) params.put("t_license", t_license);
 		
 		if(id != null) {
 			dao.teacherResist(params);

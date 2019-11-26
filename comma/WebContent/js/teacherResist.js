@@ -5,19 +5,45 @@ function carreerIN(){
 	var category = $("#careerSelect option:selected").val();
 	var career = $("#carrerText").val();
 	
+	var casw = 0;
+	
+	//같은 분야가 있는지 비교
+	$("#catH5").each(function(index, item){
+		
+		var tempCat = $(item).text();
+		
+		if(tempCat==category){
+			$("#carH5").eq(index).text(career+"년");
+			
+			
+			$("input[name=t_career]").eq(index).val(uni);
+			
+			alert(index);
+			casw = 1;
+			
+			return;
+		}
+		
+		
+	});
+	
+	
+	if(casw==1){
+		return;
+	}
 	var uni = category +":"+ career;
 	alert(uni);
 	var cat = $('<div style="border-bottom:1px solid black; heigt:50px;"> </div>');
-		var catH5 = $('<h5 style="font-size:15px;">'+category+'</h5>');
+		var catH5 = $('<h5 style="font-size:15px;" id="catH5">'+category+'</h5>');
 	
 	var car = $('<div style="border-bottom:1px solid black; heigt:50px;"> </div>')
-		var carH5 = $('<h5 style="font-size:15px;">'+career+'년</h5>')
+		var carH5 = $('<h5 style="font-size:15px;" id="carH5">'+career+'년</h5>')
 	
 	var del = $('<div style="border-bottom:1px solid black; heigt:50px;"></div>');
 		var delBtn = $('<input type="button" id="delCareerBtn" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="carreerOUT(this)">')
 	
 	var hide = $('<div style="display:none"></div>');
-		var hideInput = $("<input style='display:none' type='hide' name='t_career' value='"+uni+"'>");
+		var hideInput = $("<input style='display:none' type='hide' name='t_careerObject' value='"+uni+"'>");
 		
 	$(cat).append(catH5);
 	$(car).append(carH5);
@@ -37,7 +63,7 @@ function carreerIN(){
 function carreerOUT(me){
 	alert("탔어~");
 	var index = $(me).parent().index();
-	alert(index);
+	alert("커리어" + index);
 	
 	$("#careerCat div").eq(index).remove();
 	$("#careerNum div").eq(index).remove();
@@ -61,10 +87,10 @@ function univIN(){
 		var majH5 = $('<h5 style="font-size:15px;">'+majorName+'</h5>')
 
 	var del = $('<div style="border-bottom:1px solid black; heigt:50px;"> </div>');
-		var delBtn = $('<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="carreerOUT(this)">')
+		var delBtn = $('<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="univOUT(this)">')
 
 	var hide = $('<div style="display:none"></div>');
-		var hideInput = $("<input style='display:none' type='hide' name='t_education' value='"+uni+"'>");
+		var hideInput = $("<input style='display:none' type='hide' name='t_educationObject' value='"+uni+"'>");
 	
 		
 		$(sc).append(scH5);
@@ -80,7 +106,7 @@ function univIN(){
 	
 }
 
-function carreerOUT(me){
+function univOUT(me){
 	alert("탔어~");
 	var index = $(me).parent().index();
 	alert(index);
@@ -103,7 +129,7 @@ function licIN(){
 		var delBtn = $('<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="licOUT(this)">')
 
 	var hide = $('<div style="display:none"></div>');
-		var hideInput = $("<input style='display:none' type='hide' name='t_license' value='"+licName+"'>");
+		var hideInput = $("<input style='display:none' type='hide' name='t_licenseObject' value='"+licName+"'>");
 	
 		
 		$(lic).append(licH5);
@@ -127,7 +153,49 @@ function licOUT(me){
 
 
 function Tc_resist(){
-	alert("으아~~")
+	alert("으아~~");
+	
+	var birth_pattern = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+	var phone_pattern = /^(?:(010-?\d{4})|(01[1|6|7|8|9]-?\d{3,4}))-?\d{4}$/;
+	var account_pattern = /[^0-9]/g;
+	
+	var birth = $("#tr_birth");
+	var phone = $("#tr_phone");
+	var account = $("#tr_account");
+	
+	var birthCheck = birth_pattern.test(birth.val());
+	var phoneCheck = phone_pattern.test(phone.val());
+	var accountCheck = account_pattern.test(account.val());
+	
+	if(birthCheck==false){
+		alert("생년월일을 확인해주세요.");
+		
+		birth.focus();
+		
+	}else if(phoneCheck==false){
+		alert("휴대폰을 확인해주세요.");
+		
+		phone.focus();
+		
+	}else if(accountCheck==true){
+		alert("계좌번호를 확인해주세요.");
+		
+		account.focus();
+	}
+	
+	var caCount = 0;
+	$("h5[id=catH5]").each(function(index, item){
+		
+		caCount = caCount + 1;
+	});
+	
+	if(caCount == 0){
+		alert("경력사항을 입력해주세요.");
+		return;
+	}
+	
+	
+	//폼데이터 등록
 	var formData = $("#t_resistForm").serializeObject();
 	
 	$.ajax({
@@ -190,18 +258,27 @@ function profileChange(me){
 
 function birthCheck(me){
 	
-	var patt = "/^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/ ";
+	var pattern = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 	
 	var birth = $("#tr_birth");
 	
-	var res = birth.val().match(patt);
+	var res = pattern.test(birth.val());
+	var msg = $("#birthMsg");
 	
-	if(res==false){
-		alert("생년월일!");
+	if(res==true){
+		msg.text("올바른 생년월일 입니다.");
+		msg.css({
+			"color":"blue",
+			"display":"inline-block"
+		});
+		
 	}else{
-		alert(birth.val());
-		alert(res);
-		alert("아니야!")
+		msg.text("생년월일을 다시 확인해주세요.");
+		msg.css({
+			"color":"red",
+			"display":"inline-block"
+		});
+		birth.val("");
 	}
 	
 	
@@ -210,15 +287,59 @@ function birthCheck(me){
 
 function phoneCheck(me){
 	
-	var patt = "/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i";
+	var pattern = /^(?:(010-?\d{4})|(01[1|6|7|8|9]-?\d{3,4}))-?\d{4}$/;
 	
-	var res = me.val().match(patt);
+	var phone = $("#tr_phone");
+	
+	var res = pattern.test(phone.val());
+	
+	var msg = $("#phoneMsg");
+	
+	if(res==true){
+		msg.text("올바르게 입력되었습니다.");
+		msg.css({
+			"color":"blue",
+			"display":"inline-block"
+		});
+		
+	}else{
+		msg.text("휴대폰을 다시 확인해주세요.");
+		msg.css({
+			"color":"red",
+			"display":"inline-block"
+		});
+		phone.val("");
+	}
 }
 
 function accountCheck(me){
 	
-	var patt = "/^\d{3}-\d{3,4}-\d{4}$/";
+	var pattern = /[^0-9]/g;
 	
-	var res = me.val().match(patt);
+	var account = $("#tr_account");
+	
+	var res = pattern.test(account.val());
+	
+	var accountMsg = $("#accountMsg");
+	
+	
+	if(res==false){
+		
+		accountMsg.text("O");
+		accountMsg.css({
+			
+			"display":"inline-block",
+			"color":"blue"
+		});
+			
+		
+	}else{
+		accountMsg.text("X");
+		accountMsg.css({
+			"display":"inline-block",
+			"color":"red"
+		})
+		
+	}
 }
 

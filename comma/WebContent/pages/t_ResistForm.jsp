@@ -49,7 +49,9 @@
                         <span class="input-group-text">생년월일</span>
                     </div>
                     <input type="text" id="tr_birth" name="birth" class="form-control" placeholder="생년월일을 입력해주세요. (ex 19991212)" onblur="birthCheck(this)">
+	                <h5 id="birthMsg" style="display:none; color:red; font-size:20px;">안녕?</h5>
                 </div>
+                
             </div>
 
 			<!-- 핸드폰 -->
@@ -59,8 +61,9 @@
                         <span class="input-group-text">휴대폰</span>
                         
                     </div>
-                    <input type="text" name="p_number" class="form-control" placeholder="핸드폰 번호를 입력 해주세요 (ex 010-7310-9603)" style="width:700px;">
+                    <input type="text" id="tr_phone" name="p_number" class="form-control" placeholder="핸드폰 번호를 입력 해주세요 (ex 01073109603)" style="width:700px;" onblur="phoneCheck(this)">
                 </div>
+                <h5 id="phoneMsg" style="display:none; color:red; font-size:20px;">안녕?</h5>
 
                
             </div>
@@ -149,13 +152,13 @@
 			 				<h5 style="font-size:15px; font-weight:600">분야</h5>
 			 			</div>
 			 			
-			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 			<!-- <div style="border-bottom:1px solid black; heigt:50px;">
 			 				<h5 style="font-size:15px;">액티비티</h5>
 			 			</div>
 			 			
 			 			<div style="border-bottom:1px solid black; heigt:50px;">
 			 				<h5 style="font-size:15px;">액티비티</h5>
-			 			</div>
+			 			</div> -->
 			 		</div>
 			 		
 			 		<!-- 경력 -->
@@ -164,13 +167,13 @@
 			 				<h5 style="font-size:15px; font-weight:600">경력</h5>
 			 			</div>
 			 			
-			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 			<!-- <div style="border-bottom:1px solid black; heigt:50px;">
 			 				<h5 style="font-size:15px;">5년</h5>
 			 			</div>
 			 			
 			 			<div style="border-bottom:1px solid black; heigt:50px;">
 			 				<h5 style="font-size:15px;">5년</h5>
-			 			</div>
+			 			</div> -->
 			 		</div>
 			 		
 			 		<!-- 삭제버튼 -->
@@ -179,7 +182,7 @@
 			 				<h5 style="font-size:15px; font-weight:600">삭제</h5>
 			 			</div>
 			 			
-			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 			<!-- <div style="border-bottom:1px solid black; heigt:50px;">
 			 				<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;">
 			 				
 			 			</div>
@@ -187,7 +190,7 @@
 			 			<div style="border-bottom:1px solid black; heigt:50px;">
 			 				<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;">
 			 				
-			 			</div>
+			 			</div> -->
 			 		</div>
 			 		<div id="careerHide" style="display:inline-block;">
 			 			
@@ -216,7 +219,7 @@
                 </div>
                 
                 <div style="display:inline-block; vertical-align:top;">
-                	<input type="text" name="account" class="form-control"  style="height:47px; width:500px;" placeholder="등록할 계좌를 입력해주세요.">
+                	<input type="text" id="tr_account" name="account" class="form-control"  style="height:47px; width:500px;" placeholder="등록할 계좌를 입력해주세요." onblur="accountCheck(this)">
                 </div>
                 
                 <div style="width:100px; display:inline-block; vertical-align:top; height:80px;">
@@ -227,6 +230,7 @@
 					</select>
 					
 				</div>
+				<h5 id="accountMsg" style="display:none; font-size:20px;">안녕?</h5>
 
                
             	</div>
