@@ -22,6 +22,7 @@
 	<jsp:include page="alert/question_write.jsp"></jsp:include>
 	<jsp:include page="alert/notice_view.jsp"></jsp:include>
 	<jsp:include page="alert/question_view.jsp"></jsp:include>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 
@@ -76,6 +77,9 @@
 			// 	}
 			// 	noticeList();
 			// 	questionList();
+			
+			
+			
 
 		})
 	</script>
@@ -89,60 +93,81 @@
 		</div>
 
 		<br> <br>
+
 		<div id="notice_board" align="left" style="width: 1100px;">
-			<h2 style="font-weight: 800; font-size: 22px;">공지사항</h2>
-			<table id="notice_boardList">
-				<tr align="center">
-					<th width="1200">작성자</th>
-					<th width="1200">제목</th>
-					<th width="1200">작성일</th>
-				</tr>
+			<!-- 			<h2 style="font-weight: 800; font-size: 22px;">공지사항</h2> -->
+			<div class="input-group mt-3 mb-3">
+				<div class="input-group-prepend">
+					<button type="button"
+						class="btn btn-outline-secondary dropdown-toggle"
+						data-toggle="dropdown">선택</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="notice.do">공지사항</a> 
+						<a class="dropdown-item" href="question.do">질문게시판</a>
+							
+					</div>
+				</div>
+				
+			</div>
 
-				<tr>
-					<td colspan="3" bgcolor="gray">
-				</tr>
+<!-- 			<div id="notice_boardList" style="display: none"> -->
+<!-- 			<h2 style="font-weight: 800; font-size: 22px;">공지사항</h2> -->
+<!-- 				<table> -->
 
-				<c:forEach items="${noticeList }" var="n">
-					<tr>
-						<td align="center">${n.id }</td>
-						<td align="center">${n.title }</td>
-						<td align="center">${n.date }</td>
-					</tr>
-				</c:forEach>
+<!-- 					<tr align="center"> -->
+<!-- 						<th width="1200">작성자</th> -->
+<!-- 						<th width="1200">제목</th> -->
+<!-- 						<th width="1200">작성일</th> -->
+<!-- 					</tr> -->
 
-				<tr>
-					<td colspan="6" width="1400" bgcolor="hotpink"></td>
-				</tr>
+<!-- 					<tr> -->
+<!-- 						<td colspan="3" bgcolor="gray"> -->
+<!-- 					</tr> -->
 
+<%-- 					<c:forEach items="${noticeList }" var="n"> --%>
+<!-- 						<tr> -->
+<%-- 							<td align="center">${n.id }</td> --%>
+<%-- 							<td align="center">${n.title }</td> --%>
+<%-- 							<td align="center">${n.date }</td> --%>
+<!-- 						</tr> -->
+<%-- 					</c:forEach> --%>
 
-				<tr>
-					<td colspan="6" align="center"><c:if test="${start != 1 }">
-							<a href="notice.do?page=1">[처음]</a>
-							<a href="notice.do?page=${start-1 }">[이전]</a>
-						</c:if> <c:forEach begin="${start }" end="${end }" var="i">
-							<c:choose>
-								<c:when test="${i == current }">
-						[${i }]
-						</c:when>
-
-								<c:when test="${i <= last }">
-									<a href="notice.do?page=${i }">[${i }]</a>
-								</c:when>
+<!-- 					<tr> -->
+<!-- 						<td colspan="6" width="1400" bgcolor="hotpink"></td> -->
+<!-- 					</tr> -->
 
 
+<!-- 					<tr> -->
+<%-- 						<td colspan="6" align="center"><c:if test="${start != 1 }"> --%>
+<!-- 								<a href="notice.do?page=1">[처음]</a> -->
+<%-- 								<a href="notice.do?page=${start-1 }">[이전]</a> --%>
+<%-- 							</c:if> <c:forEach begin="${start }" end="${end }" var="i"> --%>
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${i == current }"> --%>
+<%-- 						[${i }] --%>
+<%-- 						</c:when> --%>
+
+<%-- 									<c:when test="${i <= last }"> --%>
+<%-- 										<a href="notice.do?page=${i }">[${i }]</a> --%>
+<%-- 									</c:when> --%>
 
 
-							</c:choose>
 
-						</c:forEach> <c:if test="${end < last }">
-							<a href="notice.do?page=${end+1 }">[다음]</a>
-							<a href="notice.do?page=${last}">[마지막]</a>
-						</c:if></td>
-				</tr>
-			</table>
 
-			<div align="left" style="width: 1100px;">
-				<h2 style="font-weight: 800; font-size: 22px;">질문 게시판</h2>
+<%-- 								</c:choose> --%>
+
+<%-- 							</c:forEach> <c:if test="${end < last }"> --%>
+<%-- 								<a href="notice.do?page=${end+1 }">[다음]</a> --%>
+<%-- 								<a href="notice.do?page=${last}">[마지막]</a> --%>
+<%-- 							</c:if></td> --%>
+<!-- 					</tr> -->
+<!-- 				</table> -->
+
+<!-- 			</div> -->
+
+
+			<div id="question_boardList">
+			<h2 style="font-weight: 800; font-size: 22px;">질문게시판</h2>
 				<table>
 					<tr align="center">
 						<th width="1200">작성자</th>
@@ -167,18 +192,25 @@
 					</tr>
 
 
-					<tr>
-						<td colspan="6" align="center"><c:if test="${start != 1 }">
-								<a href="question.do?page=1">[처음]</a>
-								<a href="question.do?page=${start-1 }">[이전]</a>
-							</c:if> <c:forEach begin="${start }" end="${end }" var="i">
+					
+				</table>
+				
+				<ul class="pagination justify-content-center">
+						
+						<c:if test="${start != 1 }">
+								<li class="page-item"><a class="page-link" href="question.do?page=1"><<</a></li>
+
+							<li class="page-item"><a class="page-link" href="question.do?page=${start-1 }"><</a></li>
+							</c:if>
+							
+							 <c:forEach begin="${start }" end="${end }" var="i">
 								<c:choose>
 									<c:when test="${i == current }">
-						[${i }]
-						</c:when>
+										<li class="page-item"><a class="page-link">${i }</a></li>
+									</c:when>
 
 									<c:when test="${i <= last }">
-										<a href="question.do?page=${i }">[${i }]</a>
+									<li class="page-item"><a class="page-link" href="question.do?page=${i }">${i }</a></li>
 									</c:when>
 
 
@@ -187,16 +219,15 @@
 								</c:choose>
 
 							</c:forEach> <c:if test="${end < last }">
-								<a href="question.do?page=${end+1 }">[다음]</a>
-								<a href="question.do?page=${last}">[마지막]</a>
-							</c:if></td>
-					</tr>
-				</table>
-
-
-
-
+								<li class="page-item"><a class="page-link" href="question.do?page=${end+1 }">></a></li>
+								<li class="page-item"><a class="page-link" href="question.do?page=${last}">>></a></li>
+							</c:if>
+					</ul>
 			</div>
+
+
+
+
 		</div>
 </body>
 </html>
