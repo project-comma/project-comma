@@ -71,7 +71,7 @@ public class RequestClassController {
 	public ModelAndView cr_ResistForm(@RequestParam HashMap<String, Object> params) {
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("classReqResist");
+		mav.setViewName("classReqResistForm");
 
 		return mav;
 	}

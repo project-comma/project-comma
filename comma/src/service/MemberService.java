@@ -158,6 +158,9 @@ public class MemberService implements IMemberService{
 		
 		String fileName = prof.getOriginalFilename();
 		
+		if(fileName==null) {
+			
+		}
 		File attachFile = new File(path+fileName);
 		
 		System.out.println(attachFile.getAbsolutePath());
