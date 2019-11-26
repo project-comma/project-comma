@@ -19,7 +19,7 @@
   	where number= #{number}
   </update>
   
-  <select id="select" resultType="java.util.HashMap" parameterType="int">
+  <select id="select" resultType="notice" parameterType="int">
   	select * from notice_board where number= #{number}
   </select>
   
@@ -27,4 +27,15 @@
   	select * from notice_board
   </select>
   
+  <select id="selectNoticePage" parameterType="java.util.HashMap"
+		resultType="notice">
+		select * from notice_board order by number desc limit #{skip}, #{qty}
+  </select>
+
+  <select id="getCount" parameterType="java.util.HashMap" resultType="int">
+
+		select count(*) from notice_board
+	</select>
+  
+ 
   </mapper>

@@ -9,7 +9,8 @@ public interface IMemberDao {
 
 	public boolean insertMember(HashMap<String, Object> params);
 	public int updateMember(HashMap<String, Object> params);
-	public String imageUpdate(Member member);
+	public int profileUpdate(HashMap<String, Object> params);
+	public int teacherResist(HashMap<String, Object> params); 
 	
 	public int deleteMember(HashMap<String, Object> params);
 	

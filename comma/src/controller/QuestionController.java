@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,35 +24,65 @@ public class QuestionController {
 	@Autowired
 	private IQuestionService qService;
 	
-	@RequestMapping("questionList.do")//질문리스트
-	public void questionList(HttpServletResponse response) throws IOException {
-		
-		
-		
-		ArrayList<HashMap<String, Object>> result = qService.read();
-//		System.out.println(result);
-		JSONArray jarr = new JSONArray();
-		for (int i = 0; i < result.size(); i++) {
-			JSONObject jo = new JSONObject();
-			jo.put("id", result.get(i).get("id"));
-			jo.put("title", result.get(i).get("title"));
-			jo.put("date", result.get(i).get("date"));
-			jarr.put(jo);
-		}
-		
-		response.getWriter().println(jarr);
-		
-		
-		
-	}
-	
-	
 	@RequestMapping("question.do")
-	public ModelAndView ask() {
-
+	public ModelAndView questionList(
+		@RequestParam(defaultValue = "1") int page,
+//		@RequestParam(required = false) Date startDate,
+//		@RequestParam(required = false) Date endDate,
+		HttpSession session) {
+		
 		ModelAndView mav = new ModelAndView();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		
+		
+		
+		
+		
+		HashMap<String, Object> result = qService.getQuestionListPage(params, page);
+		
+//		session.setAttribute("test", params);
+		
+		mav.addAllObjects(result);
+		
+		mav.addAllObjects(params);
+		
+		mav.setViewName("centro");
 		return mav;
+		
+		
+		
 	}
+	
+//	@RequestMapping("questionList.do")//질문리스트
+//	public void questionList(HttpServletResponse response) throws IOException {
+//		
+//		
+//		
+//		ArrayList<HashMap<String, Object>> result = qService.read();
+////		System.out.println(result);
+//		JSONArray jarr = new JSONArray();
+//		for (int i = 0; i < result.size(); i++) {
+//			JSONObject jo = new JSONObject();
+//			jo.put("id", result.get(i).get("id"));
+//			jo.put("title", result.get(i).get("title"));
+//			jo.put("date", result.get(i).get("date"));
+//			jarr.put(jo);
+//		}
+//		
+//		response.getWriter().println(jarr);
+//		
+//		
+//		
+//	}
+//	
+//	
+//	@RequestMapping("question.do")
+//	public ModelAndView ask() {
+//
+//		ModelAndView mav = new ModelAndView();
+//		return mav;
+//	}
 		
 	
 	@RequestMapping("question_write.do")//질문쓰기

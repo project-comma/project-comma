@@ -3,12 +3,15 @@ package service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import dao.IMemberDao;
 
@@ -76,17 +79,83 @@ public class MemberService implements IMemberService{
 
 	@Override
 	public int resistTeacher(String id, HashMap<String, Object> params) {//선생님 등록 
+		
+		
+		
 		System.out.println("서비스="+params);
 		System.out.println("서비스id=" + id);
 		params.put("id", id);
 		
+		
 		if(id != null) {
-			dao.updateMember(params);
+			dao.teacherResist(params);
 			return 0;
 		}
 		else {
 			return 1;
 		}
+	}
+	
+	
+	public int resistProfileImage(String id, MultipartHttpServletRequest request) {
+		
+		
+		Iterator<String> iter = request.getFileNames();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("id", id);
+		String path = "C:/image/";
+		
+		MultipartFile prof = null;
+		if(iter.hasNext()) {
+			
+			prof = request.getFile(iter.next());
+			
+			
+		}
+		
+		File dir = new File(path);
+		
+		String fileName = prof.getOriginalFilename();
+		
+		File attachFile = new File(path+fileName);
+		
+		System.out.println(attachFile.getAbsolutePath());
+		
+		try {
+			prof.transferTo(attachFile);
+			
+			params.put("image", fileName);
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		dao.profileUpdate(params);
+		 
+		
+		return 1;
+	}
+	
+	
+	public File getProfileImage(String id) {
+		
+		
+		HashMap<String, Object> mem = dao.selectMember(id);
+		
+		String fileName = (String)mem.get("image");
+		
+		if(fileName==null) {
+			
+			System.out.println("프로필이 없어 ㅠㅠ");
+			return new File("C:/image/defaultProfile/pro.jpg");
+		}
+		
+		String path = "C:/image/";
+		
+		return new File(path + fileName);
 	}
 
 	@Override

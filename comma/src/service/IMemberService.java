@@ -6,6 +6,9 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 public interface IMemberService {
 
 	
@@ -17,6 +20,10 @@ public interface IMemberService {
 	public ArrayList<HashMap<String, Object>> MemberList();
 	
 	public int resistTeacher(String id, HashMap<String, Object> params);
+	
+	public int resistProfileImage(String id, MultipartHttpServletRequest request);
+	
+	public File getProfileImage(String id);
 	
 	public int Login(String id, String password);
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%request.setCharacterEncoding("utf-8"); %>    
 <!DOCTYPE html>
 <html>
 
@@ -28,13 +29,13 @@
 	<div align="center">
     <h2 style="font-weight:900">선생님 등록</h2><br>
 
-    <form id="t_resistForm" action="t_Resist.do">
+    <form id="t_resistForm" action="t_Resist.do" enctype="multimart/form-data" accept-charset="UTF-8">
         
         
         <div align="center"><!-- 밑줄 상단 구간 -->
         
-        <div align="center" style=" display:inline-block; vertical-align:top;"><!-- 왼쪽 사진 구간 -->
-        	<img id="my_prophoto" src="img/test.jpg" style="margin-top:100px;">
+        <div align="center" style=" display:inline-block; vertical-align:top; margin-left:100px;"><!-- 왼쪽 사진 구간 -->
+        	<img id="my_prophoto" src="profileImageView.do?id=${sessionScope.id }" style="margin-top:10px;">
         </div><!-- 왼쪽 사진 구간 END -->
         
         
@@ -47,7 +48,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">생년월일</span>
                     </div>
-                    <input type="text" name="birth" class="form-control" placeholder="생년월일을 입력해주세요. (ex 19991212)">
+                    <input type="text" id="tr_birth" name="birth" class="form-control" placeholder="생년월일을 입력해주세요. (ex 19991212)" onblur="birthCheck(this)">
                 </div>
             </div>
 
@@ -58,28 +59,14 @@
                         <span class="input-group-text">휴대폰</span>
                         
                     </div>
-                    <input type="text" name="phone" class="form-control" placeholder="핸드폰 번호를 입력 해주세요 (ex 010-7310-9603)" style="width:700px;">
+                    <input type="text" name="p_number" class="form-control" placeholder="핸드폰 번호를 입력 해주세요 (ex 010-7310-9603)" style="width:700px;">
                 </div>
 
-                <div class="inlineArr">
-                    <button type="button" class="btn btn-outline-secondary" style="margin-left : 30px;">인증번호 보내기</button>
-                </div>
+               
             </div>
 			
 			<!-- 인증번호 -->
-            <div align="left" style="width: 1200px; height: 50px; margin-bottom: 80px;">
-                <div class="input-group mb-3 input-group-lg inlineArr" style="width: 800px; margin-left: 100px;">
-                    <div class="input-group-prepend inlineArr">
-                        <span class="input-group-text">인증번호</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="인증번호를입력 해주세요" style="width:650px;">
-
-                </div>
-
-                <div class="inlineArr">
-                    <button type="button" class="btn btn-outline-secondary" style="margin-left : 30px;">인증 하기</button>
-                </div>
-            </div>
+            
 			
             	
 			<!-- 사진 -->
@@ -87,7 +74,7 @@
                 
                     
                 <div class="custom-file" style="width: 800px; margin-left: 100px;">
-    				<input type="file" name="profile" class="custom-file-input" id="customFile">
+    				<input type="file" name="profile" class="custom-file-input" id="customFile" onchange="profileChange(this)">
     					<label class="custom-file-label" for="customFile">프로필 사진</label>
   				</div>
                 
@@ -105,7 +92,7 @@
             
             </div><!-- 밑줄 상단 구간 END -->
 
-			<br><br><br>
+			
 			<div align="center" style="height: 800px;">
 			
 			<!-- 밑줄 -->
@@ -235,8 +222,8 @@
                 <div style="width:100px; display:inline-block; vertical-align:top; height:80px;">
                     <select name="bank" class="custom-select" style="height:49px;">
 						<option selected>은행</option>
-						<option value="seoul">농협</option>
-						<option value="seoul">국민</option>
+						<option value="농협">농협</option>
+						<option value="국민">국민</option>
 					</select>
 					
 				</div>
@@ -270,7 +257,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">학교</span>
                     </div>
-                    <input id="schoolInput" type="text" name="edu" class="form-control" placeholder="학교명">
+                    <input id="schoolInput" type="text" class="form-control" placeholder="학교명">
                 </div>
                 
             </div>
@@ -280,7 +267,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">학과</span>
                     </div>
-                    <input id="majorInput" type="text" name="edu" class="form-control" placeholder="학과명">
+                    <input id="majorInput" type="text" class="form-control" placeholder="학과명">
                 </div>
                 
             </div>
@@ -400,11 +387,11 @@
             </div>
 
             <div align="left" style="width: 1200px; height: 50px; margin-bottom: 30px;">
-                <div class="input-group mb-3 input-group-lg" style="width: 700px; margin-left: 200px;">
+                <div class="input-group mb-3 input-group-lg" style="width: 650px; margin-left: 200px;">
                     <div class="input-group-prepend">
                         <span class="input-group-text">소셜미디어</span>
                     </div>
-                    <input type="text" name="sosial" class="form-control" placeholder="사용하고계시는 소셜 미디어의 주소나 아이디를 입력 해주세요">
+                    <input type="text" name="t_sns" class="form-control" placeholder="소셜 미디어의 주소나 아이디를 입력 해주세요">
                 </div>
 
                 

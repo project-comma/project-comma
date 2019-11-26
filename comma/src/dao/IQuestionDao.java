@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import model.Notice;
 import model.Question;
 
 public interface IQuestionDao {
@@ -18,6 +17,6 @@ public interface IQuestionDao {
 	
 	public int getCount(HashMap<String, Object> params);
 	
-	public List<Notice> selectQuestionPage(HashMap<String, Object> params);
+	public List<Question> selectQuestionPage(HashMap<String, Object> params);
 
 }

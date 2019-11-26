@@ -17,7 +17,7 @@ function carreerIN(){
 		var delBtn = $('<input type="button" id="delCareerBtn" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="carreerOUT(this)">')
 	
 	var hide = $('<div style="display:none"></div>');
-		var hideInput = $("<input style='display:none' type='hide' name='career' value='"+uni+"'>");
+		var hideInput = $("<input style='display:none' type='hide' name='t_career' value='"+uni+"'>");
 		
 	$(cat).append(catH5);
 	$(car).append(carH5);
@@ -64,7 +64,7 @@ function univIN(){
 		var delBtn = $('<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="carreerOUT(this)">')
 
 	var hide = $('<div style="display:none"></div>');
-		var hideInput = $("<input style='display:none' type='hide' name='education' value='"+uni+"'>");
+		var hideInput = $("<input style='display:none' type='hide' name='t_education' value='"+uni+"'>");
 	
 		
 		$(sc).append(scH5);
@@ -103,7 +103,7 @@ function licIN(){
 		var delBtn = $('<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;" onclick="licOUT(this)">')
 
 	var hide = $('<div style="display:none"></div>');
-		var hideInput = $("<input style='display:none' type='hide' name='license' value='"+licName+"'>");
+		var hideInput = $("<input style='display:none' type='hide' name='t_license' value='"+licName+"'>");
 	
 		
 		$(lic).append(licH5);
@@ -133,14 +133,92 @@ function Tc_resist(){
 	$.ajax({
 		
 		url:"t_Resist.do",
+		cache: false,
 		type:"POST",
-		contentType:"application/json",
+		contentType:"application/json; charset=UTF-8",
 		data:JSON.stringify(formData),
 		success:function(data){
-			
+			alert("들왔어?");
+			var form = new FormData(document.getElementById("t_resistForm"));
+			$.ajax({
+				url:"t_ResistFile.do",
+				cache: false,
+				data: form,
+				dataType: 'text',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				success: function(response){
+					alert(response);
+				},
+				error: function(jqXHR, error){
+					alert('error : ' + error);
+				}
+			});
 		},
 		error:function(xhr, status, error){
 			alert("["+xhr.status+"]" + error);
 		}
 	});
+	
+	
 }
+
+function profileChange(me){
+	
+	alert(me.files[0].name);
+	
+	
+	var file = me.files[0];
+	
+	var reader = new FileReader();
+	
+	reader.onload = function(e){
+		var myphoto = $("#my_prophoto");
+		
+		myphoto.attr('src', e.target.result);
+		
+	}
+	
+	reader.readAsDataURL(file);
+	
+	
+}
+
+
+
+
+function birthCheck(me){
+	
+	var patt = "/^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/ ";
+	
+	var birth = $("#tr_birth");
+	
+	var res = birth.val().match(patt);
+	
+	if(res==false){
+		alert("생년월일!");
+	}else{
+		alert(birth.val());
+		alert(res);
+		alert("아니야!")
+	}
+	
+	
+}
+
+
+function phoneCheck(me){
+	
+	var patt = "/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i";
+	
+	var res = me.val().match(patt);
+}
+
+function accountCheck(me){
+	
+	var patt = "/^\d{3}-\d{3,4}-\d{4}$/";
+	
+	var res = me.val().match(patt);
+}
+
