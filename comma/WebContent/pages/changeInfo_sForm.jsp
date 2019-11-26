@@ -91,7 +91,7 @@
 	<br>
 
 
-	<form action="changeInfo_s.do">
+	<form action="changeInfo_s.do" enctype="multipart/form-data" method="post">
 		<div align="center">
 			<div align="left" style="width: 1200px">
 				<div align="center" style="margin-top: 50px">
@@ -103,7 +103,7 @@
 						<div class="filebox preview-image inlineArr">
 							<input class="upload-name" value="파일선택" disabled="disabled" style="margin-left: 20px;">
 							<label for="input-file">업로드</label> <input type="file"
-								id="input-file" class="upload-hidden">
+								id="input-file" class="upload-hidden" name="file">
 						</div>
 					</div>
 	
