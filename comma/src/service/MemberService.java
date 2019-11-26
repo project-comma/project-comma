@@ -269,7 +269,10 @@ public class MemberService implements IMemberService{
 
 	@Override
 	public int modifyMember_s(String id, HashMap<String, Object> params) {
-		// TODO Auto-generated method stub
+		params.put("id", id);
+		dao.updateMember_s(params);
+		System.out.println(params);
+		
 		return 0;
 	}
 }

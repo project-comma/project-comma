@@ -33,11 +33,12 @@
   <update id="profileUpdate" parameterType="java.util.HashMap">
   	update member set image=#{image} where id=#{id}
   </update>
-<!--   <update id="updateMember" parameterType="java.util.HashMap"> -->
-<!--   	update member set email= #{email}, password= #{password}, -->
-<!--   	p_number= #{p_number} where id = #{id} -->
   
-<!--   </update> -->
+  <update id="updateMember_s" parameterType="java.util.HashMap">
+  	update member set email= #{email}, password= #{password},
+  	p_number= #{p_number},image=#{image} where id = #{id}
+  
+  </update>
   
   
   

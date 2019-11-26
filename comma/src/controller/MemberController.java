@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -41,51 +40,42 @@ public class MemberController {
 	}
 
 //	선생님등록 페이지
-	@RequestMapping(value="t_Resist.do", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "t_Resist.do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String t_Resist(HttpSession session, @RequestBody HashMap<String, Object> params) {
 
 		String session_id = (String) session.getAttribute("id");
-		
-		
-		
+
 		System.out.println(params);
-		
+
 		int result = mService.resistTeacher(session_id, params);
-		
+
 //		System.out.println("컨트롤러에 돌아온 리턴값=" + result);
-		 
+
 		return "main";
-		
 
 	}
-	
-	//선생님등록 파일 업로드
+
+	// 선생님등록 파일 업로드
 	@RequestMapping("t_ResistFile.do")
 	@ResponseBody
 	public Object t_ResistFile(MultipartHttpServletRequest request, HttpSession session) {
-		
-		
+
 		System.out.println("드루와드루와~");
-		
-		
-		String id = (String)session.getAttribute("id");
-		
+
+		String id = (String) session.getAttribute("id");
+
 		HashMap<String, Object> params = mService.MemberInfo(id);
-		
-		
-		
-		
+
 		int result = mService.resistProfileImage(id, request);
-		
-		
+
 		return "안녕?";
 	}
-	
+
 	@RequestMapping("profileImageView.do")
 	public View profileView(String id) {
-		
+
 		View view = new DownloadView(mService.getProfileImage(id));
-		
+
 		return view;
 	}
 
@@ -106,8 +96,10 @@ public class MemberController {
 
 	// 학생 정보 변경 페이지
 	@RequestMapping("changeInfo_s.do")
-	public ModelAndView changeInfo_s(HttpSession session, @RequestParam HashMap<String, Object> params) {
-
+	public ModelAndView changeInfo_s(HttpSession session, @RequestParam HashMap<String, Object> params,
+			@RequestParam("file") MultipartFile file) {
+		String fileName = file.getOriginalFilename();
+		params.put("image", fileName);
 		ModelAndView mav = new ModelAndView();
 		String session_id = (String) session.getAttribute("id");
 
@@ -115,7 +107,7 @@ public class MemberController {
 		int mState = (int) mId.get("state");
 
 		if (params.get("password").equals((params).get("passwordCheck")) && session_id != null && mState == 1) {
-			int result = mService.modifyMember(session_id, params);
+			int result = mService.modifyMember_s(session_id, params);
 			System.out.println("컨트롤러에 리턴된값=" + result);
 			mav.setViewName("main");
 			return mav;
@@ -307,7 +299,7 @@ public class MemberController {
 	@RequestMapping("acceptT.do")
 	public Map acceptT(@RequestParam HashMap<String, Object> params) {
 		Map<String, Object> map = new HashMap<String, Object>();
-	
+
 //		map.put("controller", "t_accept");
 		return map;
 
