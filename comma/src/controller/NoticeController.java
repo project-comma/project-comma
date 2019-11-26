@@ -110,12 +110,12 @@ public class NoticeController {
 		
 		HashMap<String, Object> result = nService.getNoticeListPage(params, page);
 		
-//		session.setAttribute("test", params);
+
 		
 		mav.addAllObjects(result);
-		mav.addAllObjects(params);
+//		mav.addAllObjects(params);
 		System.out.println(result);
-		mav.setViewName("centro");
+		mav.setViewName("centroNotice");
 		return mav;
 		
 		

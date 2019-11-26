@@ -54,7 +54,7 @@ public class QuestionService implements IQuestionService{
 		result.put("last", getLastPage(params));
 		
 		params.put("skip", getSkip(page));
-		params.put("qty", 5);
+		params.put("qty", 10);
 		result.put("questionList", dao.selectQuestionPage(params));
 		
 		return result;
@@ -75,13 +75,13 @@ public class QuestionService implements IQuestionService{
 	@Override
 	public int getLastPage(HashMap<String, Object> params) {
 		
-		return (dao.getCount(params) - 1) / 5 + 1;
+		return (dao.getCount(params) - 1) / 10 + 1;
 	}
 
 	@Override
 	public int getSkip(int num) {
 		
-		return (num - 1) * 5;
+		return (num - 1) * 10;
 	}
 
 	@Override

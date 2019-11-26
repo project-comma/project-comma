@@ -41,13 +41,14 @@ public class QuestionController {
 		
 		HashMap<String, Object> result = qService.getQuestionListPage(params, page);
 		
-//		session.setAttribute("test", params);
+
 		
 		mav.addAllObjects(result);
 		
-		mav.addAllObjects(params);
+//		mav.addAllObjects(params);
+		System.out.println(result);
 		
-		mav.setViewName("centro");
+		mav.setViewName("centroQuestion");
 		return mav;
 		
 		

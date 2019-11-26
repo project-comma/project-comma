@@ -50,7 +50,7 @@ public class NoticeService implements INoticeService{
 		result.put("last", getLastPage(params));
 		
 		params.put("skip", getSkip(page));
-		params.put("qty", 5);
+		params.put("qty", 10);
 		result.put("noticeList", dao.selectNoticePage(params));
 		
 		return result;
@@ -71,13 +71,13 @@ public class NoticeService implements INoticeService{
 	@Override
 	public int getLastPage(HashMap<String, Object> params) {
 		
-		return (dao.getCount(params) - 1) / 5 + 1;
+		return (dao.getCount(params) - 1) / 10 + 1;
 	}
 
 	@Override
 	public int getSkip(int num) {
 		
-		return (num - 1) * 5;
+		return (num - 1) * 10;
 	}
 
 	@Override
