@@ -3,6 +3,8 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +23,11 @@ public class RequestClassController {
 
 	// 클래스 요청 등록
 	@RequestMapping("classReqResist.do")
-	public ModelAndView classReqResist(@RequestParam HashMap<String, Object> params) {
+	public ModelAndView classReqResist(@RequestParam HashMap<String, Object> params, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 
+		params.put("id", session.getAttribute("id"));
+		
 		int res = rService.resistRequest(params);
 
 		if (res == Commons.SUCCESS_RESIST) {
@@ -33,7 +37,7 @@ public class RequestClassController {
 		} else if (res == Commons.ID_OVERLAP) {
 
 		}
-		mav.setViewName("classReqResist");
+		mav.setViewName("classReqList");
 		return mav;
 	}
 

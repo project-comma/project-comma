@@ -7,9 +7,9 @@
   
   <insert id="insertRequestClass" parameterType="java.util.HashMap" >
   	insert into request (id, c_title, c_category, content, price,
-  	c_location, c_startday, c_starttime, c_classtime, c_member)values 
+  	c_location, c_startday, c_starttime, c_period)values 
   	(#{id}, #{c_title}, #{c_category}, #{content}, #{price}, #{c_location},
-  	#{c_startday}, #{c_starttime}, #{c_classtime}, #{c_member})
+  	#{c_startday}, #{c_starttime}, #{c_period})
   </insert>
   
   <delete id="deleteRequestClass" parameterType="int">
@@ -27,7 +27,7 @@
   </select>
   
   <select id="selectList" resultType="java.util.ArrayList" parameterType="java.util.HashMap">
-  	select * from request
+  	select * from request order by id desc
   </select>
   
   </mapper>

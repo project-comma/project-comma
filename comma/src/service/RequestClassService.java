@@ -20,13 +20,15 @@ public class RequestClassService implements IRequestClassService{
 		
 		System.out.println(params);
 		// TODO Auto-generated method stub
-		String stday = (String)params.get("year")+params.get("month")+params.get("day");
-		String time = (String)params.get("time") + params.get("hour");
+		String stday = (String)params.get("year")+ ":" + params.get("month")+ ":" +params.get("day");
+		String time = (String)params.get("time") + ":" + params.get("hour");
+		String loc = (String)params.get("province") +":"+ params.get("city") + ":" + params.get("gu");
 		params.put("c_startday", stday);
 		params.put("c_starttime", time);
+		params.put("c_location", loc);
 		
 		
-		dao.insertRequest(params);
+		dao.insertRequestClass(params);
 		return 0;
 	}
 
