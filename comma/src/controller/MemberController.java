@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -72,9 +73,9 @@ public class MemberController {
 	}
 
 	@RequestMapping("profileImageView.do")
-	public View profileView(String id) {
+	public View profileView(String id, HttpServletRequest request) {
 
-		View view = new DownloadView(mService.getProfileImage(id));
+		View view = new DownloadView(mService.getProfileImage(id, request));
 
 		return view;
 	}
@@ -315,4 +316,14 @@ public class MemberController {
 		return mav;
 	}
 
+	//선생님모드 온오프
+	@RequestMapping("modeChange.do")
+	public void modeChange(@RequestBody HashMap<String, Object> params) {
+		
+		
+		System.out.println(params);
+		
+		
+		
+	}
 }

@@ -217,7 +217,9 @@ function Tc_resist(){
 				contentType: false,
 				type: 'POST',
 				success: function(response){
-					alert(response);
+					alert("등록되었습니다.");
+					
+					location.href="mypage.do";
 				},
 				error: function(jqXHR, error){
 					alert('error : ' + error);

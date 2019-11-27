@@ -56,6 +56,8 @@
    
 </script>
 
+<script src="js/teacher_function.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -171,9 +173,9 @@
 					<div class="custom-control custom-switch"
 						style="float: right; margin-left: 7px;">
 
-						<input type="checkbox" class="custom-control-input" id="switch1"
-							style="float: left;"> <label class="custom-control-label"
-							for="switch1">선생님모드ON</label>
+						<input type="checkbox" class="custom-control-input" id="tSwitch"
+							style="float: left;" onclick="modeChange(this)"> <label class="custom-control-label"
+							for="tSwitch">선생님모드ON</label>
 
 					</div>
 

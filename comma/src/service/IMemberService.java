@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +26,7 @@ public interface IMemberService {
 
 	public int resistProfileImage(String id, MultipartHttpServletRequest request);
 
-	public File getProfileImage(String id);
+	public File getProfileImage(String id, HttpServletRequest request);
 
 	public int Login(String id, String password);
 

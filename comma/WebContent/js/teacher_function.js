@@ -51,3 +51,32 @@ function declaration_s_close() {// 학생 신고 창 닫기
 function declaration_ajax(id) {// 학생신고 ajax 학샐이름을 매게 변수로 받는다
 
 }
+
+
+function modeChange(me){
+	var ch = $("input[id=tSwitch]").prop("checked");
+	
+	var mode = 0;
+	if(ch){
+		mode = 2;//선생님모드
+	}else{
+		mode = 1;//학생모드
+	}
+	
+	
+	$.ajax({
+		url:"modeChange.do",
+		type:"POST",
+		contentType:"application/json",
+		data:{
+			mode:mode
+		},
+		datatype:"json",
+		success:function(){
+			
+		},
+		error:function(){
+			aler("에러!!");
+		}
+	});
+}

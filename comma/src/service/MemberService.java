@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,38 +90,56 @@ public class MemberService implements IMemberService{
 		String t_education = "";
 		String t_license = "";
 		
-		ArrayList<String> career = (ArrayList<String>)params.get("t_careerObject");
-		
-		for(String s : career) {
-			if(!t_career.equals("")) {
-				t_career += "-";
-			}
-			t_career += s;
-			System.out.println(s);
-		}
-		
-		ArrayList<String> edu = (ArrayList<String>)params.get("t_educationObject");
-		
-		for(String s : edu) {
+		try {
 			
-			if(!t_education.equals("")) {
-				t_education += "-";
+			ArrayList<String> career = (ArrayList<String>)params.get("t_careerObject");
+			for(String s : career) {
+				if(!t_career.equals("")) {
+					t_career += "-";
+				}
+				t_career += s;
+				System.out.println(s);
 			}
-			t_education += s;
-		}
-		
-		ArrayList<String> lic = (ArrayList<String>)params.get("t_licenseObject");
-		
-		for(String s : lic) {
-			
-			if(!t_license.equals("")) {
-				t_license += "-";
-			}
-			
-			t_license += s;
+		}catch(ClassCastException e) {
+			t_career = (String)params.get("t_careerObject");
 		}
 		
 		
+		
+		try {
+			ArrayList<String> edu = (ArrayList<String>)params.get("t_educationObject");
+			
+			for(String s : edu) {
+				
+				if(!t_education.equals("")) {
+					t_education += "-";
+				}
+				t_education += s;
+			}
+			
+		} catch (ClassCastException e) {
+			t_education = (String)params.get("t_educationObject");
+			// TODO: handle exception
+		}
+		
+		
+		
+		try {
+			ArrayList<String> lic = (ArrayList<String>)params.get("t_licenseObject");
+			
+			for(String s : lic) {
+				
+				if(!t_license.equals("")) {
+					t_license += "-";
+				}
+				
+				t_license += s;
+			}
+			
+		} catch (ClassCastException e) {
+			t_license = (String)params.get("t_licenseObject");
+			// TODO: handle exception
+		}
 		params.put("id", id);
 		if(!t_career.equals(""))params.put("t_career", t_career);
 		if(!t_education.equals("")) params.put("t_education", t_education);
@@ -159,7 +178,7 @@ public class MemberService implements IMemberService{
 		String fileName = prof.getOriginalFilename();
 		
 		if(fileName==null) {
-			
+			return 0;
 		}
 		File attachFile = new File(path+fileName);
 		
@@ -182,7 +201,7 @@ public class MemberService implements IMemberService{
 	}
 	
 	
-	public File getProfileImage(String id) {
+	public File getProfileImage(String id, HttpServletRequest request) {
 		
 		
 		HashMap<String, Object> mem = dao.selectMember(id);
@@ -192,7 +211,8 @@ public class MemberService implements IMemberService{
 		if(fileName==null) {
 			
 			System.out.println("프로필이 없어 ㅠㅠ");
-			return new File("C:/image/defaultProfile/pro.jpg");
+			String img = request.getRealPath("/img/");
+			return new File(img+"test2.jpg");
 		}
 		
 		String path = "C:/image/";
