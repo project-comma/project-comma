@@ -177,7 +177,8 @@ public class MemberService implements IMemberService{
 		
 		String fileName = prof.getOriginalFilename();
 		
-		if(fileName==null) {
+		if(fileName==null || fileName.equals("")) {
+			System.out.println("이미지가 없어!!!");
 			return 0;
 		}
 		File attachFile = new File(path+fileName);

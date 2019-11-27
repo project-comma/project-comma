@@ -162,13 +162,13 @@ public class MemberController {
 	@RequestMapping("mypage.do")
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		int state = (int) session.getAttribute("state");
+		String mode = (String)session.getAttribute("mode");
 
-		if (state == 1) {
+		if (mode.equals("1")) {
 			mav.setViewName("mypage_s");
-		} else if (state == 2) {
+		} else if (mode.equals("2")) {
 			mav.setViewName("mypage_t");
-		} else if (state == 3) {
+		} else if (mode.equals("3")) {
 			mav.setViewName("admin");
 		}
 
@@ -226,6 +226,7 @@ public class MemberController {
 			System.out.println(state);
 			session.setAttribute("id", id);
 			session.setAttribute("state", state);
+			session.setAttribute("mode", state);
 //			session.setAttribute("password", password);
 
 			return "main";
@@ -317,11 +318,14 @@ public class MemberController {
 	}
 
 	//선생님모드 온오프
-	@RequestMapping("modeChange.do")
-	public void modeChange(@RequestBody HashMap<String, Object> params) {
+	@ResponseBody
+	@RequestMapping(value="modeChange.do", method=RequestMethod.POST)
+	public void modeChange(@RequestParam HashMap<String, Object> params, HttpSession session) {
 		
 		
-		System.out.println(params);
+		System.out.println("모드" + params);
+		
+		session.setAttribute("mode", params.get("mode"));
 		
 		
 		

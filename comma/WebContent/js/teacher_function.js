@@ -67,7 +67,6 @@ function modeChange(me){
 	$.ajax({
 		url:"modeChange.do",
 		type:"POST",
-		contentType:"application/json",
 		data:{
 			mode:mode
 		},
@@ -76,7 +75,21 @@ function modeChange(me){
 			
 		},
 		error:function(){
-			aler("에러!!");
+			aler("에러!!")
 		}
 	});
+}
+
+
+function modeSwitch(mode){
+	
+	
+	
+	
+	
+	if(mode==2){
+		$("#tSwitch").prop("checked", true);
+	}else{
+		$("#tSwitch").prop("checked", false);
+	}
 }
