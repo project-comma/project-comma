@@ -99,8 +99,7 @@ public class MemberController {
 	@RequestMapping("changeInfo_s.do")
 	public ModelAndView changeInfo_s(HttpSession session, @RequestParam HashMap<String, Object> params,
 			@RequestParam("file") MultipartFile file) {
-		String fileName = file.getOriginalFilename();
-		params.put("image", fileName);
+
 		ModelAndView mav = new ModelAndView();
 		String session_id = (String) session.getAttribute("id");
 
@@ -108,7 +107,7 @@ public class MemberController {
 		int mState = (int) mId.get("state");
 
 		if (params.get("password").equals((params).get("passwordCheck")) && session_id != null && mState == 1) {
-			int result = mService.modifyMember_s(session_id, params);
+			int result = mService.modifyMember_s(session_id, params, file);
 			System.out.println("컨트롤러에 리턴된값=" + result);
 			mav.setViewName("main");
 			return mav;

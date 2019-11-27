@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
- <!-- JQuery로드 -->
+<!-- JQuery로드 -->
 <script src="https://code.jquery.com/jquery-2.2.4.js"
 	integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
 	crossorigin="anonymous">
@@ -14,53 +14,46 @@
 </script>
 
 <script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
 
-$(document).ready(function() {
+						function classList() {
+							$
+									.ajax({
+										type : "get",
+										url : "classAllList.do",
+										dataType : "json",
+										success : function(arr) {
+											// 				alert(arr);
 
-	
-	
-	
-	function classList() {
-		$.ajax({
-			type : "get",
-			url : "classAllList.do",
-			dataType : "json",
-			success : function (arr) {
-// 				alert(arr);
-				
-				for(var i = 0; i < arr.length; i++){
-					var div = $("<div style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>")
-// 					var img = $("<img width='300px' height='300px'>");
-					var img = $("<div>")
-					img.text(arr[i].c_image);
-					var name = $("<div>");
-					name.text(arr[i].c_name);
-					var price =$("<div>");
-					price.text(arr[i].c_price);
-					div.append(img).append(name).append(price);
-					$("#classList").append(div);
-				}
-				
-			},
-			error : function (xhrReq, status, error) {
-				alert("에러창")
-				console.log(xhrReq + ' / ' + status + ' / ' + error);
-				
-			}
-			
-			
-			
-		})
-	}
-	classList();
+											for (var i = 0; i < arr.length; i++) {
+												var div = $("<div style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>")
+												// 					var img = $("<img width='300px' height='300px'>");
+												var img = $("<div>")
+												img.text(arr[i].c_image);
+												var name = $("<div>");
+												name.text(arr[i].c_name);
+												var price = $("<div>");
+												price.text(arr[i].c_price);
+												div.append(img).append(name)
+														.append(price);
+												$("#classList").append(div);
+											}
 
+										},
+										error : function(xhrReq, status, error) {
+											alert("에러창")
+											console.log(xhrReq + ' / ' + status
+													+ ' / ' + error);
 
-	
-	
-	
+										}
 
-})
+									})
+						}
+						classList();
 
+					})
 </script>
 
 
@@ -95,8 +88,8 @@ $(document).ready(function() {
 			</div>
 
 			<div class="span" align="center">
-				<img src="img/수공예.png" id="handmade" class="icon"> <br>
-				<a href="" class="iconText">수공예</a>
+				<img src="img/수공예.png" id="handmade" class="icon"> <br> <a
+					href="" class="iconText">수공예</a>
 			</div>
 
 			<div class="span" align="center">
@@ -120,8 +113,8 @@ $(document).ready(function() {
 			</div>
 
 			<div class="span" align="center">
-				<img src="img/언어.png" id="language" class="icon"> <br>
-				<a href="" class="iconText">언어</a>
+				<img src="img/언어.png" id="language" class="icon"> <br> <a
+					href="" class="iconText">언어</a>
 			</div>
 
 
@@ -139,9 +132,9 @@ $(document).ready(function() {
 			<form action="">
 				<div align="center">
 					<div class="input-group mb-3" style="width: 600px;">
-						<input type="text" class="form-control" placeholder="검색어 입력">
+						<input type="text" class="form-control" placeholder="검색어를 입력해주세요.">
 						<div class="input-group-append">
-							<button class="btn btn-secondary" type="submit">Go</button>
+							<button class="btn btn-secondary" type="submit">검색</button>
 						</div>
 					</div>
 				</div>
@@ -150,62 +143,61 @@ $(document).ready(function() {
 				<button type="button" class="btn btn-outline-secondary"
 					id="filter_btn" style="float: right; margin-right: 20px">필터</button>
 				<br> <br>
-				<div
-					style="width: 1200px; height: 400pX; position: absolute;"
+				<div style="width: 1200px; height: 400pX; position: absolute;"
 					id="filter_area" align="center" class="grey-color">
 
 
 					<table>
 						<tr>
 							<td id="sec-1" style="width: 400px">
-								<div style="margin-left: 50px; margin-top: 30px; height:150px;">
-									<h4 style="font-size:20px; font-weight:600;">위치</h4>
+								<div style="margin-left: 50px; margin-top: 30px; height: 150px;">
+									<h4 style="font-size: 20px; font-weight: 600;">위치</h4>
 									<!-- 위치 검색 박스 -->
-									
-								
-								<div style="display: inline-block; float:left; width:100px;">
-					<select name="province" class="custom-select">
-						<option selected>도</option>
-						<option value="spec">특별시</option>
-						<option value="geonggi">경기도</option>
-						<option value="geongsangbuk">경상북도</option>
-						<option value="geongsangnam">경상남도</option>
-						<option value="chungcheongbuk">충청북도</option>
-						<option value="chungcheongnam">충청남도</option>
-						<option value="jeonlabuk">전라북도</option>
-						<option value="jeonlanam">전라남도</option>
-						<option value="jeju">제주도</option>
-						
 
-					</select>
-				</div>
-				
-				<div style="display: inline-block; float:left; width:100px;">
-					<select name="city" class="custom-select">
-						<option selected>시</option>
-						<option value="seoul">서울시</option>
-						
-					</select>
-				</div>
-				
-				<div style="display: inline-block; float:left; width:100px;">
-					<select name="gu" class="custom-select">
-						<option selected>구</option>
-						<option value="jonglo">종로</option>
-						
-					</select>
-				</div>
-									
-									
+
+									<div style="display: inline-block; float: left; width: 100px;">
+										<select name="province" class="custom-select">
+											<option selected>도</option>
+											<option value="spec">특별시</option>
+											<option value="geonggi">경기도</option>
+											<option value="geongsangbuk">경상북도</option>
+											<option value="geongsangnam">경상남도</option>
+											<option value="chungcheongbuk">충청북도</option>
+											<option value="chungcheongnam">충청남도</option>
+											<option value="jeonlabuk">전라북도</option>
+											<option value="jeonlanam">전라남도</option>
+											<option value="jeju">제주도</option>
+
+
+										</select>
+									</div>
+
+									<div style="display: inline-block; float: left; width: 100px;">
+										<select name="city" class="custom-select">
+											<option selected>시</option>
+											<option value="seoul">서울시</option>
+
+										</select>
+									</div>
+
+									<div style="display: inline-block; float: left; width: 100px;">
+										<select name="gu" class="custom-select">
+											<option selected>구</option>
+											<option value="jonglo">종로</option>
+
+										</select>
+									</div>
+
+
 									<!-- 위치 검색 박스 -->
-									
-									
-									
-									
+
+
+
+
 								</div>
 
 								<div style="margin-left: 50px; margin-top: 30px">
-									<h4 style="font-size:20px; font-weight:600;">가격</h4>
+									<h4 style="font-size: 20px; font-weight: 600;">가격</h4>
 									<input type="checkbox" name="chk_price3"
 										style="width: 15px; height: 15px"> 10,000원이상 30,000원
 									이하<br> <input type="checkbox" name="chk_price4.5"
@@ -223,35 +215,35 @@ $(document).ready(function() {
 							</td>
 							<td id="sec-2" style="width: 400px">
 								<div style="margin-left: 50px; margin-top: 10px">
-									<h4 style="font-size:20px; font-weight:600;">별점</h4>
+									<h4 style="font-size: 20px; font-weight: 600;">별점</h4>
 									<input type="checkbox" name="star4">
 									<h4 style="display: inline-block; margin-left: 20px">★★★★</h4>
 									이상<br> <input type="checkbox" name="star3">
 									<h4 style="display: inline-block; margin-left: 20px">★★★</h4>
 									이상<br> <input type="checkbox" name="star2">
 									<h4 style="display: inline-block; margin-left: 20px">★★</h4>
-									이상<br>
-									
-									<input type="checkbox" name="star">
-									<h4 style="display:inline-block; font-size:15px;">직접입력</h4>
-									<br>
-									<input type="text" name="star-front" style="width:50px;">이상 ~ <input type="text" name="star-rear" style="width:50px;">이하
-									<br>
+									이상<br> <input type="checkbox" name="star">
+									<h4 style="display: inline-block; font-size: 15px;">직접입력</h4>
+									<br> <input type="text" name="star-front"
+										style="width: 50px;">이상 ~ <input type="text"
+										name="star-rear" style="width: 50px;">이하 <br>
 								</div>
 								<div style="margin-left: 50px; margin-top: 10px">
-									<h4 style="font-size:20px; font-weight:600;">원데이/정규</h4>
+									<h4 style="font-size: 20px; font-weight: 600;">원데이/정규</h4>
 									<input type="checkbox" name="chk_oneday"
 										style="width: 15px; height: 15px"> 원데이 <input
 										type="checkbox" name="chk_regular"
-										style="width: 15px; height: 15px"> 정규
+										style="width: 15px; height: 15px; margin-right: 10px;">
+									정규
 								</div>
 
 								<div style="margin-left: 50px; margin-top: 30px">
-									<h4 style="font-size:20px; font-weight:600;">수업형태</h4>
+									<h4 style="font-size: 20px; font-weight: 600;">수업형태</h4>
 									<input type="checkbox" name="chk_classgroup1"
-										style="width: 15px; height: 15px"> 1:1<br> <input
+										style="width: 15px; height: 15px"> 1:1 <input
 										type="checkbox" name="chk_classgroup2"
-										style="width: 15px; height: 15px"> 그룹<br>
+										style="width: 15px; height: 15px; margin-right: 10px;">
+									그룹<br>
 								</div>
 
 							</td>
@@ -261,7 +253,7 @@ $(document).ready(function() {
 							</td>
 							<td id="sec-3" style="width: 400px">
 								<div style="margin-left: 50px;">
-									<h4 style="font-size:20px; font-weight:600;">수업 진행 시간</h4>
+									<h4 style="font-size: 20px; font-weight: 600;">수업 진행 시간</h4>
 									<input type="checkbox" name="chk_classTime_1"
 										style="width: 15px; height: 15px"> 1시간 이하<br> <input
 										type="checkbox" name="chk_classTime_2"
@@ -273,33 +265,31 @@ $(document).ready(function() {
 								</div>
 
 								<div style="margin-left: 50px; margin-top: 30px">
-								
-								
-								
-									<h4 style="font-size:20px; font-weight:600;">요일/시간</h4>
-									<input type="checkbox" name="chk_am"
-										style="width: 15px; height: 15px"> 오전 <input
-										type="checkbox" name="chk_pm"
-										style="width: 15px; height: 15px"> 오후 <input
-										type="checkbox" name="chk_evening"
-										style="width: 15px; height: 15px"> 저녁
-										
-										<br>
-										<br>
-										<input
-										type="checkbox" name="chk_weekday"
-										style="width: 15px; height: 15px"> 평일
-										
-										<input
-										type="checkbox" name="chk_weekend"
-										style="width: 15px; height: 15px"> 주말
-									
-									
-								</div>
-								<br>
-								<br>
-								<div style="float:right; margin-right:30px;">
-									<input type="button" value="검색" class="btn btn-outline-secondary" style="width:100px;">
+
+
+
+									<h4 style="font-size: 20px; font-weight: 600;">요일/시간</h4>
+									<div style="margin-bottom: 10px;">
+										<input type="checkbox" name="chk_weekday"
+											style="width: 15px; height: 15px"> 평일 <input
+											type="checkbox" name="chk_weekend"
+											style="width: 15px; height: 15px"> 주말
+
+									</div>
+									<div>
+										<input type="checkbox" name="chk_am"
+											style="width: 15px; height: 15px"> 오전 <input
+											type="checkbox" name="chk_pm"
+											style="width: 15px; height: 15px"> 오후 <input
+											type="checkbox" name="chk_evening"
+											style="width: 15px; height: 15px"> 저녁
+									</div>
+
+
+								</div> <br> <br>
+								<div style="float: right; margin-right: 30px;">
+									<input type="button" value="검색"
+										class="btn btn-outline-secondary" style="width: 100px;">
 								</div>
 
 							</td>
@@ -314,20 +304,20 @@ $(document).ready(function() {
 		</div>
 
 	</div>
-	
+
 	<div align="center">
-			<div align="left" style="width:1200px "  id="classList" >
-<!-- 				<div style="width:300px; height: 400px;" id="classList"> -->
-<!-- 					<img src="img/시간.png" width="300px" height="300px"> -->
-<!-- 					<img src="img/시간.png" width="80px" height="80px"> -->
-<!-- 					<div>이상훈 </div> -->
-<!-- 					<div>내용내용내용내용내용내용내용내용</div> -->
-<!-- 					<div>가격</div> -->
-<!-- 				</div> -->
-			
-			
-			</div>
-		
+		<div align="left" style="width: 1200px" id="classList">
+			<!-- 				<div style="width:300px; height: 400px;" id="classList"> -->
+			<!-- 					<img src="img/시간.png" width="300px" height="300px"> -->
+			<!-- 					<img src="img/시간.png" width="80px" height="80px"> -->
+			<!-- 					<div>이상훈 </div> -->
+			<!-- 					<div>내용내용내용내용내용내용내용내용</div> -->
+			<!-- 					<div>가격</div> -->
+			<!-- 				</div> -->
+
+
 		</div>
+
+	</div>
 </body>
 </html>

@@ -12,7 +12,7 @@
 	crossorigin="anonymous">
 	
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document)
 			.ready(
 
@@ -83,36 +83,75 @@
 										});
 
 					});
-</script>
+</script> -->
 <body>
 
 	<jsp:include page="header.jsp"></jsp:include>
+
+
 	<h2 align="center" style="margin-top: 50px;">학생 정보 변경</h2>
 	<br>
 
 
-	<form action="changeInfo_s.do" enctype="multipart/form-data" method="post">
+	<form action="changeInfo_s.do" enctype="multipart/form-data"
+		method="post">
 		<div align="center">
 			<div align="left" style="width: 1200px">
 				<div align="center" style="margin-top: 50px">
-					<div>
+
+
+					<%-- 		<div>
 						<div class="inlineArr">
 							<img src=img/people.jpg style="width: 200px; height: 200px; margin-bottom: 50px;"
 								class="rounded-circle" id="default_people_img">
 						</div>
 						<div class="filebox preview-image inlineArr">
-							<input class="upload-name" value="파일선택" disabled="disabled" style="margin-left: 20px;">
+							<input class="upload-name" placeholder="파일을 선택해주세요." disabled="disabled" style="margin-left: 20px;" value="${info.image}">
 							<label for="input-file">업로드</label> <input type="file"
-								id="input-file" class="upload-hidden" name="file">
+								id="input-file" class="upload-hidden" name="file" src="profileImageView.do?id=${sessionScope.id }" >
 						</div>
+					</div> --%>
+
+
+
+
+					<div>
+						<div class="inlineArr" style="margin-bottom: 50px;">
+							<!-- 왼쪽 사진 구간 -->
+							<img id="my_prophoto"
+								src="profileImageView.do?id=${sessionScope.id }"
+								style="margin-top: 10px;">
+						</div>
+						<div class="inlineArr">
+							<div class="custom-file"
+								style="width: 800px; margin-left: 100px; margin-top: 50px;">
+								<input type="file" name="profile" class="custom-file-input"
+									id="customFile" onchange="profileChange(this)"> <label
+									class="custom-file-label" for="customFile">프로필 사진</label>
+							</div>
+						</div>
+
+						<script>
+							// Add the following code if you want the name of the file appear on select
+							$(".custom-file-input").on(
+									"change",
+									function() {
+										var fileName = $(this).val()
+												.split("\\").pop();
+										$(this).siblings(".custom-file-label")
+												.addClass("selected").html(
+														fileName);
+									});
+						</script>
+
 					</div>
-	
+
 					<div class="input-group mb-3 input-group-lg">
 						<div class="input-group-prepend">
 							<span class="input-group-text">이메일</span>
 						</div>
 						<input type="text" class="form-control" name="email"
-							placeholder="이메일을 입력해 주세요">
+							placeholder="이메일을 입력해 주세요" value="${info.email}">
 					</div>
 
 					<div class="input-group mb-3 input-group-lg">
@@ -120,7 +159,7 @@
 							<span class="input-group-text">핸드폰</span>
 						</div>
 						<input type="text" class="form-control" name="p_number"
-							placeholder="핸드폰 번호를 입력해 주세요">
+							placeholder="핸드폰 번호를 입력해 주세요" value="${info.p_number}">
 					</div>
 
 					<div class="input-group mb-3 input-group-lg">
@@ -144,7 +183,8 @@
 
 
 				<div style="margin-top: 50px; margin-bottom: 50px;" align="center">
-					<button type="submit" class="btn btn-outline-secondary">변경 하기</button>
+					<button type="submit" class="btn btn-outline-secondary">변경
+						하기</button>
 				</div>
 
 			</div>

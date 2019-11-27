@@ -37,6 +37,6 @@ public interface IMemberService {
 	// 첨부파일 갖다주는 기능
 	public File getAttachFile(String id);
 
-	int modifyMember_s(String id, HashMap<String, Object> params);
+	int modifyMember_s(String id, HashMap<String, Object> params, MultipartFile file);
 
 }
