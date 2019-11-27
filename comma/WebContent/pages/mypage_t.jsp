@@ -32,7 +32,7 @@
 				<tr height="250">
 					<td width="300">
 						<div align="center" style="width: 300px; height: 250px;">
-							<img id="my_prophoto" src="img/test.jpg" width="200" height="200">
+							<img id="my_prophoto" src="profileImageView.do?id=${sessionScope.id }" width="200" height="200">
 						</div>
 
 					</td>

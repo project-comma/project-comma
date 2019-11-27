@@ -17,7 +17,16 @@ public class RequestClassService implements IRequestClassService{
 	
 	@Override
 	public int resistRequest(HashMap<String, Object> params) {//클래스 요청
+		
+		System.out.println(params);
 		// TODO Auto-generated method stub
+		String stday = (String)params.get("year")+params.get("month")+params.get("day");
+		String time = (String)params.get("time") + params.get("hour");
+		params.put("c_startday", stday);
+		params.put("c_starttime", time);
+		
+		
+		dao.insertRequest(params);
 		return 0;
 	}
 

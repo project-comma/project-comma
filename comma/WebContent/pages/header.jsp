@@ -61,7 +61,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		modeSwitch(<%=session.getAttribute("mode") %>);
+		modeSwitch("<%=(String)session.getAttribute("mode") %>");
 
 		var log = false;
 		$('#joinid').blur(function() {

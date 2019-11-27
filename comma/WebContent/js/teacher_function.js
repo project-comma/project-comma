@@ -87,7 +87,7 @@ function modeSwitch(mode){
 	
 	
 	
-	if(mode==2){
+	if(mode=='tc'){
 		$("#tSwitch").prop("checked", true);
 	}else{
 		$("#tSwitch").prop("checked", false);

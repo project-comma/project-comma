@@ -163,12 +163,17 @@ public class MemberController {
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String mode = (String)session.getAttribute("mode");
+		
+		System.out.println("모드!" + mode);
 
-		if (mode.equals("1")) {
+		if (mode.equals("st")) {
+			System.out.println("학생!");
 			mav.setViewName("mypage_s");
-		} else if (mode.equals("2")) {
+		} else if (mode.equals("tc")) {
+			System.out.println("선생님!");
 			mav.setViewName("mypage_t");
-		} else if (mode.equals("3")) {
+		} else if (mode.equals("ad")) {
+			System.out.println("관리자!");
 			mav.setViewName("admin");
 		}
 
@@ -226,7 +231,15 @@ public class MemberController {
 			System.out.println(state);
 			session.setAttribute("id", id);
 			session.setAttribute("state", state);
-			session.setAttribute("mode", state);
+			
+			if(state==1) {
+				session.setAttribute("mode", "st");
+				
+			}else if(state==2) {
+				session.setAttribute("mode", "tc");
+			}else if(state==3) {
+				session.setAttribute("mode", "ad");
+			}
 //			session.setAttribute("password", password);
 
 			return "main";
@@ -325,7 +338,15 @@ public class MemberController {
 		
 		System.out.println("모드" + params);
 		
-		session.setAttribute("mode", params.get("mode"));
+		int mode = Integer.parseInt((String)params.get("mode"));
+		
+		if(mode==1) {
+			
+			session.setAttribute("mode", "st");
+		}else if(mode==2){
+			session.setAttribute("mode", "tc");
+		}
+		
 		
 		
 		

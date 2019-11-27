@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">제목</span>
 				</div>
-				<input type="text" class="form-control" placeholder="제목을 입력해주세요.">
+				<input type="text" name="c_title" class="form-control" placeholder="제목을 입력해주세요.">
 				<br>
 
 			</div>
@@ -41,19 +42,19 @@
 				</div>
 
 				<div style="display: inline-block; width:400px;">
-					<select name="category" class="custom-select">
-						<option selected>플라워</option>
-						<option value="cook">요리</option>
-						<option value="flower">플라워</option>
-						<option value="hand">수공예</option>
-						<option value="art">미술</option>
-						<option value="act">액티비티</option>
-						<option value="beuty">뷰티</option>
-						<option value="music">음악</option>
-						<option value="lang">언어</option>
-						<option value="dance">방송댄스</option>
-						<option value="web">웹개발</option>
-
+					<select name="c_category" class="custom-select">
+						<option selected>카테고리</option>
+						<option value="요리">요리</option>
+						<option value="플라워">플라워</option>
+						<option value="수공예">수공예</option>
+						<option value="미술">미술</option>
+						<option value="액티비티">액티비티</option>
+						<option value="뷰티">뷰티</option>
+						<option value="음악">음악</option>
+						<option value="언어">언어</option>
+						<option value="방송댄스">방송댄스</option>
+						<option value="웹개발">웹개발</option>
+						<option value="기타">기타</option>
 					</select>
 				</div>
 			</div>
@@ -64,7 +65,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">수업가격</span>
 				</div>
-				<input type="text" class="form-control" placeholder="수업가격을 입력해주세요.">
+				<input type="text" name="price" class="form-control" placeholder="수업가격을 입력해주세요.">
 				<br>
 
 			</div>
@@ -80,15 +81,15 @@
 				<div style="display: inline-block; float:left; width:100px;">
 					<select name="province" class="custom-select">
 						<option selected>도</option>
-						<option value="spec">특별시</option>
-						<option value="geonggi">경기도</option>
-						<option value="geongsangbuk">경상북도</option>
-						<option value="geongsangnam">경상남도</option>
-						<option value="chungcheongbuk">충청북도</option>
-						<option value="chungcheongnam">충청남도</option>
-						<option value="jeonlabuk">전라북도</option>
-						<option value="jeonlanam">전라남도</option>
-						<option value="jeju">제주도</option>
+						<option value="특별시">특별시</option>
+						<option value="경기도">경기도</option>
+						<option value="경상북도">경상북도</option>
+						<option value="경상남도">경상남도</option>
+						<option value="충청북도">충청북도</option>
+						<option value="충청남도">충청남도</option>
+						<option value="전라북도">전라북도</option>
+						<option value="전라남도">전라남도</option>
+						<option value="제주도">제주도</option>
 						
 
 					</select>
@@ -97,7 +98,7 @@
 				<div style="display: inline-block; float:left; width:100px;">
 					<select name="city" class="custom-select">
 						<option selected>시</option>
-						<option value="seoul">서울시</option>
+						<option value="서울시">서울시</option>
 						
 					</select>
 				</div>
@@ -105,7 +106,7 @@
 				<div style="display: inline-block; float:left; width:100px;">
 					<select name="gu" class="custom-select">
 						<option selected>구</option>
-						<option value="jonglo">종로</option>
+						<option value="종로구">종로</option>
 						
 					</select>
 				</div>
@@ -130,8 +131,9 @@
 			
 			<div style="display:inline-block; float:left;">
 			<select name="year" class="custom-select" style="width: 100px;">
-				<option selected>2019</option>
-				<option value="2019">2019</option>
+				<option selected>년</option>
+				<option value="2019년">2019년</option>
+				<option value="2020년">2020년</option>
 				
 
 			</select>
@@ -139,7 +141,7 @@
 			
 			<div style="display:inline-block; float:left;">
 			 <select name="month" class="custom-select" style="width: 100px;">
-				<option selected>1월</option>
+				<option selected>월</option>
 				<option value="1월">1월</option>
 				<option value="2월">2월</option>
 				<option value="3월">3월</option>
@@ -158,8 +160,11 @@
 			
 			<div style="display:inline-block; float:left;">
 			<select name="day" class="custom-select" style="width: 100px;">
-				<option selected>1일</option>
-				<option value="1일">1일</option>
+				<option selected>일</option>
+				<c:forEach var="i" begin="1" end="31" step="1">
+					<option value="${i }일">${i }일</option>
+				</c:forEach>
+				
 				
 
 			</select>
@@ -180,8 +185,8 @@
 				<div style="display:inline-block; float:left;">
 				<select name="time" class="custom-select" style="width: 100px;">
 					<option selected>오전</option>
-					<option value="1일">오전</option>
-					<option value="2일">오후</option>
+					<option value="오전">오전</option>
+					<option value="오후">오후</option>
 
 				</select>
 				
@@ -190,7 +195,7 @@
 				
 				<div style="display:inline-block; float:left;">
 					<select name="hour" class="custom-select" style="width: 100px;">
-					<option selected>00시</option>
+					<option selected>시</option>
 					<option value="1시">01시</option>
 					<option value="2시">02시</option>
 					<option value="3시">03시</option>
@@ -221,20 +226,20 @@
 				</div>
 				
 				<div style="display:inline-block; float:left;">
-					<select name="period_time" class="custom-select" style="width: 100px;">
-					<option selected>01시간</option>
-					<option value="1">01시간</option>
-					<option value="2">02시</option>
-					<option value="3">03시</option>
-					<option value="4">04시</option>
-					<option value="5">05시</option>
-					<option value="6">06시</option>
-					<option value="7">07시</option>
-					<option value="8">08시</option>
-					<option value="9">09시</option>
-					<option value="10">10시</option>
-					<option value="11">11시</option>
-					<option value="12">12시</option>
+					<select name="c_period" class="custom-select" style="width: 100px;">
+					<option selected>수업진행시간</option>
+					<option value="1시간">01시간</option>
+					<option value="2시간">02시간</option>
+					<option value="3시간">03시간</option>
+					<option value="4시간">04시간</option>
+					<option value="5시간">05시간</option>
+					<option value="6시간">06시간</option>
+					<option value="7시간">07시간</option>
+					<option value="8시간">08시간</option>
+					<option value="9시간">09시간</option>
+					<option value="10시간">10시간</option>
+					<option value="11시간">11시간</option>
+					<option value="12시간">12시간</option>
 					
 
 				</select>
