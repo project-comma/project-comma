@@ -269,14 +269,14 @@ public class MemberService implements IMemberService {
 
 	@Override
 	public int modifyMember_s(String id, HashMap<String, Object> params, MultipartFile file) {
-		System.out.println(" modifyMember_s_service");
+	
 		params.put("id", id);
 		String pw = (String) params.get("password");
-		System.out.println("원래비번" + pw);
+		
 		if (pw.equals("") || pw == null) {
 			HashMap<String, Object> result = dao.selectMember(id);
 			String password = (String) result.get("password");
-			System.out.println("없어서원래비번" + password);
+		
 			params.put("password", password);
 		}
 

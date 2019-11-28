@@ -12,6 +12,8 @@
 	crossorigin="anonymous">
 	
 </script>
+<script src="js/teacherResist.js" type="text/javascript"></script>
+
 <!-- <script type="text/javascript">
 	$(document)
 			.ready(
@@ -122,12 +124,12 @@
 								src="profileImageView.do?id=${sessionScope.id }"
 								style="margin-top: 10px;">
 						</div>
-						<div class="inlineArr">
+						<div class="inlineArr" align="left">
 							<div class="custom-file"
-								style="width: 800px; margin-left: 100px; margin-top: 50px;">
+								style="width: 800px; margin-left: 50px; margin-top: 100px;">
 								<input type="file" name="profile" class="custom-file-input"
 									id="customFile" onchange="profileChange(this)"> <label
-									class="custom-file-label" for="customFile">프로필 사진</label>
+									class="custom-file-label" for="customFile">프로필 사진을 선택 해주세요.</label>
 							</div>
 						</div>
 
