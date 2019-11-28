@@ -81,8 +81,10 @@ public class ClassController {
 
 	}
 
+	
+	
 	// 클래스상세내용
-	@RequestMapping("class.do")
+	@RequestMapping("classForm.do")
 	public ModelAndView classw(int number) {
 		number = 4;
 
@@ -90,26 +92,89 @@ public class ClassController {
 		ModelAndView mav = new ModelAndView();
 		HashMap<String, Object> result = cService.viewClass(number);
 //		System.out.println(result);
-
+		
 		mav.setViewName("class");
 		return mav;
 
 	}
 
 	// 클래스 등록
-	@RequestMapping("classResist.do")
-	public ModelAndView c_Resist(@RequestParam HashMap<String, Object> params) {
-		ModelAndView mav = new ModelAndView();
+	@RequestMapping("classResistBtn.do")
+	public void c_Resist(HttpServletResponse response, @RequestParam HashMap<String, Object> params) throws IOException {
+//		ModelAndView mav = new ModelAndView();
 
-		int result = cService.resistClass(params);
-		System.out.println(result);
+		
+//		System.out.println(result);
+//		System.out.println(params);
+		
+		
+		
+		
+		if(params.get("c_number").equals("")) {
+			
+			String result = (String) params.get("c_number");
+			result = "1";
+			
+			String resultStr = "{ \"result\" : " + result + "}";
+			response.getWriter().println(resultStr);
+		}
+		else if (params.get("c_image").equals("")) {
+			String result = (String) params.get("c_image");
+			result = "2";
+			
+			String resultStr = "{ \"result\" : " + result + "}";
+			response.getWriter().println(resultStr);
+		}
+		else if (params.get("c_content").equals("")) {
+			String result = (String) params.get("c_content");
+			result = "3";
+			
+			String resultStr = "{ \"result\" : " + result + "}";
+			response.getWriter().println(resultStr);
+		}
+		else if (params.get("c_price").equals("")) {
+			String result = (String) params.get("c_price");
+			result = "4";
+			
+			String resultStr = "{ \"result\" : " + result + "}";
+			response.getWriter().println(resultStr);
+		}
+		else {
+			String c_location = (String) params.get("province");
+			c_location += "/"+params.get("city");
+			c_location += "/"+params.get("gu");
+			params.put("c_location", c_location);
+			
+			String c_startday = (String) params.get("year");
+			c_startday += "/"+params.get("month");
+			c_startday += "/"+params.get("day");
+			System.out.println(c_startday);
+			params.put("c_startday", c_startday);
+			
+			
+			
+			cService.resistClass(params);
+		
+			
+		
+			
+			
+			
+			
+			
+			
 
-		mav.setViewName("main");
-		return mav;
+			
+			
+		}
+		
+		
+
+		
 	}
 
 	// 클래스 등록폼
-	@RequestMapping("classResistForm.do")
+	@RequestMapping("classResist.do")
 	public String classResistForm(HttpSession session) {
 
 		return "classResistForm";
