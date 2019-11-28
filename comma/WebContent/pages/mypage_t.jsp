@@ -38,7 +38,7 @@
 					</td>
 
 
-					<td width="500" style="vertical-align: top;">
+					<td width="550" style="vertical-align: top;">
 						<div style="vertical-align: midle; height: 180px;">
 							<pre style="margin-top: 10px;">
 
@@ -59,6 +59,8 @@ phy555@naver.com
 								value="실시간톡" onclick="location.href='talk.do'"> <input
 								type="button" class="btn btn-light" id="modify_info" value="탈퇴"
 								onclick="drop_member_open(${id})">
+							<input type="button" class="btn btn-light" id="modify_info"
+								value="클래스 등록" onclick="location.href='classResist.do'">
 
 						</div>
 					</td>

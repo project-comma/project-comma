@@ -14,29 +14,162 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/cssconfig.css">
+
+<script src="js/jquery.serializeObject.js" type="text/javascript">
+	
+</script>
+
 <title>Insert title here</title>
 
 </head>
+
+<script type="text/javascript">
+
+	
+function delBtn(me){
+	
+	var index = $(me).parent().parent().index();
+	
+	
+	$("#tableAdd tr").eq(index).remove();
+	
+}
+
+$(document).ready(function() {
+
+// 	var log = false;
+	
+
+	$('#registBtn').click(function() {
+
+		var params = $('#classForm').serializeObject();
+// 		if (log) {
+
+			$.ajax({
+				type : "post",
+				url : "classResistBtn.do",
+				data : params,
+				dataType : "json",
+				success : function(resultStr) {
+					
+					if (resultStr.result == "1") {
+				
+						alert("수업이름을 입력해주세요");
+						
+					} 
+					if (resultStr.result == "2") {
+				
+						alert("수업에 관련된 사진을 올려주세요");
+						
+					} 
+					if (resultStr.result == "3") {
+				
+						alert("수업내용을 입력해주세요");
+						
+					} 
+					if (resultStr.result == "4") {
+				
+						alert("수업가격을 입력해주세요");
+						
+					} 
+					
+
+				},
+				error : function(xhrReq, status, error) {
+					
+					alert("실패!");
+					console.log(xhrReq + ' / ' + status + ' / ' + error);
+				}
+			})
+
+// 		} else
+// 			alert("밖놉")
+
+	})
+	
+	
+	
+// 	var tt = 2
+// 	alert(typeof tt);
+// 	tt = String(tt);
+// 	alert(typeof tt);
+	
+	
+	
+	
+	$("#addBtn").click(function() {
+		
+		var time = $("#time").val()
+		var hour = $("#hour").val()
+		
+		
+		var year = $("#year").val()
+		var month = $("#month").val()
+		var day= $("#day").val()
+		
+		
+		var uni1 = year+"-"+month+"-"+day
+		var uni2 = time+":"+hour
+		
+		
+			
+		var tr = $("<tr>")
+		var td1 = $("<td><input readonly='readonly' type='text' value='"+uni1+"' name='c_startday'></td>")
+		
+		var td2 = $("<td><input readonly='readonly' type='text' value='"+uni2+"' name='c_starttime'></td>")
+		
+		
+			
+		var btn = $("<td><input type='button' id='delBtn1' value='삭제' onclick='delBtn(this)' ></td>")
+		
+		
+		
+		
+		tr.append(td1).append(td2).append(btn);
+		$("#tableAdd").append(tr);
+		
+
+		
+		
+		
+		
+	})
+	 
+	
+	
+	
+	
+
+
+	
+	
+	
+
+})
+
+
+</script>
+
 <body>
 
 	<jsp:include page="header.jsp"></jsp:include>
 	<div align="center">
 		<div align="left" style="width: 1200px">
 			<div align="center" style="margin-top: 50px">
-				<h2 align="center">클래스 등록/수정</h2>
+				<h2  align="center">클래스 등록/수정</h2>
 				<div align="center"
 					style="border-bottom: 1px solid #555; width: 1200px; margin-bottom: 15px;"></div>
 			</div>
 
 
-			<form action="">
+			<form action="classResistBtn.do" id="classForm">
 				<div align="center" style="margin-top: 50px;">
 					<div id="inputinput">
 						<div class="input-group mb-3 input-group-lg">
 							<div class="input-group-prepend">
 								<span class="input-group-text">수업이름</span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="text" name="c_number" class="form-control"
 								placeholder="수업이름을 입력해 주세요">
 						</div>
 
@@ -45,7 +178,7 @@
 								<span class="input-group-text">카테고리</span>
 							</div>
 
-							<select class="form-control" id="sel1" name="sellist1">
+							<select class="form-control" id="sel1" name="c_category">
 								<option>카테고리를 설정해주세요</option>
 								<option>2</option>
 								<option>3</option>
@@ -61,7 +194,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text"> 사진  </span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="text" name="c_image" class="form-control"
 								placeholder="수업과 관련된 사진을 올려주세요">
 								
 								<input type="button" value="파일 업로드">
@@ -97,7 +230,7 @@
 
 						<div class="form-group">
   							<label for="comment">수업내용을 입력해주세요</label>
-  							<textarea class="form-control" rows="5" id="comment"></textarea>
+  							<textarea class="form-control" name="c_content" rows="5" id="comment"></textarea>
 						</div>
 
 <br>
@@ -107,7 +240,7 @@
 								<span class="input-group-text">수업가격</span>
 							</div>
 							
-							<input type="text" class="form-control"
+							<input type="text" name="c_price" class="form-control"
 								placeholder="수업가격을 입력해 주세요">
 						</div>
 <br>
@@ -164,14 +297,25 @@
 							</div>
 						</div>
 						
-						<div align="center">
-							<div style="display:inline-block;" >
-								<input type="checkbox" style="width:30px; height:30px;" name="regular">
-							</div>
-							<div style="display:inline-block; margin-left:10px;">
-								<input type="checkbox" style="width:30px; height:30px;" name="oneday">
-							</div>
-						</div>
+<!-- 						<div align="center"> -->
+<!-- 							<div style="display:inline-block;" > -->
+<!-- 								<input type="checkbox" style="width:30px; height:30px;" name="regular"> -->
+<!-- 							</div> -->
+<!-- 							<div style="display:inline-block; margin-left:10px;"> -->
+<!-- 								<input type="checkbox" style="width:30px; height:30px;" name="oneday"> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						
+						<div class="form-check-inline">
+      <label class="form-check-label" for="radio1">
+        <input type="radio" class="form-check-input" id="radio1" name="c_type" value="1" checked>
+      </label>
+    </div>
+    <div class="form-check-inline">
+      <label class="form-check-label" for="radio2">
+        <input type="radio" class="form-check-input" id="radio2" name="c_type" value="2">
+      </label>
+    </div>
 <br>
 <br>
 				<div align="center" style="width:500px; margin-left:100px;">
@@ -182,7 +326,7 @@
 			
 			
 			<div style="display:inline-block; float:left;">
-			<select name="year" class="custom-select" style="width: 100px;">
+			<select name="year" id="year" class="custom-select" style="width: 100px;">
 				<option selected>2019</option>
 				<option value="2019">2019</option>
 				
@@ -191,28 +335,33 @@
 			</div>
 			
 			<div style="display:inline-block; float:left;">
-			 <select name="month" class="custom-select" style="width: 100px;">
-				<option selected>1월</option>
-				<option value="1월">1월</option>
-				<option value="2월">2월</option>
-				<option value="3월">3월</option>
-				<option value="4월">4월</option>
-				<option value="5월">5월</option>
-				<option value="6월">6월</option>
-				<option value="7월">7월</option>
-				<option value="8월">8월</option>
-				<option value="9월">9월</option>
-				<option value="10월">10월</option>
-				<option value="11월">11월</option>
-				<option value="12월">12월</option>
+			 <select name="month" id="month" class="custom-select" style="width: 100px;">
+				<option selected>-</option>
+				<option value="1">1월</option>
+				<option value="2">2월</option>
+				<option value="3">3월</option>
+				<option value="4">4월</option>
+				<option value="5">5월</option>
+				<option value="6">6월</option>
+				<option value="7">7월</option>
+				<option value="8">8월</option>
+				<option value="9">9월</option>
+				<option value="10">10월</option>
+				<option value="11">11월</option>
+				<option value="12">12월</option>
 
 			</select> <br> <br>
 			</div>
 			
 			<div style="display:inline-block; float:left;">
-			<select name="day" class="custom-select" style="width: 100px;">
-				<option selected>1일</option>
-				<option value="1일">1일</option>
+			<select name="day" id="day" class="custom-select" style="width: 100px;">
+				<option selected>-</option>
+				<option value="1">1일</option>
+				<option value="2">2일</option>
+				<option value="3">3일</option>
+				<option value="4">4일</option>
+				<option value="5">5일</option>
+				<option value="6">6일</option>
 				
 
 			</select>
@@ -231,10 +380,10 @@
 				</div>
 				
 				<div style="display:inline-block; float:left;">
-				<select name="time" class="custom-select" style="width: 100px;">
-					<option selected>오전</option>
-					<option value="1일">오전</option>
-					<option value="2일">오후</option>
+				<select name="time" id="time" class="custom-select" style="width: 100px;">
+					<option selected>-</option>
+					<option value="오전">오전</option>
+					<option value="오후">오후</option>
 
 				</select>
 				
@@ -242,8 +391,8 @@
 				
 				
 				<div style="display:inline-block; float:left;">
-					<select name="hour" class="custom-select" style="width: 100px;">
-					<option selected>00시</option>
+					<select name="hour" id="hour" class="custom-select" style="width: 100px;">
+					<option selected>-</option>
 					<option value="1시">01시</option>
 					<option value="2시">02시</option>
 					<option value="3시">03시</option>
@@ -265,47 +414,56 @@
 				<br>
 				<br>
 				<br>
-				<div>
-				<div style="display:inline-block; float:left;">
-					<h4 style="font-size:20px; font-weight:550;">회차</h4>
-				</div>
+<!-- 				<div> -->
+<!-- 				<div style="display:inline-block; float:left;"> -->
+<!-- 					<h4 style="font-size:20px; font-weight:550;">회차</h4> -->
+<!-- 				</div> -->
 			
 			
-				<div style="display:inline-block; float:left;">
-					<select name="repeat" class="custom-select" style="width: 100px;">
-						<option selected>1회차</option>
-						<option value="2019">1회차</option>
+<!-- 				<div style="display:inline-block; float:left;"> -->
+<!-- 					<select name="repeat" id="repeat" class="custom-select" style="width: 100px;"> -->
+<!-- 						<option selected>-</option> -->
+<!-- 						<option value="1">1회차</option> -->
+<!-- 						<option value="2">2회차</option> -->
+<!-- 						<option value="3">3회차</option> -->
 				
 
-					</select>
-				</div>
+<!-- 					</select> -->
+<!-- 				</div> -->
 				
-				<div style="display:inline-block; float:left; margin-left:50px;">
-					<h4 style="font-size:20px; font-weight:550;">수업주기</h4>
-				</div>
+<!-- 				<div style="display:inline-block; float:left; margin-left:50px;"> -->
+<!-- 					<h4 style="font-size:20px; font-weight:550;">수업주기</h4> -->
+<!-- 				</div> -->
 			
 			
-				<div style="display:inline-block; float:left;">
-					<select name="term" class="custom-select" style="width: 100px;">
-						<option selected>1일</option>
-						<option value="1">1일</option>
+<!-- 				<div style="display:inline-block; float:left;"> -->
+<!-- 					<select name="term" id="term" class="custom-select" style="width: 100px;"> -->
+<!-- 						<option selected>-</option> -->
+<!-- 						<option value="1">1일</option> -->
+<!-- 						<option value="2">2일</option> -->
+<!-- 						<option value="3">3일</option> -->
+<!-- 						<option value="4">4일</option> -->
+<!-- 						<option value="5">5일</option> -->
+<!-- 						<option value="6">6일</option> -->
+<!-- 						<option value="7">7일</option> -->
+						
 				
 
-					</select>
-				</div>
+<!-- 					</select> -->
+<!-- 				</div> -->
 				
 				
 				
-				</div>
-<br>
-<br>			
-			<input type="button" value="추가">
+<!-- 				</div> -->
+			
+			<input type="button" id="addBtn" value="추가">
 			<br>
 			<div align="center">
 			
-				<table border="1">
+				<table border="1" id="tableAdd">
 				
 					<tr>
+					
 						<th width="150">
 							날짜
 						</th>
@@ -319,19 +477,9 @@
 						</th>
 					</tr>
 					
-					<tr>
-						<td>
-							2019-12-12
-						</td>
-						
-						<td>
-							오전:9시
-						</td>
-						
-						<td>
-							<input type="button" value="삭제">
-						</td>
-					</tr>
+					
+					
+					
 				</table>
 			</div>
 			
@@ -379,10 +527,10 @@
 			<br>
 			<br><br>
 						<div style="margin-bottom: 20px;">
-							<button type="button" class="btn btn-outline-secondary">클래스
+							<button type="button" id="registBtn" class="btn btn-outline-secondary">클래스
 								등록</button>
 						</div>
-
+						
 
 
 					</div>
