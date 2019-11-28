@@ -102,7 +102,8 @@ public class MemberController {
 	@RequestMapping("changeInfo_s.do")
 	public ModelAndView changeInfo_s(HttpSession session, @RequestParam HashMap<String, Object> params,
 			@RequestParam("profile") MultipartFile file) {
-
+		System.out.println(params.get("p_number"));
+		System.out.println(params.get("email"));
 		ModelAndView mav = new ModelAndView();
 		String session_id = (String) session.getAttribute("id");
 

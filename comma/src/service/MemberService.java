@@ -270,12 +270,13 @@ public class MemberService implements IMemberService {
 
 	@Override
 	public int modifyMember_s(String id, HashMap<String, Object> params, MultipartFile file) {
-	
+	System.out.println("service"+params.get("p_number"));
+	System.out.println("service"+params.get("email"));
 		params.put("id", id);
 		String pw = (String) params.get("password");
 		
+		HashMap<String, Object> result = dao.selectMember(id);
 		if (pw.equals("") || pw == null) {
-			HashMap<String, Object> result = dao.selectMember(id);
 			String password = (String) result.get("password");
 		
 			params.put("password", password);
@@ -283,24 +284,25 @@ public class MemberService implements IMemberService {
 
 		String path = "C:/image/";
 		String fileName = file.getOriginalFilename();
-//		System.out.println(fileName);
-		
-		params.put("image", fileName);
 		if (fileName == null || fileName.equals("")) {
-//			System.out.println("modifyMember_s-이미지 없다");
-			return 0;
-		}
-		File attachFile = new File(path + fileName);
+			String image = (String) result.get("image");
+			params.put("image", image);
+		}else {
+			params.put("image", fileName);
+			File attachFile = new File(path + fileName);
+			
+			try {
+				file.transferTo(attachFile);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		try {
-			file.transferTo(attachFile);
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		System.out.println(params);
 		dao.updateMember_s(params);
 
 //		System.out.println("modifyMember_s"+params);
