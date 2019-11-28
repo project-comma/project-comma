@@ -14,78 +14,9 @@
 </script>
 <script src="js/teacherResist.js" type="text/javascript"></script>
 
-<!-- <script type="text/javascript">
-	$(document)
-			.ready(
+<script src="js/studentUpdate.js" type="text/javascript"></script>
 
-					function() {
 
-						var fileTarget = $('.filebox .upload-hidden');
-
-						fileTarget.on('change', function() {
-							if (window.FileReader) {
-								// 파일명 추출
-								var filename = $(this)[0].files[0].name;
-							}
-
-							else {
-								// Old IE 파일명 추출
-								var filename = $(this).val().split('/').pop()
-										.split('\\').pop();
-							}
-							;
-
-							$(this).siblings('.upload-name').val(filename);
-						});
-
-						//preview image 
-						var imgTarget = $('.preview-image .upload-hidden');
-
-						imgTarget
-								.on(
-										'change',
-										function() {
-											var parent = $(this).parent();
-											parent.children('.upload-display')
-													.remove();
-
-											if (window.FileReader) {
-												//image 파일만
-												if (!$(this)[0].files[0].type
-														.match(/image\//))
-													return;
-
-												var reader = new FileReader();
-												reader.onload = function(e) {
-													var src = e.target.result;
-													parent
-															.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb rounded-circle" style="width:200px; height:200px;"></div></div>');
-
-												}
-												reader
-														.readAsDataURL($(this)[0].files[0]);
-												//기본 이미지 숨기기
-												$("#default_people_img").hide();
-											}
-
-											else {
-												$(this)[0].select();
-												$(this)[0].blur();
-												var imgSrc = document.selection
-														.createRange().text;
-												parent
-														.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
-
-												var img = $(this).siblings(
-														'.upload-display')
-														.find('img');
-												img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""
-														+ imgSrc + "\")";
-											}
-										});
-
-					});
-</script> -->
 <body>
 
 	<jsp:include page="header.jsp"></jsp:include>
@@ -102,21 +33,6 @@
 				<div align="center" style="margin-top: 50px">
 
 
-					<%-- 		<div>
-						<div class="inlineArr">
-							<img src=img/people.jpg style="width: 200px; height: 200px; margin-bottom: 50px;"
-								class="rounded-circle" id="default_people_img">
-						</div>
-						<div class="filebox preview-image inlineArr">
-							<input class="upload-name" placeholder="파일을 선택해주세요." disabled="disabled" style="margin-left: 20px;" value="${info.image}">
-							<label for="input-file">업로드</label> <input type="file"
-								id="input-file" class="upload-hidden" name="file" src="profileImageView.do?id=${sessionScope.id }" >
-						</div>
-					</div> --%>
-
-
-
-
 					<div>
 						<div class="inlineArr" style="margin-bottom: 50px;">
 							<!-- 왼쪽 사진 구간 -->
@@ -129,7 +45,8 @@
 								style="width: 800px; margin-left: 50px; margin-top: 100px;">
 								<input type="file" name="profile" class="custom-file-input"
 									id="customFile" onchange="profileChange(this)"> <label
-									class="custom-file-label" for="customFile">프로필 사진을 선택 해주세요.</label>
+									class="custom-file-label" for="customFile">프로필 사진을 선택
+									해주세요.</label>
 							</div>
 						</div>
 
@@ -152,16 +69,21 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">이메일</span>
 						</div>
-						<input type="text" class="form-control" name="email"
-							placeholder="이메일을 입력해 주세요" value="${info.email}">
+						<input type="text" class="form-control" id="st_email" name="email"
+							placeholder="이메일을 입력해 주세요" value="${info.email}" onblur="st_emailCheck(this)">
+							<h5 id="st_emailMsg"
+							style="display: none; color: red; font-size: 20px;">안녕?</h5>
 					</div>
 
 					<div class="input-group mb-3 input-group-lg">
 						<div class="input-group-prepend">
 							<span class="input-group-text">핸드폰</span>
 						</div>
-						<input type="text" class="form-control" name="p_number"
-							placeholder="핸드폰 번호를 입력해 주세요" value="${info.p_number}">
+						<input type="text" class="form-control" id="st_phone"
+							name="p_number" placeholder="핸드폰 번호를 입력해 주세요.(ex01011112222)"
+							value="${info.p_number}" onblur="st_phoneCheck(this)">
+						<h5 id="st_phoneMsg"
+							style="display: none; color: red; font-size: 20px;">안녕?</h5>
 					</div>
 
 					<div class="input-group mb-3 input-group-lg">
@@ -185,8 +107,8 @@
 
 
 				<div style="margin-top: 50px; margin-bottom: 50px;" align="center">
-					<button type="submit" class="btn btn-outline-secondary">변경
-						하기</button>
+					<button type="submit" class="btn btn-outline-secondary"
+						>변경 하기</button>
 				</div>
 
 			</div>

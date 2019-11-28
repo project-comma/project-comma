@@ -61,7 +61,7 @@
                         <span class="input-group-text">휴대폰</span>
                         
                     </div>
-                    <input type="text" id="tr_phone" name="p_number" class="form-control" placeholder="핸드폰 번호를 입력 해주세요 (ex 01073109603)" style="width:700px;" onblur="phoneCheck(this)">
+                    <input type="text" id="tr_phone" name="p_number" class="form-control" placeholder="핸드폰 번호를 입력 해주세요 (ex 01011112222)" style="width:700px;" onblur="phoneCheck(this)">
                 </div>
                 <h5 id="phoneMsg" style="display:none; color:red; font-size:20px;">안녕?</h5>
 
