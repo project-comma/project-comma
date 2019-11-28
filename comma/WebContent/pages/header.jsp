@@ -262,7 +262,7 @@
 				<div style="margin-top: 20px">
 
 
-					<div align="center" style="margin-bottom: 50px;">
+					<div align="center" style="margin-bottom: 30px;">
 						<h2>쉼표 학생 회원가입</h2>
 					</div>
 
@@ -275,8 +275,8 @@
 						<input type="text" name="name" placeholder=" Name" class="text_1">
 					</div>
 					<div style="font-size: 12px">아이디는 이메일 형식으로 입력 할수 없습니다</div>
-					<div>
-						<input type="text" id="joinid" name="id" placeholder=" ID" class="text_1"><span id="idok">종복여부</span>
+					<div align="left" style="margin-left: 100px;">
+						<input type="text" id="joinid" name="id" placeholder=" ID" class="text_1"><span id="idok" style="margin-left: 5px;">중복여부</span>
 					</div>
 					<div>
 						<input type="text" name="email" placeholder=" Email"
@@ -293,13 +293,13 @@
 					</div>
 
 					<div>
-						<input type="radio" name="gender" value="man"> <input
-							type="radio" name="gender" value="woman">
+						<input type="radio" name="gender" value="man"> 남자
+						<input
+							type="radio" name="gender" value="woman">여자
 					</div>
-					<pre style="font-size: 12px; height: 50px;"> 본 회원가입은 쉼의 학생으로 가입되는것입니다.
+					<pre style="font-size: 12px; height: 65px;"> 본 회원가입은 쉼의 학생으로 가입되는것입니다.
 쉼의 선생님 가입을 원할경우 학생 가입후
- 마이페이지에서 선생님 가입을 해주세요
-         </pre>
+ 마이페이지에서 선생님 가입을 해주세요.</pre>
 					<div>
 						<input type="button" id="joinBtn" class="btn btn-outline-secondary"
 							style="width: 200px; margin-bottom: 10px;" value="가입하기">

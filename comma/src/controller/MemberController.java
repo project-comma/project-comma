@@ -98,8 +98,8 @@ public class MemberController {
 	// 학생 정보 변경 페이지
 	@RequestMapping("changeInfo_s.do")
 	public ModelAndView changeInfo_s(HttpSession session, @RequestParam HashMap<String, Object> params,
-			@RequestParam("file") MultipartFile file) {
-
+			@RequestParam("profile") MultipartFile file) {
+		
 		ModelAndView mav = new ModelAndView();
 		String session_id = (String) session.getAttribute("id");
 
@@ -161,8 +161,8 @@ public class MemberController {
 	@RequestMapping("mypage.do")
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String mode = (String)session.getAttribute("mode");
-		
+		String mode = (String) session.getAttribute("mode");
+
 		System.out.println("모드!" + mode);
 
 		if (mode.equals("st")) {
@@ -230,13 +230,13 @@ public class MemberController {
 			System.out.println(state);
 			session.setAttribute("id", id);
 			session.setAttribute("state", state);
-			
-			if(state==1) {
+
+			if (state == 1) {
 				session.setAttribute("mode", "st");
-				
-			}else if(state==2) {
+
+			} else if (state == 2) {
 				session.setAttribute("mode", "tc");
-			}else if(state==3) {
+			} else if (state == 3) {
 				session.setAttribute("mode", "ad");
 			}
 //			session.setAttribute("password", password);
@@ -329,25 +329,21 @@ public class MemberController {
 		return mav;
 	}
 
-	//선생님모드 온오프
+	// 선생님모드 온오프
 	@ResponseBody
-	@RequestMapping(value="modeChange.do", method=RequestMethod.POST)
+	@RequestMapping(value = "modeChange.do", method = RequestMethod.POST)
 	public void modeChange(@RequestParam HashMap<String, Object> params, HttpSession session) {
-		
-		
+
 		System.out.println("모드" + params);
-		
-		int mode = Integer.parseInt((String)params.get("mode"));
-		
-		if(mode==1) {
-			
+
+		int mode = Integer.parseInt((String) params.get("mode"));
+
+		if (mode == 1) {
+
 			session.setAttribute("mode", "st");
-		}else if(mode==2){
+		} else if (mode == 2) {
 			session.setAttribute("mode", "tc");
 		}
-		
-		
-		
-		
+
 	}
 }
