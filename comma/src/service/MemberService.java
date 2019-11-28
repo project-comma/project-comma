@@ -211,7 +211,7 @@ public class MemberService implements IMemberService {
 		HashMap<String, Object> result = dao.selectMember(id);
 
 		if (result == null) {
-			return 0;
+			return 0;//회원정보 없음
 		} else {
 			String oPwd = (String) result.get("password");
 			if (oPwd == null) {
@@ -228,7 +228,8 @@ public class MemberService implements IMemberService {
 						return 3;
 					}
 				} else {
-					return 0;
+					//비밀번호가 일치하지 않음
+					return 4;
 				}
 			}
 		}
