@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
+
+import com.mysql.fabric.Response;
 
 import service.IMemberService;
 
@@ -99,7 +102,7 @@ public class MemberController {
 	@RequestMapping("changeInfo_s.do")
 	public ModelAndView changeInfo_s(HttpSession session, @RequestParam HashMap<String, Object> params,
 			@RequestParam("profile") MultipartFile file) {
-		
+
 		ModelAndView mav = new ModelAndView();
 		String session_id = (String) session.getAttribute("id");
 
@@ -221,12 +224,15 @@ public class MemberController {
 
 	// 로그인
 	@RequestMapping("login.do")
-	public String login(HttpSession session, String id, String password) {
+	public ModelAndView login(HttpSession session, String id, String password, HttpServletResponse response) {
 //		System.out.println(mService.Login(id, password));
 //		System.out.println(id+"ddd"+password);
-
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main");
 		int state = mService.Login(id, password);
-		if (state != 0) {
+		System.out.println(state);
+		response.setContentType("text/html; charset=utf-8");
+		if (state != 0 && state != 4) {
 			System.out.println(state);
 			session.setAttribute("id", id);
 			session.setAttribute("state", state);
@@ -241,12 +247,39 @@ public class MemberController {
 			}
 //			session.setAttribute("password", password);
 
-			return "main";
-
 		} else {
 
-			return "main";
+			try {
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<script language='javascript'>");
+				if (state == 0) {
+					// 화원 등록이 안된경우
+					System.out.println("id X");
+					out.println("alert('등록되지 않은 아이디 입니다.');");
+					/*
+					 * out.println("location.href='mainForm.do';"); out.println("</script>");
+					 * out.flush(); out.close();
+					 */
+
+				} else if (state == 4) {
+					System.out.println("비번 X");
+					out.println("alert('비밀번호가 일치하지 않습니다.');");
+
+				}
+				out.println("location.href='mainForm.do';");
+				out.println("</script>");
+				out.flush();
+				out.close();
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+
+				e.printStackTrace();
+			}
 		}
+		return mav;
 
 	}
 
