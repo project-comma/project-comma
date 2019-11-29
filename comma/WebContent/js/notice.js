@@ -7,26 +7,31 @@ function notice_write_open() {
 	
 }
 function notice_write_close() {
+	
 	$("#notice_write").hide();
 	$(".dim").hide();
 	
-}function notice_write_ajax(content) {
+}function notice_write_ajax(id) {
 	console.log("notice_write_ajax")
+	
+	var title = $("#n_title").val();
+	var content = $("#n_content").val();
 	$.ajax({
 		type : "post",
 		dataType : "json",	
 /*		contentType : "application/json",*/
 		url : "notice_write.do",
 		data : {
-			content : content
+			title : title,
+			content : content,
+			id : id
 		},
-		sucess : function(data) {
-			console.log("success");
-			console.log(data);
-			
+		success : function(data) {
+			alert("작성되었습니다.")
+			notice_write_close();
 		},
 		error : function() {
-			console.log("error");
+			alert("작성에 실패했습니다.")
 		}
 
 	});

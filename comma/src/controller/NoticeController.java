@@ -69,8 +69,10 @@ public class NoticeController {
 	@RequestMapping("notice_write.do")//공지사항쓰기
 	public Map notice_write(@RequestParam HashMap<String, Object> params) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("name", "yesol");
+		System.out.println(params);
 		System.out.println("controller");
+		
+		nService.write(params);
 		return map;
 	}
 	
