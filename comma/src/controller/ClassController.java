@@ -105,7 +105,8 @@ public class ClassController {
 
 		
 //		System.out.println(result);
-//		System.out.println(params);
+		System.out.println(params);
+		System.out.println(params.get("c_startday"));
 		
 		
 		
@@ -144,13 +145,6 @@ public class ClassController {
 			c_location += "/"+params.get("city");
 			c_location += "/"+params.get("gu");
 			params.put("c_location", c_location);
-			
-			String c_startday = (String) params.get("year");
-			c_startday += "/"+params.get("month");
-			c_startday += "/"+params.get("day");
-			System.out.println(c_startday);
-			params.put("c_startday", c_startday);
-			
 			
 			
 			cService.resistClass(params);

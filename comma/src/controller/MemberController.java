@@ -52,6 +52,7 @@ public class MemberController {
 		System.out.println(params);
 
 		int result = mService.resistTeacher(session_id, params);
+		System.out.println(params.get("career"));
 
 //		System.out.println("컨트롤러에 돌아온 리턴값=" + result);
 
