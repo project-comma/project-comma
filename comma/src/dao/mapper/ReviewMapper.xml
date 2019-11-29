@@ -6,8 +6,8 @@
   <mapper namespace="dao.IReviewDao">
   
   <insert id="insertReview" parameterType="java.util.HashMap" >
-	insert into review_board (id, content, image, c_score) values
-	(#{id}, #{content}, #{image}, #{c_score})
+	insert into review_board (id, content, image) values
+	(#{id}, #{content}, #{image})
 	
   </insert>
   
