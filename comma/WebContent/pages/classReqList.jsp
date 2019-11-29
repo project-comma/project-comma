@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 
@@ -14,6 +15,30 @@
     <title>Insert title here</title>
 </head>
 
+<script src="js/teacherResist.js" type="text/javascript"></script>
+<script src="js/request.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		var page = 1;
+		
+		$("#cl_reqListForm").scroll(function(){
+			
+			var innerHeight = $(this).innerHeight();
+			var scroll = $(this).scrollTop() + $(this).innerHeight();
+			var height = $(this)[0].scrollHeight;
+			
+			//alert(scroll + ":" + height);
+			
+			if(scroll >= height){
+				//alert("안녕?" + scroll + ":" + height);
+				addReqList(page, '<%=request.getParameter("category")%>', '<%=request.getParameter("keyword")%>');
+				page = page + 1;
+			}
+		});
+	});
+</script>
 <body>
     <jsp:include page="header.jsp"></jsp:include><br>
 
@@ -22,43 +47,43 @@
           <br> <br> <br>
 			<div class="span" align="center">
 				<img src="img/요리.png" id="cook" class="icon"> <br> <a
-					href="" class="iconText">요리</a>
+					href="classReqList.do?category=요리" class="iconText">요리</a>
 			</div>
 
 			<div class="span" align="center">
 				<img src="img/수공예.png" id="handmade" class="icon"> <br>
-				<a href="" class="iconText">수공예</a>
+				<a href="classReqList.do?category=수공예" class="iconText">수공예</a>
 			</div>
 
 			<div class="span" align="center">
 				<img src="img/미술.png" id="art" class="icon"> <br> <a
-					href="" class="iconText">미술</a>
+					href="classReqList.do?category=미술" class="iconText">미술</a>
 			</div>
 
 			<div class="span" align="center">
 				<img src="img/액티브티.png" id="activity" class="icon"> <br>
-				<a href="" class="iconText">액티브티</a>
+				<a href="classReqList.do?category=액티비티" class="iconText">액티비티</a>
 			</div>
 
 			<div class="span" align="center">
 				<img src="img/뷰티.png" id="beauty" class="icon"> <br> <a
-					href="" class="iconText">뷰티</a>
+					href="classReqList.do?category=뷰티" class="iconText">뷰티</a>
 			</div>
 
 			<div class="span" align="center">
 				<img src="img/음악.png" id="music" class="icon"> <br> <a
-					href="" class="iconText">음악</a>
+					href="classReqList.do?category=음악" class="iconText">음악</a>
 			</div>
 
 			<div class="span" align="center">
 				<img src="img/언어.png" id="language" class="icon"> <br>
-				<a href="" class="iconText">언어</a>
+				<a href="classReqList.do?category=언어" class="iconText">언어</a>
 			</div>
 
 
 			<div class="span" align="center">
 				<img src="img/웹개발.png" id="webDevelopment" class="icon"> <br>
-				<a href="" class="iconText">웹개발</a>
+				<a href="classReqList.do?category=웹개발" class="iconText">웹개발</a>
 
 			</div>
           
@@ -66,7 +91,7 @@
             <div class="span" align="center">
                 <img src="img/기타등등.png" id="exception" class="icon">
                 <br>
-                <a href="" class="iconText">기타등등</a>
+                <a href="classReqList.do?category=기타" class="iconText">기타등등</a>
             </div>
 
 
@@ -83,34 +108,44 @@
                 </div>
             </div>
         </form>
+        
+      
 
         <form action="">
             <div align="center">
                 <h2 align="center">전체</h2>
-                <div style="width: 1100px; height: 500px; border: 2px double black; background: white;">
-            <table align="left">
-                <tr>
-                    <td>
-                        <div align="center" style="width: 150px; height: 150px;">
-                            <img src="img/시간.png" id="cook" class="icon" style="width: 125px; height: 125px">
-                            <br>
-                            <a style="margin-left: 5px;">사용자</a>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div style="display: inline-block">
-                            <h6>[원데이]베이커리/케익너만을<br>위한 케익 만들기<br>40,000/1인</h6>
-                        </div>
-                        <br>
-                        <img src="img/원.png" id="money" class="icon" width="20px" height="20px">
-
-                    </td>
-                </tr>
-
-            </table>
+                <div id="cl_reqListForm" style="overflow:auto; width: 1100px; height: 800px;">
+            
+            		<c:forEach var="r" items="${classReqList }">
+                	<div style="display:inline-block; float:left; width:450px; height:170px; margin-left:50px; margin-top:50px; background: #CCFFCC;" onclick="classReqInfo(${r.number })">
+                		<div style="display:inline-block; float:left; width:150px;">
+                			<img src="profileImageView.do?id=${r.id }" id="my_prophoto" class="icon" style="width: 145px; height: 145px">
+                		</div>
+                		
+                		<div align="left" style="display:inline-block; float:left; width:295px;">
+                			<div style="display: inline-block">
+                          	  <h5 style="font-size:15px;">[분야]-[${r.c_category }]</h5>
+                          	  <h5 style="font-size:15px;">[요청사항]</h5>
+                          	  <h5 style="font-size:15px;">${r.c_title }</h5>
+                          	  <img style="display:inline-block; vertical-align:top;" src="img/위치.png" id="money" class="icon" width="15px" height="15px">
+                          	  <h5 style="font-size:15px; display:inline-block;">[위치]${r.c_location }</h5>
+                          	  
+                       		 </div>
+                       		 <br>
+                        	<img src="img/원.png" id="money" class="icon" width="20px" height="20px">
+                        	<h5 style="font-size:15px; display:inline-block;">${r.price }원</h5>
+                		</div>
+                	
+                	</div>
+                	</c:forEach>
+                	
+                	
+                	
+                	
+                	
+                </div>	
                 
-                </div>
+                
 
             </div><br><br>
 
@@ -123,5 +158,5 @@
 
 
 </body>
-
+<script src="js/request.js" type="text/javascript"></script>
 </html>

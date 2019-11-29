@@ -25,25 +25,18 @@
                 <tr>
                     <td>
                         <div class="CR_span1" align="center">
-                            <img src="img/시간.png" id="location" width="200px;" height="200px;">
+                            <img src="profileImageView.do?id=${req.id }" id="my_prophoto" width="200px;" height="200px;">
                             <br>
-                            <h5 style="font-size:15px; margin-top:15px;">사용자</h5>
+                            <h5 style="font-size:15px; margin-top:15px;">${req.id }</h5>
                         </div>
                     </td>
 
                     <td>
                         <div style="display: inline-block">
                             <!-- 제목 -->
-                            <h4 style="font-size:20px; font-weight:800px;">수영 배우고 싶어요</h4><br>
+                            <h4 style="font-size:20px; font-weight:800px;">${req.c_title }</h4><br>
                             <!-- 내용 -->
-                            <pre style="font-size:15px;">
-수영 기초반을 3달전 수강한 적이이으면 물에 뜨는 것과 자유형 정도 는 할수 있습니다 .
-
-수영 중에서 배영 만 배우고 싶습니다, 
-
-수업 시간은  딱 한시간을 원합니다
-
-일정은 협의 가능 합니다 .</pre>
+                            <pre style="font-size:15px;">${req.content }</pre>
                             
                             
                         </div>
@@ -59,7 +52,7 @@
             <div class="CR_span" align="center">
                 <img src="img/위치.png" id="location" class="CR_icon2">
                 <br>
-                <a href="" class="iconText">서울시/영등포구</a>
+                <a href="" class="iconText">${req.c_location}</a>
             </div>
 
             <div class="CR_span" align="center">
@@ -71,13 +64,13 @@
             <div class="CR_span" align="center">
                 <img src="img/시간.png" id="time" class="CR_icon2">
                 <br>
-                <a href="" class="iconText">시간</a>
+                <a href="" class="iconText">${req.c_starttime}</a>
             </div>
 
             <div class="CR_span" align="center">
                 <img src="img/원.png" id="money" class="CR_icon2">
                 <br>
-                <a href="" class="iconText">30,000/1회</a>
+                <a href="" class="iconText">${req.price}원</a>
             </div>
             <div class="menu" align="center" style="border-bottom:1px solid #555; width:800px;"></div>
             

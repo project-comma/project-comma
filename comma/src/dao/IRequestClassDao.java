@@ -9,6 +9,8 @@ public interface IRequestClassDao {
 	public int updateRequestClass(HashMap<String, Object> params);
 	public int deleteRequestClass(int num);
 	
-	public HashMap<String, Object> select(String id);
+	public HashMap<String, Object> select(int num);
 	public ArrayList<HashMap<String, Object>> selectList(HashMap<String, Object> params);
+	
+	public ArrayList<HashMap<String, Object>> searchList(HashMap<String, Object> params);
 }

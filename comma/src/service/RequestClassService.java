@@ -45,15 +45,35 @@ public class RequestClassService implements IRequestClassService{
 	}
 
 	@Override
-	public HashMap<String, Object> viewRequest(String id) {
+	public HashMap<String, Object> viewRequest(int number) {
+		
+		HashMap<String, Object> res = dao.select(number);
 		// TODO Auto-generated method stub
-		return null;
+		return res;
+	}
+	
+	
+	
+	private int getSkip(int page) {
+		
+		return (page-1)*8;
 	}
 
 	@Override
-	public ArrayList<HashMap<String, Object>> searchRequest(HashMap<String, Object> params) {
+	public HashMap<String, Object> searchRequest(HashMap<String, Object> params, int page) {
+		
+		params.put("skip", getSkip(page));
+		params.put("qty", 8);
+		ArrayList<HashMap<String, Object>> list = dao.searchList(params);
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		
+		res.put("classReqList", list);
+		
+		System.out.println(res);
 		// TODO Auto-generated method stub
-		return null;
+		return res;
 	}
 
 	@Override

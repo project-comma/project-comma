@@ -1,13 +1,18 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,23 +45,133 @@ public class RequestClassController {
 		mav.setViewName("classReqList");
 		return mav;
 	}
+	
+	
+	
 
 	// 클래스요청 리스트
 	@RequestMapping("classReqList.do")
-	public ModelAndView classReqList() {
+	public ModelAndView classReqList(
+			@RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String category
+			) {
 		ModelAndView mav = new ModelAndView();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		System.out.println(keyword);
+		System.out.println(category);
+		
+		HashMap<String, Object> res = null;
+		
+		if(keyword==null && category==null) {
+			System.out.println("둘다없어~");
+			params.put("type", 0);
+			res = rService.searchRequest(params, 1);
+			
+		}else if(keyword!=null && category==null) {
+			System.out.println("키워드!");
+			params.put("keyword", keyword);
+			params.put("type", 1);
+			res = rService.searchRequest(params, 1);
+			
+		}else if(keyword==null && category!=null) {
+			System.out.println("카테고리!");
+			params.put("type", 2);
+			params.put("category", category);
+			res = rService.searchRequest(params, 1);
+			
+		}else {
+			params.put("keyword", keyword);
+			params.put("category", category);
+			params.put("type", 3);
+			res = rService.searchRequest(params, 1);
+			
+		}
+		
+		
+		mav.addAllObjects(res);
+		mav.addAllObjects(params);
+		
+		System.out.println(res);
+		System.out.println(params);
 		mav.setViewName("classReqList");
 
 		System.out.println("리퀘스트!!");
 		return mav;
 	}
+	
+	//클래스요청 목록 추가
+	@ResponseBody
+	@RequestMapping(value="addClassReqList.do", method = RequestMethod.POST)
+	public HashMap<String, Object> addClassReqList(
+			@RequestParam HashMap<String, Object> props 
+			) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		
+		String keyword = (String)props.get("keyword");
+		String category = (String)props.get("category");
+		String tempPage = (String)props.get("page");
+		
+		int page = Integer.parseInt(tempPage);
+		System.out.println(keyword);
+		System.out.println(category);
+		
+		HashMap<String, Object> res = null;
+		
+		if(keyword.equals("") & category.equals("")) {
+			System.out.println("둘다없어~");
+			params.put("type", 0);
+			res = rService.searchRequest(params, page);
+			
+		}else if(!keyword.equals("") && category.equals("")) {
+			System.out.println("키워드!");
+			params.put("keyword", keyword);
+			params.put("type", 1);
+			res = rService.searchRequest(params, 1);
+			
+		}else if(keyword.equals("") && !category.equals("")) {
+			System.out.println("카테고리!");
+			params.put("type", 2);
+			params.put("category", category);
+			res = rService.searchRequest(params, 1);
+			
+		}else {
+			params.put("keyword", keyword);
+			params.put("category", category);
+			params.put("type", 3);
+			res = rService.searchRequest(params, 1);
+			
+		}
+		
+		
+		
+		
+		System.out.println(res);
+		System.out.println(params);
+		
+
+		System.out.println("리퀘스트추가!!");
+		
+		
+		return res;
+	}
 
 	// 클래스요청상세내용
 	@RequestMapping("classReq.do")
-	public ModelAndView classReq() {
+	public ModelAndView classReq(@RequestParam String number) {
 
+		System.out.println(number + "번!!");
+		
+		int num = Integer.parseInt(number);
+		
+		
+		HashMap<String, Object> res = rService.viewRequest(num);
+		
 		ModelAndView mav = new ModelAndView();
 
+		System.out.println(res);
+		mav.addObject("req", res);
 		mav.setViewName("classReq");
 		return mav;
 	}
