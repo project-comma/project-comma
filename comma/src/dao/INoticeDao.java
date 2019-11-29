@@ -14,7 +14,7 @@ public interface INoticeDao {
 	public int insertNotice(HashMap<String, Object> params);
 	public int deleteNotice(String number);
 	public int modifyNotice(HashMap<String, Object> params);
-	public Notice select(int num);
+	public HashMap<String, Object> select(int num);
 	
 	public ArrayList<HashMap<String, Object>> selectAll();
 	public ArrayList<HashMap<String, Object>> searchList();

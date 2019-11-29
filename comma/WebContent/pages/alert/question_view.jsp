@@ -24,17 +24,17 @@
 		<div align="center" style="height: 30px; margin-left: 50px">
 			<div style="display: inline-block; float: left; width: 150px;">
 				<div style="display: inline-block; float: left;">작성자:</div>
-				<div style="display: inline-block; float: left;">작성자</div>
+				<div id="q_idView" style="display: inline-block; float: left;">작성자</div>
 				<!-- DB 에서 꺼내오기 -->
 			</div>
 			<div style="display: inline-block; float: left; width: 300px;">
 				<div style="display: inline-block; float: left;">제목:</div>
-				<div style="display: inline-block; float: left;">DB 에서 꺼내온 제목</div>
+				<div id="q_titleView" style="display: inline-block; float: left;">DB 에서 꺼내온 제목</div>
 				<!-- DB 에서 꺼내오기 -->
 			</div>
 			<div style="display: inline-block; float: left; width: 150px;">
 				<div style="display: inline-block; float: left;">작성일:</div>
-				<div style="display: inline-block; float: left;">19-11-08</div>
+				<div id="q_dateView" style="display: inline-block; float: left;">19-11-08</div>
 				<!-- DB 에서 꺼내오기 -->
 			</div>
 		</div>
@@ -42,7 +42,7 @@
 		<div align="center" style="height: 50px; margin-left: 50px">
 
 			<div style="display: inline-block; float: left;">내용:</div>
-			<div style="display: inline-block; float: left;">
+			<div id="q_contentView" style="display: inline-block; float: left;">
 				<pre style="width: 600px; height: 300px; text-align: left; margin-left: 10px;">내용이다
 dB 에서 꺼내온 내용
 ㅇcccccccccccccccc

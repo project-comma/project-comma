@@ -38,6 +38,34 @@ function notice_write_close() {
 }
 
 function notice_view_open(number) {
+	
+	$.ajax({
+		type:'post',
+		url:'noticeView.do',
+		dataType:'json',
+		data:{
+			number:number
+		},
+		success:function(data){
+			
+			$.each(data, function(key, val){
+				
+				if(key=='content'){
+					$('#n_contentView pre').text(val);
+				}else if(key=='title'){
+					$('#n_titleView').text(val);
+				}else if(key=='date'){
+					var dat = new Date(val);
+					
+					$('#n_dateView').text(dat.getFullYear()+"-"+dat.getMonth()+"-"+dat.getDay());
+				}
+			});
+		},
+		error:{
+			
+		}
+			
+	});
 	$("#notice_view").show();
 	$(".dim").show();
 	

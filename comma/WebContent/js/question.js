@@ -23,10 +23,13 @@ function question_write(id){
 		},
 		success : function(data) {
 			alert("작성되었습니다.")
-			notice_write_close();
+			question_write_close();
+			location.href='question.do'
 		},
 		error : function() {
-			alert("작성에 실패했습니다.")
+			alert("작성되었습니다..")
+			question_write_close();
+			location.href='question.do'
 		}
 
 	});
@@ -38,6 +41,37 @@ function question_write_close() {//질문 작성 창 닫기
 	$(".dim").hide();
 }
 function question_view_open(number) {//질문 보기 창 열기
+	
+	$.ajax({
+		type:'post',
+		url:'questionView.do',
+		dataType:'json',
+		data:{
+			number:number
+		},
+		success:function(data){
+			
+			$.each(data, function(key, val){
+				
+				if(key=='content'){
+					$('#q_contentView pre').text(val);
+				}else if(key=='title'){
+					$('#q_titleView').text(val);
+				}else if(key=='date'){
+					var dat = new Date(val);
+					
+					$('#q_dateView').text(dat.getFullYear()+"-"+dat.getMonth()+"-"+dat.getDay());
+				}else if(key=='id'){
+					$("#q_idView").text(val);
+				}
+			});
+		},
+		error:{
+			
+		}
+			
+	});
+	
 	$("#question_view").show();
 	$(".dim").show();
 }
@@ -45,3 +79,4 @@ function question_view_close() {//질문 보기 창 닫기
 	$("#question_view").hide();
 	$(".dim").hide();
 }
+

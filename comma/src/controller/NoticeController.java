@@ -124,4 +124,18 @@ public class NoticeController {
 		
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="noticeView.do")
+	public HashMap<String, Object> noticeView(@RequestParam String number){
+		
+		int num = Integer.parseInt(number);
+		
+		
+		HashMap<String, Object> res = nService.getNotice(num);
+		
+		
+		return res;
+	}
+	
 }

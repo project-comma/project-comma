@@ -183,7 +183,7 @@
 					<c:forEach items="${questionList }" var="q">
 						<tr>
 							<td align="center">${q.id }</td>
-							<td align="center">${q.title }</td>
+							<td align="center"><h5 onclick="question_view_open('${q.number}')">${q.title }</h5></td>
 							<td align="center">${q.date }</td>
 						</tr>
 					</c:forEach>

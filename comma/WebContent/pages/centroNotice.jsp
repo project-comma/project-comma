@@ -124,7 +124,7 @@
 					<c:forEach items="${noticeList }" var="n">
 						<tr>
 							<td align="center">${n.id }</td>
-							<td align="center">${n.title }</td>
+							<td align="center"><h5 onclick="notice_view_open('${n.number}')">${n.title }</h5></td>
 							<td align="center">${n.date }</td>
 						</tr>
 					</c:forEach>

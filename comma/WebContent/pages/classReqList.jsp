@@ -98,10 +98,10 @@
 
         </div><br><br>
 
-        <form action="">
+        <form action="classReqList.do">
             <div align="center">
                 <div class="input-group mb-3" style="width:600px;">
-                    <input type="text" class="form-control" placeholder="class 명 입력">
+                    <input type="text" name="keyword" class="form-control" placeholder="검색어 입력">
                     <div class="input-group-append">
                         <button class="btn btn-success" type="submit">Go</button>
                     </div>

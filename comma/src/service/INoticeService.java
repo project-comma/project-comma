@@ -19,7 +19,7 @@ public interface INoticeService {
 	public int getEndPage(int num);
 	public int getLastPage(HashMap<String, Object> params);
 	public int getSkip(int num);
-	public Notice getNotice(int num);
+	public HashMap<String, Object> getNotice(int num);
 	
 	
 	
