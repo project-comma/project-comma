@@ -15,9 +15,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/cssconfig.css">
 
-<script src="js/jquery.serializeObject.js" type="text/javascript">
-	
-</script>
+<script src="js/jquery.serializeObject.js" type="text/javascript"></script>
 
 <title>Insert title here</title>
 
@@ -31,6 +29,15 @@
 		$("#tableAdd tr").eq(index).remove();
 
 	}
+	
+	function delBtn2(me) {
+
+		var index = $(me).parent().parent().index();
+
+		$("#tableAdd2 tr").eq(index).remove();
+
+	}
+	
 
 	$(document).ready(function() {
 
@@ -38,12 +45,16 @@
 
 				$('#registBtn').click(function() {
 
-					var params = $('#classForm').serializeArray();
+// 					var params = $('#classForm').serialize();
+					var params = $('#classForm').serializeObject();
 
 						$.ajax({
 							type : "post",
 							url : "classResistBtn.do",
-							data : params,
+// 							
+							contentType:"application/json; charset=UTF-8",
+							data : JSON.stringify(params),
+							
 							dataType : "json",
 							success : function(resultStr) {
 
@@ -54,18 +65,27 @@
 							}
 							if (resultStr.result == "2") {
 
-							alert("수업에 관련된 사진을 올려주세요");
+							alert("카테고리를 입력해주세요");
 
 							}
 							if (resultStr.result == "3") {
 
-							alert("수업내용을 입력해주세요");
+							alert("수업에 관련된 사진을 올려주세요");
 
 							}
 							if (resultStr.result == "4") {
 
+							alert("수업내용을 입력해주세요");
+
+							}
+							if (resultStr.result == "5") {
+
 							alert("수업가격을 입력해주세요");
 
+							}
+							if(resultStr.result == "6") {
+								alert("클래스 등록됨")
+								
 							}
 
 						},
@@ -98,12 +118,28 @@
 
 											var btn = $("<td><input type='button' id='delBtn1' value='삭제' onclick='delBtn(this)' ></td>")
 
-											tr.append(td1).append(td2).append(
-													btn);
+											tr.append(td1).append(td2).append(btn);
 											$("#tableAdd").append(tr);
 
 					})
+					
+					$("#addImage").click(function () {
+						
+						var image = $("#image").val();
+						var tr = $("<tr>")
+						var td1 = $("<td><input readonly='readonly' type='file' value='"+image+"' name='c_image'></td>")
+						
+
+						
+
+						var btn = $("<td><input type='button' id='delBtn1' value='삭제' onclick='delBtn2(this)' ></td>")
+						tr.append(td1).append(btn)
+						$("#tableAdd2").append(tr);
+						
+					})
 })
+
+
 
 </script>
 
@@ -126,7 +162,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">수업이름</span>
 							</div>
-							<input type="text" name="c_number" class="form-control"
+							<input type="text" name="c_name" class="form-control"
 								placeholder="수업이름을 입력해 주세요">
 						</div>
 
@@ -155,8 +191,7 @@
 								<span class="input-group-text"> 사진 </span>
 							</div>
 							<input type="text" name="c_image" class="form-control"
-								placeholder="수업과 관련된 사진을 올려주세요"> <input type="file"
-								value="파일 업로드">
+								placeholder="수업과 관련된 사진을 올려주세요"> <input type="file" name="image" value="파일 업로드">
 
 						</div>
 
@@ -164,19 +199,17 @@
 
 
 
+						<input type="button" id="addImage" value="추가"> <br>
 						<div>
-							<table border="1">
+							<table border="1" id="tableAdd2">
 								<tr>
 									<th width="300">파일</th>
+									
 
 									<th>삭제</th>
 								</tr>
 
-								<tr>
-									<td>image.jpg</td>
-
-									<td><input type="button" value="삭제"></td>
-								</tr>
+ 								
 							</table>
 						</div>
 
@@ -465,7 +498,7 @@
 								</div>
 
 								<div style="display: inline-block; float: left;">
-									<select name="period_time" class="custom-select"
+									<select name="c_classtime" class="custom-select"
 										style="width: 100px;">
 
 										<option value="1">01시간</option>
@@ -485,7 +518,7 @@
 								</div>
 
 								<div style="display: inline-block; float: left;">
-									<select name="max" class="custom-select" style="width: 100px;">
+									<select name="c_member" class="custom-select" style="width: 100px;">
 
 										<option value="1">01명</option>
 										<option value="2">02명</option>
@@ -530,4 +563,5 @@
 	</div>
 	</div>
 </body>
+<script src="js/jquery.serializeObject.js" type="text/javascript"></script>
 </html>

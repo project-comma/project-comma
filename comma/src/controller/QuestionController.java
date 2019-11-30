@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.IQuestionService;
@@ -85,14 +87,15 @@ public class QuestionController {
 //		return mav;
 //	}
 		
-	
+	@ResponseBody
 	@RequestMapping("question_write.do")//질문쓰기
-	public ModelAndView question_write(@RequestParam HashMap<String, Object> params) {
+	public String question_write(@RequestParam HashMap<String, Object> params) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println(params);
 		int result = qService.write(params);
 		System.out.println(result);
 		
-		return mav;
+		return "aa";
 	}
 	
 	@RequestMapping("question_remove.do")//질문제거
@@ -112,4 +115,16 @@ public class QuestionController {
 		return mav;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping("questionView.do")
+	public HashMap<String, Object> questionView(@RequestParam String number){
+		
+		int num = Integer.parseInt(number);
+		
+		HashMap<String, Object> res = qService.getQuestion(num);
+		
+		
+		return res;
+	}
 }

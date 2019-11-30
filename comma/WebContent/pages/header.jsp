@@ -141,7 +141,7 @@
 
 	<div class="dim"></div>
 	<div align="center">
-		
+		<jsp:include page="alert/notice_write.jsp"></jsp:include>
 		<div align="right" id="high_menu">
 
 			<c:choose>
@@ -190,7 +190,7 @@
 						onclick="location.href='logout.do'">
 					<input type="button" class="btn btn-outline-secondary"
 						value="공지사항작성" id="n_res_btn"
-						style="float: right; margin-left: 7px;"> `
+						style="float: right; margin-left: 7px;" onclick="notice_write_open()"> `
 			
 			</c:when>
 			</c:choose>
@@ -283,12 +283,12 @@
 							class="text_1">
 					</div>
 					<div>
-						<input type="text" name="password" placeholder=" Password"
+						<input type="password" name="password" placeholder=" Password"
 							class="text_1">
 
 					</div>
 					<div>
-						<input type="text" name="passwordCheck"
+						<input type="password" name="passwordCheck"
 							placeholder=" Password check" class="text_1">
 					</div>
 
@@ -342,7 +342,7 @@
 					</div>
 
 					<div>
-						<input type="text" name="password" placeholder=" Password"
+						<input type="password" name="password" placeholder=" Password"
 							class="text_1">
 					</div>
 

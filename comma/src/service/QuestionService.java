@@ -85,7 +85,7 @@ public class QuestionService implements IQuestionService{
 	}
 
 	@Override
-	public Question getQuestion(int num) {
+	public HashMap<String, Object> getQuestion(int num) {
 		
 		return dao.selectOne(num);
 		

@@ -81,7 +81,7 @@ public class NoticeService implements INoticeService{
 	}
 
 	@Override
-	public Notice getNotice(int num) {
+	public HashMap<String, Object> getNotice(int num) {
 		
 		return dao.select(num);
 		

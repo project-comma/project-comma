@@ -36,10 +36,13 @@ $(document).ready(function() {
 			url : "mainList.do",
 			dataType : "json",
 			success : function (arr) {
-// 				alert(arr);
+				
+				
 				
 				for(var i = 0; i < arr.length; i++){
-					var div = $("<div style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
+					var number = $(arr[i].c_number);
+					var div = $("<a href='classForm.do?number="+arr[i].c_number+"' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
+					
 // 					var img = $("<img width='300px' height='300px'>");
 					var img = $("<div>")
 					img.text(arr[i].c_image);
@@ -157,6 +160,7 @@ $(document).ready(function() {
 		
 		<div align="center">
 			<div align="left" style="width:1200px "  id="classList" >
+			
 <!-- 				<div style="width:300px; height: 400px;" id="classList"> -->
 <!-- 					<img src="img/시간.png" width="300px" height="300px"> -->
 <!-- 					<img src="img/시간.png" width="80px" height="80px"> -->

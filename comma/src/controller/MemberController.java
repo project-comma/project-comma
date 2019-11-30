@@ -52,7 +52,6 @@ public class MemberController {
 		System.out.println(params);
 
 		int result = mService.resistTeacher(session_id, params);
-		System.out.println(params.get("career"));
 
 //		System.out.println("컨트롤러에 돌아온 리턴값=" + result);
 
@@ -168,8 +167,15 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		String mode = (String) session.getAttribute("mode");
 
+		
 		System.out.println("모드!" + mode);
+		
+		if(mode==null) {
+			mav.setViewName("redirect:mainForm.do");
+			return mav;
+		}
 
+		
 		if (mode.equals("st")) {
 			System.out.println("학생!");
 			mav.setViewName("mypage_s");
@@ -373,6 +379,7 @@ public class MemberController {
 
 		int mode = Integer.parseInt((String) params.get("mode"));
 
+		
 		if (mode == 1) {
 
 			session.setAttribute("mode", "st");

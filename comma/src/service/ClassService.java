@@ -19,12 +19,12 @@ public class ClassService implements IClassService{
 	
 	@Override
 	public int resistClass(HashMap<String, Object> params) {//요청클래스
-//		int result = dao.insertClass(params);
+		int result = dao.insertClass(params);
 		
-		ArrayList<String> startday = (ArrayList<String>) params.get("c_startday");
 		
-		System.out.println("서비스="+startday);
-		return 0;
+		
+		System.out.println("서비스"+result);
+		return result;
 	}
 
 	@Override

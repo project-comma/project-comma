@@ -109,6 +109,7 @@ public class ReviewController {
 	// 리뷰상세보기
 	@RequestMapping("ReadReview.do")
 	public ModelAndView ReadReview(String number) {
+		System.out.println("ReadReview.do contrpller");
 		ModelAndView mav = new ModelAndView();
 
 		HashMap<String, Object> result = reService.viewReview(number);

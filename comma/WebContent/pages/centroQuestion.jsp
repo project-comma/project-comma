@@ -167,7 +167,8 @@
 
 
 			<div id="question_boardList">
-			<h2 style="font-weight: 800; font-size: 22px;">질문게시판</h2>
+			<h2 style="display:inline-block; font-weight: 800; font-size: 22px;">질문게시판</h2>
+			<input type="button" id="q_writebtn" style="float:right;" value="질문작성" onclick="question_write_open()">
 				<table>
 					<tr align="center">
 						<th width="1200">작성자</th>
@@ -182,7 +183,7 @@
 					<c:forEach items="${questionList }" var="q">
 						<tr>
 							<td align="center">${q.id }</td>
-							<td align="center">${q.title }</td>
+							<td align="center"><h5 onclick="question_view_open('${q.number}')">${q.title }</h5></td>
 							<td align="center">${q.date }</td>
 						</tr>
 					</c:forEach>
