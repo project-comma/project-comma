@@ -46,7 +46,7 @@ public class MemberController {
 //	선생님등록 페이지
 	@RequestMapping(value = "t_Resist.do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String t_Resist(HttpSession session, @RequestBody HashMap<String, Object> params) {
-
+		System.out.println(params);
 		String session_id = (String) session.getAttribute("id");
 
 		System.out.println(params);
@@ -140,9 +140,10 @@ public class MemberController {
 	// 선생님 정보 변경 페이지
 	@RequestMapping("changeInfo_t.do")
 	public ModelAndView changeInfo_t(HttpSession session, @RequestParam HashMap<String, Object> params) {
-
 		ModelAndView mav = new ModelAndView();
 		String session_id = (String) session.getAttribute("id");
+		System.out.println("controller"+params);
+		System.out.println(session_id);
 
 		HashMap<String, Object> mId = mService.MemberInfo(session_id);
 		int mState = (int) mId.get("state");
@@ -167,15 +168,13 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		String mode = (String) session.getAttribute("mode");
 
-		
 		System.out.println("모드!" + mode);
-		
-		if(mode==null) {
+
+		if (mode == null) {
 			mav.setViewName("redirect:mainForm.do");
 			return mav;
 		}
 
-		
 		if (mode.equals("st")) {
 			System.out.println("학생!");
 			mav.setViewName("mypage_s");
@@ -379,7 +378,6 @@ public class MemberController {
 
 		int mode = Integer.parseInt((String) params.get("mode"));
 
-		
 		if (mode == 1) {
 
 			session.setAttribute("mode", "st");

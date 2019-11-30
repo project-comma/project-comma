@@ -290,8 +290,7 @@ pre {
   visibility: hidden;
 }
 
-
-/* img 업로드및 업로드시 바로 이미지 보여주기 */
+/* 
 .where {
 	display: block;
 	margin: 25px 15px;
@@ -312,7 +311,7 @@ pre {
 	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
-/* 업로드 버튼 */
+
 .filebox label {
 	display: inline-block;
 	padding: .5em .75em;
@@ -330,8 +329,8 @@ pre {
 	position: absolute;
 }
 
-/* named upload */
-/* 파일 경로 뿌려주는 부분 */
+
+
 .filebox .upload-name {
 	display: inline-block;
 	padding: .5em .75em;
@@ -343,7 +342,7 @@ pre {
 	border: 1px solid #ebebeb;
 	border-bottom-color: #e2e2e2;
 	border-radius: .25em;
-	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 	width: 500px;
@@ -351,8 +350,7 @@ pre {
 	position: absolute;
 }
 
-/* imaged preview */
-/* 이미지 뿌려주는곳 뒤에  */
+  
 .filebox .upload-display {
 	margin-bottom: 5px;
 	width: 200px;
@@ -365,7 +363,7 @@ pre {
 		margin-bottom: 0;
 	}
 }
-/* 이미지 뿌려지는곳 */
+ 이미지 뿌려지는곳 
 .filebox .upload-thumb-wrap {
 	display: inline-block;
 	width: 200px;
@@ -392,6 +390,8 @@ pre {
 	background-color: #337ab7;
 	border-color: #2e6da4;
 }
+*/
+
 
 
 
