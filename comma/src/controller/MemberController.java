@@ -46,7 +46,7 @@ public class MemberController {
 //	선생님등록 페이지
 	@RequestMapping(value = "t_Resist.do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String t_Resist(HttpSession session, @RequestBody HashMap<String, Object> params) {
-
+		System.out.println(params);
 		String session_id = (String) session.getAttribute("id");
 
 		System.out.println(params);
@@ -140,9 +140,10 @@ public class MemberController {
 	// 선생님 정보 변경 페이지
 	@RequestMapping("changeInfo_t.do")
 	public ModelAndView changeInfo_t(HttpSession session, @RequestParam HashMap<String, Object> params) {
-
 		ModelAndView mav = new ModelAndView();
 		String session_id = (String) session.getAttribute("id");
+		System.out.println("controller"+params);
+		System.out.println(session_id);
 
 		HashMap<String, Object> mId = mService.MemberInfo(session_id);
 		int mState = (int) mId.get("state");
@@ -175,7 +176,15 @@ public class MemberController {
 			return mav;
 		}
 
+<<<<<<< HEAD
 		
+=======
+		if (mode == null) {
+			mav.setViewName("redirect:mainForm.do");
+			return mav;
+		}
+
+>>>>>>> branch 'master' of https://github.com/project-comma/project-comma
 		if (mode.equals("st")) {
 			System.out.println("학생!");
 			mav.setViewName("mypage_s");

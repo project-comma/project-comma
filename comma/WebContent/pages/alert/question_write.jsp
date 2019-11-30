@@ -24,7 +24,7 @@
 			<hr width="600px;">
 			<div style="margin-left: 50px; margin-top: 40px;" align="left">
 
-				<input type="text"
+				<input type="text" id="q_title"
 					style="border-radius: 3px; width: 400px; height: 40px;"
 					placeholder="  제목을 입력 해주세요.">
 
@@ -35,11 +35,11 @@
 		</div>
 
 		<div class="form-group">
-			<textarea class="form-control" rows="5"
+			<textarea class="form-control" rows="5" id="q_content"
 				style="width: 600px; height: 200px;" placeholder="  내용을 입력 해주세요."></textarea>
 		</div>
 		<div>
-			<button type="submit" class="btn btn-outline-secondary">질문
+			<button type="button" class="btn btn-outline-secondary" onclick="question_write('${sessionScope.id}')">질문
 				작성</button>
 
 		</div>

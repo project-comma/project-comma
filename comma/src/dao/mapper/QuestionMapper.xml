@@ -6,8 +6,8 @@
   <mapper namespace="dao.IQuestionDao">
   
   <insert id="insertQuestion" parameterType="java.util.HashMap">
-  	insert into question_board values
-  	(#{number}, #{id}, #{title}, #{content}, #{date})
+  	insert into question_board (id, title, content) values
+  	(#{id}, #{title}, #{content})
   </insert>
   
   <delete id="deleteQuestion" parameterType="int">

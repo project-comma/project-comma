@@ -19,7 +19,7 @@
   	where number= #{number}
   </update>
   
-  <select id="select" resultType="notice" parameterType="int">
+  <select id="select" resultType="java.util.HashMap" parameterType="int">
   	select * from notice_board where number= #{number}
   </select>
   

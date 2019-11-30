@@ -51,11 +51,100 @@ public class MemberService implements IMemberService {
 
 	@Override
 	public int modifyMember(String id, HashMap<String, Object> params) {// 회원정보 수정 학생,선생둘다
-
+		System.out.println("service"+params);
 		params.put("id", id);
-		dao.updateMember(params);
+		String t_career = "";
+		String t_education = "";
+		String t_license = "";
+		String sns = (String) params.get("t_sns");
+		String education = (String) params.get("t_education");
+		String license = (String) params.get("t_license");
+		HashMap<String, Object> result = dao.selectMember(id);
+		if(sns==null||sns.equals("")) {
+			sns=(String) result.get("t_sns");
+			params.put("t_sns", sns);
+			
+		}
+		if(education==null||education.equals("")) {
+			education=(String) result.get("t_education");
+			params.put("t_education", education);
+			
+		}
+		if(license==null||license.equals("")) {
+			license=(String) result.get("t_license");
+			params.put("t_license", license);
+			
+		}
+		System.out.println(params);
 
-		return 0;
+		try { 
+
+			ArrayList<String> career = (ArrayList<String>) params.get("t_careerObject");
+			for (String s : career) {
+				if (!t_career.equals("")) {
+					t_career += "-";
+				}
+				t_career += s;
+				System.out.println(s);
+			}
+		} catch (ClassCastException e) {
+			t_career = (String) params.get("t_careerObject");
+		}
+
+		try {
+			ArrayList<String> edu = (ArrayList<String>) params.get("t_educationObject");
+
+			for (String s : edu) {
+
+				if (!t_education.equals("")) {
+					t_education += "-";
+				}
+				t_education += s;
+			}
+
+		} catch (ClassCastException e) {
+			t_education = (String) params.get("t_educationObject");
+			// TODO: handle exception
+		}
+
+		try {
+			ArrayList<String> lic = (ArrayList<String>) params.get("t_licenseObject");
+
+			for (String s : lic) {
+
+				if (!t_license.equals("")) {
+					t_license += "-";
+				}
+
+				t_license += s;
+			}
+
+		} catch (ClassCastException e) {
+			t_license = (String) params.get("t_licenseObject");
+			// TODO: handle exception
+		}
+		params.put("id", id);
+		/*
+		 * if(t_sns==null||t_sns.equals("")) { HashMap<String, Object> result =
+		 * dao.selectMember(id); t_sns=(String) result.get("t_sns"); params.put("t_sns",
+		 * t_sns);
+		 * 
+		 * }
+		 */
+		if (!t_career.equals(""))
+			params.put("t_career", t_career);
+		if (!t_education.equals(""))
+			params.put("t_education", t_education);
+		if (!t_license.equals(""))
+			params.put("t_license", t_license);
+		if (id != null) {
+			System.out.println(params);
+			dao.updateMember(params);
+			return 0;
+		} else {
+			return 1;
+		}
+
 
 	}
 
@@ -211,7 +300,7 @@ public class MemberService implements IMemberService {
 		HashMap<String, Object> result = dao.selectMember(id);
 
 		if (result == null) {
-			return 0;//회원정보 없음
+			return 0;// 회원정보 없음
 		} else {
 			String oPwd = (String) result.get("password");
 			if (oPwd == null) {
@@ -228,7 +317,7 @@ public class MemberService implements IMemberService {
 						return 3;
 					}
 				} else {
-					//비밀번호가 일치하지 않음
+					// 비밀번호가 일치하지 않음
 					return 4;
 				}
 			}
@@ -270,15 +359,15 @@ public class MemberService implements IMemberService {
 
 	@Override
 	public int modifyMember_s(String id, HashMap<String, Object> params, MultipartFile file) {
-	System.out.println("service"+params.get("p_number"));
-	System.out.println("service"+params.get("email"));
+		System.out.println("service" + params.get("p_number"));
+		System.out.println("service" + params.get("email"));
 		params.put("id", id);
 		String pw = (String) params.get("password");
-		
+
 		HashMap<String, Object> result = dao.selectMember(id);
 		if (pw.equals("") || pw == null) {
 			String password = (String) result.get("password");
-		
+
 			params.put("password", password);
 		}
 
@@ -287,10 +376,10 @@ public class MemberService implements IMemberService {
 		if (fileName == null || fileName.equals("")) {
 			String image = (String) result.get("image");
 			params.put("image", image);
-		}else {
+		} else {
 			params.put("image", fileName);
 			File attachFile = new File(path + fileName);
-			
+
 			try {
 				file.transferTo(attachFile);
 			} catch (IllegalStateException e) {

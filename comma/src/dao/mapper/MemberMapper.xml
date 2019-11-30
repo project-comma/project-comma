@@ -17,8 +17,10 @@
   </delete>
   
   <update id="updateMember"  parameterType="java.util.HashMap">
-  	update member set t_idcard= #{t_idcard}, t_career= #{t_career},
-    t_license= #{t_license}, t_sns= #{t_sns} where id = #{id}
+  	update member set t_career=#{t_career},
+  		 t_education=#{t_education}, t_license=#{t_license},
+  		 t_sns=#{t_sns}
+  		where id = #{id}
   
   </update>
   

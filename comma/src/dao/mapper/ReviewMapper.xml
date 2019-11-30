@@ -19,12 +19,12 @@
   	update review_board set content= #{content}, image= #{image}, c_score= #{c_score}
   	where number= #{number}
   </update>
-  
+ 
   <select id="select" resultType="java.util.HashMap" parameterType="int">
   	select * from review_board where number= #{number}
   </select>
   
-  <select id="selectList" resultType="java.util.ArrayList" parameterType="java.util.HashMap">
+  <select id="selectList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
  	select * from review_board 
   </select>
   
