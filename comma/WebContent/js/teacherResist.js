@@ -80,7 +80,7 @@ function univIN(){
 	
 	var uni = schoolName+":"+majorName;
 	
-	var sc = $('<div style="border-bottom:1px solid black; heigt:50px;"> </div>');
+	var sc = $('<div style="border-bottom:1px solid black; heigt:50px;" align="center"> </div>');
 		var scH5 = $('<h5 style="font-size:15px;">'+schoolName+'</h5>');
 
 	var maj = $('<div style="border-bottom:1px solid black; heigt:50px;"> </div>')

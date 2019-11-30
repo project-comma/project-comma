@@ -6,9 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
+<script src="js/jquery.serializeObject.js"></script>
+<script src="js/teacherResist.js" type="text/javascript"></script>
+
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
- <h2 align="center">선생님 정보 변경</h2><br>
+	<div style="margin-top: 50px;">
+	<h2 align="center">선생님 정보 변경</h2>
+	</div>
+	<br>
 
 
 	<form action="changeInfo_t.do" enctype="multipart/form-data">
@@ -16,154 +23,336 @@
 			<div align="left" style="width: 1200px">
 				<div align="center" style="margin-top: 50px">
 
-					<div align="center" style="width: 200px; float: left;">
-						<img src="img/위치.png" style="width: 200px; height: 200px;">
+
+
+
+					<!--  -->
+					<!-- 경력사항 -->
+					<div align="center">
+						<div align="center" style="margin-bottom: 50px; width: 600px;">
+							<div align="left">
+								<h3 style="font-size: 20px; font-weight: 600">경력사항</h3>
+							</div>
+
+							<div style="display: inline-block; vertical-align: top;">
+								<div
+									style="display: inline-block; float: left; vertical-align: top; margin-left: 50px;">
+									<h5>담당분야:</h5>
+								</div>
+
+								<div
+									style="display: inline-block; float: left; vertical-align: top; width: 200px; margin-left: 10px;">
+									<select id="careerSelect" class="custom-select">
+										<option selected>분야를 선택해주세요.</option>
+										<option value="요리">요리</option>
+										<option value="플라워">플라워</option>
+										<option value="수공예">수공예</option>
+										<option value="미술">미술</option>
+										<option value="액티비티">액티비티</option>
+										<option value="뷰티">뷰티</option>
+										<option value="음악">음악</option>
+										<option value="언어">언어</option>
+										<option value="방송댄스">방송댄스</option>
+										<option value="웹개발">웹개발</option>
+
+									</select>
+								</div>
+
+								<div
+									style="display: inline-block; float: left; vertical-align: top; margin-left: 50px;">
+									<h5>경력:</h5>
+								</div>
+
+								<div
+									style="display: inline-block; float: left; vertical-align: top; width: 50px; margin-left: 10px;">
+									<input id="carrerText" type="text" name="career"
+										style="width: 50px;">
+								</div>
+
+								<div
+									style="display: inline-block; float: left; vertical-align: top; width: 20px; margin-left: 10px;">
+									<h5>년</h5>
+
+								</div>
+
+								<div
+									style="display: inline-block; float: left; vertical-align: top; width: 20px; margin-left: 20px;">
+									<input type="button" id="careerPlus" value="+"
+										onclick="carreerIN()">
+								</div>
+							</div>
+						</div>
+						<!-- 경력사항 입력부분END -->
+						<div align="center">
+							<div
+								style="display: inline-block; vertical-align: top;  margin-left: 30px;">
+
+								<!-- 분야 -->
+								<div id="careerCat"
+									style="display: inline-block; border-top: 2px solid black; border-bottom: 1px solid black; float: left; vertical-align: top; width: 150px;">
+									<div
+										style="background: #CCCCCC; border-bottom: 1px solid black; heigt: 50px;">
+										<h5 style="font-size: 15px; font-weight: 600">분야</h5>
+									</div>
+
+									<!-- <div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">액티비티</h5>
+			 			</div>
+			 			
+			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">액티비티</h5>
+			 			</div> -->
+								</div>
+
+								<!-- 경력 -->
+								<div id="careerNum"
+									style="display: inline-block; border-top: 2px solid black; border-bottom: 1px solid black; float: left; vertical-align: top; width: 150px;">
+									<div
+										style="background: #CCCCCC; border-bottom: 1px solid black; heigt: 50px;">
+										<h5 style="font-size: 15px; font-weight: 600">경력</h5>
+									</div>
+
+									<!-- <div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">5년</h5>
+			 			</div>
+			 			
+			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">5년</h5>
+			 			</div> -->
+								</div>
+
+								<!-- 삭제버튼 -->
+								<div id="careerDel"
+									style="display: inline-block; border-top: 2px solid black; border-bottom: 1px solid black; float: left; vertical-align: top; width: 150px;">
+									<div
+										style="background: #CCCCCC; border-bottom: 1px solid black; heigt: 50px;">
+										<h5 style="font-size: 15px; font-weight: 600">삭제</h5>
+									</div>
+
+									<!-- <div style="border-bottom:1px solid black; heigt:50px;">
+			 				<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;">
+			 				
+			 			</div>
+			 			
+			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;">
+			 				
+			 			</div> -->
+								</div>
+								<div id="careerHide" style="display: inline-block;"></div>
+							</div>
+						</div>
+						<!-- 경력사항 목록부분END -->
+
+					</div>
+					<!-- 경력사항 END -->
+
+
+
+					<br> <br>
+
+					<!-- 문구 -->
+					<div align="center">
+						<div style="display: inline-block;">
+							<h5 style="font-size: 15px;">이하 자료는 선생님들의 홍보를 위함이며 필수가 아닌</h5>
+						</div>
+
+						<div style="display: inline-block;">
+							<h5 style="font-size: 15px; color: blue;">권장사항</h5>
+						</div>
+
+						<div style="display: inline-block;">
+							<h5 style="font-size: 15px;">인것을 알려드립니다.</h5>
+						</div>
+						<!-- 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+					</div>
+					<br>
+
+					<!-- 학력 -->
+					<div align="center">
+						<div align="center"
+							style="display: inline-block; width: 280px; height: 50px; margin-bottom: 30px; margin-right: 30px;">
+							<div class="input-group mb-3 input-group-lg"
+								style="width: 280px; margin-left: 20px;">
+								<div class="input-group-prepend">
+									<span class="input-group-text">학교</span>
+								</div>
+								<input id="schoolInput" type="text" class="form-control"
+									placeholder="학교명">
+							</div>
+
+						</div>
+
+
+						<div align="left"
+							style="display: inline-block; width: 250px; height: 50px; margin-bottom: 30px;">
+							<div class="input-group mb-3 input-group-lg"
+								style="width: 250px; margin-left: 1px;">
+								<div class="input-group-prepend">
+									<span class="input-group-text">학과</span>
+								</div>
+								<input id="majorInput" type="text" class="form-control"
+									placeholder="학과명">
+							</div>
+
+						</div>
+
+						<div
+							style="display: inline-block; width: 100px; height: 20px; margin-bottom: 30px;">
+							<input type="button" value="+" onclick="univIN()">
+						</div>
+					</div>
+					<!-- 학교,학과 목록 -->
+					<div align="center" style="display: inline-block;">
+						<!-- 학교이름 -->
+						<div id="scDIV"
+							style="display: inline-block; border-top: 2px solid black; border-bottom: 1px solid black; float: left; vertical-align: top; width: 120px;">
+							<div
+								style="background: #CCCCCC; border-bottom: 1px solid black; heigt: 50px; text-align: center;">
+								<h5 style="font-size: 15px; font-weight: 600">학교</h5>
+							</div>
+
+							<!-- 	<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">학교</h5>
+			 			</div>
+			 			
+			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">학교</h5>
+			 			</div> -->
+						</div>
+
+						<!-- 학과 -->
+						<div id="majorDIV"
+							style="display: inline-block; border-top: 2px solid black; border-bottom: 1px solid black; float: left; vertical-align: top; width: 120px;">
+							<div
+								style="background: #CCCCCC; border-bottom: 1px solid black; heigt: 50px; text-align: center;">
+								<h5 style="font-size: 15px; font-weight: 600">학과</h5>
+							</div>
+
+							<!-- 		<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">학과</h5>
+			 			</div>
+			 			
+			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">학과</h5>
+			 			</div>
+			 			 -->
+						</div>
+
+						<!-- 삭제버튼 -->
+						<div id="scDelDIV"
+							style="display: inline-block; border-top: 2px solid black; border-bottom: 1px solid black; float: left; vertical-align: top; width: 120px;">
+							<div
+								style="background: #CCCCCC; border-bottom: 1px solid black; heigt: 50px; text-align: center;">
+								<h5 style="font-size: 15px; font-weight: 600">삭제</h5>
+							</div>
+
+							<!--  	<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;">
+			 				
+			 			</div>
+			 			
+			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;">
+			 				
+			 			</div>-->
+						</div>
+
+						<div id="scHideDIV" style="display: none;"></div>
 
 					</div>
 
-					<div align="left" style="width: 700px; margin-left: 30px; float: left;">
 
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">사진</span>
+					<!-- 자격증 -->
+					<div align="center" style="margin-top: 30px;">
+						<div align="center"
+							style="display: inline-block; width: 500px; height: 50px; margin-bottom: 30px; margin-top: 30px;">
+							<div class="input-group mb-3 input-group-lg"
+								style="width: 500px;">
+								<div class="input-group-prepend">
+									<span class="input-group-text">자격증</span>
+								</div>
+								<input type="text" id="licInput" class="form-control"
+									placeholder="자격증명을 입력해주세요.">
 							</div>
-							<input type="text" class="form-control" name="picture" placeholder="프로필 사진을 선택해 주세요">
+
+
 						</div>
 
-
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">이메일</span>
+						<div
+							style="display: inline-block; width: 100px; height: 20px; margin-bottom: 50px;">
+							<input type="button" value="+" onclick="licIN()">
+						</div>
+					</div>
+					<!-- 자격증목록 -->
+					<div align="center"
+						style="display: inline-block; argin-bottom: 30px;">
+						<!-- 자격증이름 -->
+						<div id="licDIV"
+							style="display: inline-block; border-top: 2px solid black; border-bottom: 1px solid black; float: left; vertical-align: top; width: 250px;">
+							<div
+								style="background: #CCCCCC; border-bottom: 1px solid black; heigt: 50px;">
+								<h5 style="font-size: 15px; font-weight: 600">자격증</h5>
 							</div>
-							<input type="text" class="form-control" name="email" placeholder="이메일을 입력해 주세요">
+
+							<!-- 			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">자격증</h5>
+			 			</div>
+			 			
+			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<h5 style="font-size:15px;">자격증</h5>
+			 			</div> -->
 						</div>
 
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">비밀번호</span>
+
+						<!-- 삭제버튼 -->
+						<div id="licDelDIV"
+							style="display: inline-block; border-top: 2px solid black; border-bottom: 1px solid black; float: left; vertical-align: top; width: 100px;">
+							<div
+								style="background: #CCCCCC; border-bottom: 1px solid black; heigt: 50px;">
+								<h5 style="font-size: 15px; font-weight: 600">삭제</h5>
 							</div>
-							<input type="text" class="form-control" name="password" placeholder="비밀번호를 입력해 주세요">
+
+							<!-- 			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;">
+			 				
+			 			</div>
+			 			
+			 			<div style="border-bottom:1px solid black; heigt:50px;">
+			 				<input type="button" class="btn btn-primary" value="삭제" style="height:24px; font-size:13px;">
+			 				
+			 			</div> -->
 						</div>
 
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">비빌번호 확인</span>
-							</div>
-							<input type="text" class="form-control" name="passwordCheck" placeholder="비밀번호를 다 시 입력해 주세요">
-						</div>
+						<div id="licHideDIV" style="display: none;"></div>
+					</div>
 
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">핸드폰</span>
-							</div>
-							<input type="text" class="form-control" name="p_number"
-								placeholder="변경 하실 핸드폰 번호를 입력 해주세요 (ex 010-7310-9603)">
-						</div>
-
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">인증번호</span>
-							</div>
-							<input type="text" class="form-control" placeholder="인증번호를입력 해주세요">
-						</div>
-
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">신분증</span>
-							</div>
-							<input type="text" class="form-control" placeholder="변경하실 신분증 파일을 제출해주세요">
-						</div>
-
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">학력</span>
-							</div>
-							<input type="text" class="form-control" placeholder="변경하실 재학 증명서 또는 졸업 증명서를 제출해주세요">
-						</div>
-
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text">자격증</span>
-							</div>
-							<input type="text" class="form-control" placeholder="변경하실 자격증 파일을 제출해주세요">
-						</div>
-
-						<div class="form-check">
-							<label class="form-check-label" for="check1">
-								<input type="checkbox" class="form-check-input" id="check1" name="option1"
-									value="something" checked>Option 1
-							</label>
-						</div>
-						<div class="form-check" style="margin-bottom: 30px; ">
-							<label class="form-check-label" for="check2">
-								<input type="checkbox" class="form-check-input" id="check2" name="option2"
-									value="something">Option 2
-							</label>
-						</div>
-
-						<div class="input-group mb-3 input-group-lg">
+					<div align="left"
+						style="width: 1200px; height: 50px; margin-bottom: 30px; margin-top: 30px;">
+						<div class="input-group mb-3 input-group-lg"
+							style="width: 650px; margin-left: 200px;">
 							<div class="input-group-prepend">
 								<span class="input-group-text">소셜미디어</span>
 							</div>
-							<input type="text" class="form-control" placeholder="사용하고계시는 소셜 미디어의 주소나 아이디를 입력 해주세요">
+							<input type="text" name="t_sns" class="form-control"
+								placeholder="소셜 미디어의 주소나 아이디를 입력 해주세요">
 						</div>
-
-
 
 
 					</div>
 
+				</div>
 
 
-					<div align="left" style="width: 200px; height: 717px; float: left; margin-left: 30px;">
-
-
-						<div>
-							<button type="button" class="btn btn-outline-secondary">파일 업로드</button>
-						</div>
-
-						<div style="margin-top: 220px;">
-							<button type="button" class="btn btn-outline-secondary">인증번호 보내기</button>
-						</div>
-
-						<div style="margin-top: 30px;">
-							<button type="button" class="btn btn-outline-secondary">인증 하기</button>
-						</div>
-
-						<div style="margin-top: 25px;">
-							<button type="button" class="btn btn-outline-secondary">파일 업로드</button>
-						</div>
-
-						<div style="margin-top: 25px;">
-							<button type="button" class="btn btn-outline-secondary">파일 업로드</button>
-						</div>
-
-						<div style="margin-top: 25px;">
-							<button type="button" class="btn btn-outline-secondary">파일 업로드</button>
-						</div>
-					</div>
-
-
-					<div style="margin-top: 50px; margin-bottom: 50px;">
-						<button type="button" class="btn btn-outline-secondary">변경 하기</button>
-					</div>
-
-
-
-
-
-
+				<div align="center" style="margin-top: 50px; margin-bottom: 50px;">
+					<button type="submit" class="btn btn-outline-secondary">변경
+						하기</button>
 				</div>
 			</div>
 		</div>
 
-
-
-
 	</form>
-
-
-
-
 </body>
+
 </html>

@@ -106,7 +106,7 @@ public class ReviewController {
 		return mav;
 	}
 
-	// 리뷰상세보기
+	// 리뷰보기
 	@RequestMapping("ReadReview.do")
 	public ModelAndView ReadReview(String number) {
 		System.out.println("ReadReview.do contrpller");
@@ -117,5 +117,7 @@ public class ReviewController {
 
 		return mav;
 	}
+	
+	
 
 }
