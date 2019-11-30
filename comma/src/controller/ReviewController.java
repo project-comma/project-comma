@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import service.IReviewService;
 
@@ -24,9 +28,25 @@ public class ReviewController {
 
 	// 리뷰페이지
 	@RequestMapping("reviewList.do")
-	public ModelAndView reviewList() {
+	public ModelAndView reviewList(@RequestParam(required = false) String keyword) {
 		ModelAndView mav = new ModelAndView();
-		ArrayList<HashMap<String, Object>> result = reService.allList();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		HashMap<String, Object> result = null;
+		if(keyword==null) {
+			params.put("type", 0);
+			result = reService.searchReview(params, 1);
+		}else {
+			params.put("type", 1);
+			params.put("keyword", keyword);
+			result = reService.searchReview(params, 1);
+		}
+		
+		
+		System.out.println(result);
+		mav.addAllObjects(result);
+		
 		mav.setViewName("reviewList");
 		return mav;
 
@@ -55,7 +75,7 @@ public class ReviewController {
 			System.out.println("리뷰쓰기성공!!!");
 		}
 		
-		mav.setViewName("reviewList");
+		mav.setViewName("redirect:reviewList.do");
 		
 		//System.out.println(result);
 		return mav;
@@ -107,17 +127,68 @@ public class ReviewController {
 	}
 
 	// 리뷰보기
+	@ResponseBody
 	@RequestMapping("ReadReview.do")
-	public ModelAndView ReadReview(String number) {
-		System.out.println("ReadReview.do contrpller");
-		ModelAndView mav = new ModelAndView();
+	public HashMap<String, Object> ReadReview(@RequestParam String number) {
+		System.out.println("ReadReview.do controller");
+		
+		
+		int num = Integer.parseInt(number);
 
-		HashMap<String, Object> result = reService.viewReview(number);
+		HashMap<String, Object> result = reService.viewReview(num);
 		System.out.println(result);
 
-		return mav;
+		return result;
+	}
+	
+	@RequestMapping("reviewImageView.do")
+	public View profileView(String number, HttpServletRequest request) {
+		
+		System.out.println(number);
+
+		int num = Integer.parseInt(number);
+		
+		View view = new DownloadView(reService.getReviewImage(num, request));
+
+		return view;
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="addReviewList.do", method = RequestMethod.POST)
+	public HashMap<String, Object> addReviewList(@RequestParam HashMap<String, Object> props){
+		
+		String number = (String)props.get("page");
+		
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		int page = Integer.parseInt(number);
+		
+		String keyword = null;
+		try {
+			
+			keyword = (String)props.get("keyword");
+			
+			if(keyword!=null && !keyword.equals("")) {
+				params.put("type", 1);
+				params.put("keyword", keyword);
+			}else {
+				System.out.println("키워드가없어~");
+				params.put("type", 0);
+				
+			}
+		} catch (NullPointerException e) {
+			params.put("type", 0);
+			// TODO: handle exception
+		}
+		
+		System.out.println(keyword);
+		System.out.println(params + ":" +page);
+		HashMap<String, Object> res = reService.searchReview(params, page);
+		
+		System.out.println(res);
+		return res; 
+	}
 
 }

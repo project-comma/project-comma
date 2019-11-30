@@ -134,7 +134,7 @@ public class NoticeController {
 		
 		HashMap<String, Object> res = nService.getNotice(num);
 		
-		
+		System.out.println(res);
 		return res;
 	}
 	

@@ -9,7 +9,7 @@ public interface IReviewDao {
 	public int updateReview(HashMap<String, Object> params);
 	public int deleteReview(String number);
 	
-	public HashMap<String, Object> select(String number);
+	public HashMap<String, Object> select(int number);
 	public ArrayList<HashMap<String, Object>> selectList();
-
+	public ArrayList<HashMap<String, Object>> searchList(HashMap<String, Object> params);
 }

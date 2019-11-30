@@ -21,7 +21,7 @@
 
 			<div>
 				<!-- 게시사진 공간 -->
-				<div style="display: inline-block; float: left;">
+				<div id="rev_ImgVw" style="display: inline-block; float: left;">
 					<img src="img/cat.jpg" style="width: 400px; height: 500px;">
 
 
@@ -33,19 +33,19 @@
 					<table>
 						<tr>
 							<td>
-								<div>
+								<div id="rev_proImgVw">
 									<img src="img/cat.jpg" class="rounded-circle"
 										alt="Cinque Terre" align="left"
 										style="height: 80px; width: 80px; margin-left: 10px; margin-top: 50px;">
 
 								</div>
 							</td>
-							<td><div style="margin-top: 30px;">사용자 이름</div></td>
+							<td><div id="rev_IdVw" style="margin-top: 30px;">사용자 이름</div></td>
 						</tr>
 						<tr>
 							<td colspan="2">
 								<hr width="250px;">
-								<div>DB에서 꺼내온 내용</div>
+								<div id="rev_ConVw">DB에서 꺼내온 내용</div>
 							</td>
 						</tr>
 

@@ -21,7 +21,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		var page = 1;
+		var page = 2;
 		
 		$("#cl_reqListForm").scroll(function(){
 			
@@ -113,7 +113,7 @@
 
         <form action="">
             <div align="center">
-                <h2 align="center">전체</h2>
+                <h2 align="center">클래스요청</h2>
                 <div id="cl_reqListForm" style="overflow:auto; width: 1100px; height: 800px;">
             
             		<c:forEach var="r" items="${classReqList }">

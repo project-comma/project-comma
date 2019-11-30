@@ -6,8 +6,8 @@
   <mapper namespace="dao.IReviewDao">
   
   <insert id="insertReview" parameterType="java.util.HashMap" >
-	insert into review_board (id, content, image) values
-	(#{id}, #{content}, #{image})
+	insert into review_board (id, content, image, title) values
+	(#{id}, #{content}, #{image}, #{title})
 	
   </insert>
   
@@ -16,7 +16,7 @@
   </delete>
   
   <update id="updateReview" parameterType="java.util.HashMap">
-  	update review_board set content= #{content}, image= #{image}, c_score= #{c_score}
+  	update review_board set content= #{content}, image= #{image}
   	where number= #{number}
   </update>
  
@@ -26,6 +26,19 @@
   
   <select id="selectList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
  	select * from review_board 
+  </select>
+  
+  
+  <select id="searchList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+  	select * from review_board where 1=0
+  	<if test="keword!=null">
+  		or title like '%${keyword}%'
+  	</if>
+  	<if test="type==0">
+  		or 1=1
+  	</if>
+  	
+  	order by number desc limit #{skip}, #{qty}
   </select>
   
   </mapper>

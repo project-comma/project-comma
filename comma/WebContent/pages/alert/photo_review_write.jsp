@@ -31,6 +31,10 @@
 								id="customFile" onchange="reviewfileChange(this)"> <label
 								class="custom-file-label" for="customFile">사진을 선택해주세요.</label>
 						</div>
+						
+						<div align="center">
+							<input type="text" name="title" placeholder="제목을 입력해주세요." maxlength="20" style="width:400px; margin-top:50px; margin-left:50px;">
+						</div>
 					</div>
 					<div class="inlineArr" align="left" style="margin-left: 20px;">
 						<!-- 왼쪽 사진 구간 -->
