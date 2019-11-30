@@ -37,7 +37,7 @@
 										success : function(arr) {
 											// 				alert(arr);
 
-<<<<<<< HEAD
+
 	
 	
 	
@@ -77,7 +77,7 @@
 		})
 	}
 	main();
-=======
+
 											for (var i = 0; i < arr.length; i++) {
 												var div = $("<div style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
 												// 					var img = $("<img width='300px' height='300px'>");
@@ -91,7 +91,7 @@
 														.append(price);
 												$("#classList").append(div);
 											}
->>>>>>> branch 'master' of https://github.com/project-comma/project-comma
+
 
 										},
 										error : function(xhrReq, status, error) {
@@ -147,7 +147,7 @@
 				
 			</div>
 		</div>
-<<<<<<< HEAD
+
 		
 		<div align="center">
 			<div align="left" style="width:1200px "  id="classList" >
@@ -163,7 +163,7 @@
 			
 			</div>
 		
-=======
+
 	</div>
 	<div  align="center" style="background-color: rgba(0, 0, 0, 0.5); z-index:31;width: 1200px; 
 	height: 600px; left:351px; top: 330px; position: relative;">
@@ -217,7 +217,7 @@
 	<div align="center">
 		<div align="left" style="width: 1200px;">
 			<h2>인기 클래스</h2>
->>>>>>> branch 'master' of https://github.com/project-comma/project-comma
+
 		</div>
 	</div>
 

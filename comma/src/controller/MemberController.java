@@ -176,15 +176,13 @@ public class MemberController {
 			return mav;
 		}
 
-<<<<<<< HEAD
-		
-=======
+
 		if (mode == null) {
 			mav.setViewName("redirect:mainForm.do");
 			return mav;
 		}
 
->>>>>>> branch 'master' of https://github.com/project-comma/project-comma
+
 		if (mode.equals("st")) {
 			System.out.println("학생!");
 			mav.setViewName("mypage_s");
