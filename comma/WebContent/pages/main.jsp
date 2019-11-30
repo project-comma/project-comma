@@ -37,6 +37,47 @@
 										success : function(arr) {
 											// 				alert(arr);
 
+<<<<<<< HEAD
+	
+	
+	
+	function main() {
+		$.ajax({
+			type : "get",
+			url : "mainList.do",
+			dataType : "json",
+			success : function (arr) {
+				
+				
+				
+				for(var i = 0; i < arr.length; i++){
+					var number = $(arr[i].c_number);
+					var div = $("<a href='classForm.do?number="+arr[i].c_number+"' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
+					
+// 					var img = $("<img width='300px' height='300px'>");
+					var img = $("<div>")
+					img.text(arr[i].c_image);
+					var name = $("<div>");
+					name.text(arr[i].c_name);
+					var price =$("<div>");
+					price.text(arr[i].c_price);
+					div.append(img).append(name).append(price);
+					$("#classList").append(div);
+				}
+				
+			},
+			error : function (xhrReq, status, error) {
+				alert("에러창")
+				console.log(xhrReq + ' / ' + status + ' / ' + error);
+				
+			}
+			
+			
+			
+		})
+	}
+	main();
+=======
 											for (var i = 0; i < arr.length; i++) {
 												var div = $("<div style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
 												// 					var img = $("<img width='300px' height='300px'>");
@@ -50,6 +91,7 @@
 														.append(price);
 												$("#classList").append(div);
 											}
+>>>>>>> branch 'master' of https://github.com/project-comma/project-comma
 
 										},
 										error : function(xhrReq, status, error) {
@@ -105,6 +147,23 @@
 				
 			</div>
 		</div>
+<<<<<<< HEAD
+		
+		<div align="center">
+			<div align="left" style="width:1200px "  id="classList" >
+			
+<!-- 				<div style="width:300px; height: 400px;" id="classList"> -->
+<!-- 					<img src="img/시간.png" width="300px" height="300px"> -->
+<!-- 					<img src="img/시간.png" width="80px" height="80px"> -->
+<!-- 					<div>이상훈 </div> -->
+<!-- 					<div>내용내용내용내용내용내용내용내용</div> -->
+<!-- 					<div>가격</div> -->
+<!-- 				</div> -->
+			
+			
+			</div>
+		
+=======
 	</div>
 	<div  align="center" style="background-color: rgba(0, 0, 0, 0.5); z-index:31;width: 1200px; 
 	height: 600px; left:351px; top: 330px; position: relative;">
@@ -158,6 +217,7 @@
 	<div align="center">
 		<div align="left" style="width: 1200px;">
 			<h2>인기 클래스</h2>
+>>>>>>> branch 'master' of https://github.com/project-comma/project-comma
 		</div>
 	</div>
 

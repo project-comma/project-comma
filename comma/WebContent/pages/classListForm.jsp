@@ -28,7 +28,8 @@
 											// 				alert(arr);
 
 											for (var i = 0; i < arr.length; i++) {
-												var div = $("<div style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>")
+												
+												var div = $("<a href='classForm.do?number="+arr[i].c_number+"' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>")
 												// 					var img = $("<img width='300px' height='300px'>");
 												var img = $("<div>")
 												img.text(arr[i].c_image);
@@ -36,8 +37,8 @@
 												name.text(arr[i].c_name);
 												var price = $("<div>");
 												price.text(arr[i].c_price);
-												div.append(img).append(name)
-														.append(price);
+												
+												div.append(img).append(name).append(price);
 												$("#classList").append(div);
 											}
 
@@ -58,6 +59,7 @@
 
 
 <body>
+
 	<jsp:include page="header.jsp"></jsp:include>
 	<script type="text/javascript">
 		var ischk = false;
@@ -307,6 +309,7 @@
 
 	<div align="center">
 		<div align="left" style="width: 1200px" id="classList">
+		
 			<!-- 				<div style="width:300px; height: 400px;" id="classList"> -->
 			<!-- 					<img src="img/시간.png" width="300px" height="300px"> -->
 			<!-- 					<img src="img/시간.png" width="80px" height="80px"> -->

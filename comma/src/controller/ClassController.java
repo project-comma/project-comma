@@ -3,20 +3,24 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.maven.model.Model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mysql.jdbc.PreparedStatement.ParseInfo;
 
 import service.IClassService;
 
@@ -48,6 +52,7 @@ public class ClassController {
 			jo.put("c_name", result.get(i).get("c_name"));
 			jo.put("c_image", result.get(i).get("c_image"));
 			jo.put("c_price", result.get(i).get("c_price"));
+			jo.put("c_number", result.get(i).get("c_number"));
 			jarr.put(jo);
 		}
 		response.getWriter().println(jarr);
@@ -75,8 +80,10 @@ public class ClassController {
 			jo.put("c_name", result.get(i).get("c_name"));
 			jo.put("c_image", result.get(i).get("c_image"));
 			jo.put("c_price", result.get(i).get("c_price"));
+			jo.put("c_number", result.get(i).get("c_number"));
 			jarr.put(jo);
 		}
+		
 		response.getWriter().println(jarr);
 
 	}
@@ -85,57 +92,102 @@ public class ClassController {
 	
 	// 클래스상세내용
 	@RequestMapping("classForm.do")
-	public ModelAndView classw(int number) {
-		number = 4;
-
+	public ModelAndView classw(@RequestParam String number) {
+//		System.out.println("클래스상네애용"+number);
+		
+		int inumber = Integer.parseInt(number) ;
+		
+		
+//		int number = 3;
 //		System.out.println(id);
 		ModelAndView mav = new ModelAndView();
-		HashMap<String, Object> result = cService.viewClass(number);
-//		System.out.println(result);
+		HashMap<String, Object> result = cService.viewClass(inumber);
+		System.out.println(result.get("c_startday"));
+		
+		String resultStr= (String) result.get("c_startday");
+		String[] arr = resultStr.split("@");
+		
+		String resultStr2 = (String) result.get("c_starttime");
+		String[] arr2 = resultStr2.split("@");
+		for (int i = 0; i < arr.length; i++) {
+			
+			String c_startday = arr[i];
+			
+			
+			mav.addObject("c_startday", c_startday);
+			
+		}
+		
+		for (int i = 0; i < arr2.length; i++) {
+			String c_starttime = arr2[i];
+			
+			mav.addObject("c_starttime", c_starttime);
+		}
+				
+		mav.addObject("c_image", result.get("c_image"));
+		mav.addObject("c_content", result.get("c_content"));
+		mav.addObject("c_classtime", result.get("c_classtime"));
+		mav.addObject("c_price", result.get("c_price"));
+		mav.addObject("c_location", result.get("c_location"));
+		mav.addObject("c_member", result.get("c_member"));
 		
 		mav.setViewName("class");
+		
 		return mav;
 
 	}
 
 	// 클래스 등록
 	@RequestMapping("classResistBtn.do")
-	public void c_Resist(HttpServletResponse response, @RequestParam HashMap<String, Object> params) throws IOException {
+	public void c_Resist(HttpSession session,HttpServletResponse response, @RequestBody HashMap<String, Object> params) throws IOException {
 //		ModelAndView mav = new ModelAndView();
 
 		
 //		System.out.println(result);
-		System.out.println(params);
-		System.out.println(params.get("c_startday"));
+//		System.out.println(params);
+		
+		String session_id = (String) session.getAttribute("id");
+//		System.out.println(params);
 		
 		
 		
 		
-		if(params.get("c_number").equals("")) {
+		
+				
+				
+				
+		if(params.get("c_name").equals("")) {
 			
-			String result = (String) params.get("c_number");
+			String result = (String) params.get("c_name");
 			result = "1";
+			
+			String resultStr = "{ \"result\" : " + result + "}";
+			response.getWriter().println(resultStr);
+		}
+		else if (params.get("c_category").equals("카테고리")) {
+			String result = (String) params.get("c_category");
+			result = "2";
 			
 			String resultStr = "{ \"result\" : " + result + "}";
 			response.getWriter().println(resultStr);
 		}
 		else if (params.get("c_image").equals("")) {
 			String result = (String) params.get("c_image");
-			result = "2";
+			result = "3";
 			
 			String resultStr = "{ \"result\" : " + result + "}";
 			response.getWriter().println(resultStr);
 		}
 		else if (params.get("c_content").equals("")) {
 			String result = (String) params.get("c_content");
-			result = "3";
+			result = "4";
 			
 			String resultStr = "{ \"result\" : " + result + "}";
 			response.getWriter().println(resultStr);
 		}
 		else if (params.get("c_price").equals("")) {
 			String result = (String) params.get("c_price");
-			result = "4";
+			result = "5";
 			
 			String resultStr = "{ \"result\" : " + result + "}";
 			response.getWriter().println(resultStr);
@@ -146,11 +198,33 @@ public class ClassController {
 			c_location += "/"+params.get("gu");
 			params.put("c_location", c_location);
 			
+			params.put("id", session_id);
+			
+			ArrayList<String> startday = (ArrayList<String>) params.get("c_startday");
+			String c_startday = "";
+			for (String s : startday) {
+				
+				c_startday += s+"@";
+			}
+			params.put("c_startday", c_startday);
+			
+			ArrayList<String> starttime = (ArrayList<String>) params.get("c_starttime");
+			String c_starttime = "";
+			for (String s : starttime) {
+				
+				c_starttime += s+"@";
+			}
+			params.put("c_starttime", c_starttime);
+			params.put("c_state", 2);
+			
+			
 			
 			cService.resistClass(params);
+			String result = "6";
 		
 			
-		
+			String resultStr = "{ \"result\" : " + result + "}";
+			response.getWriter().println(resultStr);
 			
 			
 			

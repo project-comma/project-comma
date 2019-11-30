@@ -168,13 +168,23 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		String mode = (String) session.getAttribute("mode");
 
+		
 		System.out.println("모드!" + mode);
+		
+		if(mode==null) {
+			mav.setViewName("redirect:mainForm.do");
+			return mav;
+		}
 
+<<<<<<< HEAD
+		
+=======
 		if (mode == null) {
 			mav.setViewName("redirect:mainForm.do");
 			return mav;
 		}
 
+>>>>>>> branch 'master' of https://github.com/project-comma/project-comma
 		if (mode.equals("st")) {
 			System.out.println("학생!");
 			mav.setViewName("mypage_s");
@@ -378,6 +388,7 @@ public class MemberController {
 
 		int mode = Integer.parseInt((String) params.get("mode"));
 
+		
 		if (mode == 1) {
 
 			session.setAttribute("mode", "st");

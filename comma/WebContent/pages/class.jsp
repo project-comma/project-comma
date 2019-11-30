@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,14 @@
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	
+	이미지${c_image }
+	내용${c_content }
+	시작시간${c_starttime }
+	수업시간${c_classtime }
+	가격${c_price }
+	위치${c_location }
+	인원수${c_member }
+	시작날짜${c_startday }
 
 	<div align="center"><!-- 전체 div -->
 	
@@ -101,13 +110,13 @@
 						<div class="CR_span1" align="center">
 							<img src="img/시간.png" id="profileP"
 								style="width: 200px; height: 200px; margin-top: 50px"> <br>
-							<a href="" class="">사용자</a>
+							<a href="" class="">${sessionScope.id }</a>
 						</div>
 					</td>
 
 					<td>
 						<div style="display: inline-block">
-							<pre id="class_info">원데이클래스</pre>
+							<pre id="class_info"></pre>
 						</div>
 
 						<button type="submit" class="btn btn-outline-secondary"
@@ -120,22 +129,22 @@
 
 			<div class="CR_span" align="center">
 				<img src="img/위치.png" id="location" class="CR_icon2"> <br>
-				<a href="" class="iconText">위치</a>
+				<a class="iconText">${c_location }</a>
 			</div>
 
 			<div class="CR_span" align="center">
 				<img src="img/인원수.png" id="people" class="CR_icon2"> <br>
-				<a href="" class="iconText">인원수</a>
+				<a class="iconText">최대${c_member }명</a>
 			</div>
 
 			<div class="CR_span" align="center">
 				<img src="img/시간.png" id="time" class="CR_icon2"> <br>
-				<a href="" class="iconText">시간</a>
+				<a class="iconText">${c_classtime }시간</a>
 			</div>
 
 			<div class="CR_span" align="center">
 				<img src="img/원.png" id="money" class="CR_icon2"> <br>
-				<a href="" class="iconText">30,000/1회</a>
+				<a class="iconText">${c_price}원/1회</a>
 			</div>
 			<div align="center"
 				style="border-bottom: 1px solid #555; width: 800px;"></div>
@@ -151,7 +160,7 @@
 			<div style="margin-top: 50px">
 				<h3>수업 소개</h3>
 				<br>
-				<pre id="C-introduce">수업 소개를 칸 입니다 </pre>
+				<pre id="C-introduce">${c_content } </pre>
 			</div>
 
 			<div align="center"
@@ -187,10 +196,18 @@
 			<div style="height:300px; margin-top:100px;">
 				<div class="card">
 					<div class="card-header bg-info text-white">수업가능한날짜</div>
-   					 <div class="card-body">10월 20일 9:00~11:00</div>
-   					 <div class="card-body">10월 20일 12:00~14:00</div>  
+<%--    					 <div class="card-body">${c_startday } ${c_starttime }</div> --%>
+<%--    					 <div class="card-body">${c_startday } ${c_starttime }</div>   --%>
+<%--    					 <div class="card-body">${c_startday } ${c_starttime }</div>   --%>
     				
    				 </div>
+   				 
+   				 <c:forEach items="${c_startday }" var="c">
+						<tr>
+							<td align="center">${c }</td>
+							
+						</tr>
+					</c:forEach>
 			</div>
 			
 			<div style="height:150px;">
