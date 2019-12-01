@@ -1,15 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>		
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="js/review_s.js" type="text/javascript">
+
 	
 </script>
 
+<script src="js/request.js" type="text/javascript"></script>
+
 </head>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		
+		
+		//$("#myT_phonenumber").text(phoneFormat($("#myT_phonenumber").text()));
+		
+	});
+</script>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<jsp:include page="alert/class_review.jsp"></jsp:include>
@@ -37,12 +52,8 @@
 
 					<td width="700" style="vertical-align: top;">
 						<div style="margin-top: 20px; height: 150px;">
-							<pre style="margin-top: 10px;">
-박하영
-
-phy555@naver.com
-
-				</pre>
+							<h5>${info.name }</h5>
+							<h5>${info.email }</h5>
 						</div>
 
 
@@ -834,119 +845,57 @@ phy555@naver.com
 
 			<div align="left"
 				style="width: 1200px; height: 400px; border-bottom: 1px solid black;">
+				
+				<c:forEach var="r" items="${myRequest }" begin="0" end="1">
+
 				<div id="my_req" align="left"
-					style="border: 1px solid black; height: 400px; width: 550px; display: inline:block; float: left; margin-right: 50px;">
+					style="border: 1px solid black; height: 250px; width: 550px; display: inline:block; float: left; margin-right: 50px;">
 					<div style="margin-top: 10px; margin-left: 10px;">
-						<h5 style="font-size: 15px;">[원데이]/[요리]</h5>
-						<h5 style="font-size: 15px;">[요청사항]블루베리 다쿠아즈를 만들고 싶어요 ㅠ</h5>
+						<h5 style="font-size: 15px;">[분야]/[${r.c_category }]</h5>
+						<h5 style="font-size: 15px;">[요청사항]${r.c_title }</h5>
 					</div>
 
 					<div
 						style="display: inline:block; margin-top: 5px; margin-left: 10px; float: left;">
-						<h5 style="font-size: 15px;">2019-09-15</h5>
+						<h5 style="font-size: 15px;">[원하는날짜]${r.c_startday }:${r.c_starttime }</h5>
 
 					</div>
 
 					<div style="display: inline:block; float: left; margin-left: 20px;">
 						<input type="button" style="width: 120px;" value="삭제"
-							onclick="del_conf('my_req_del',1)">
+							onclick="delRequest('${r.number}')">
 					</div>
 
 					<br>
+					<!-- 선생님현황 -->
+					<c:choose>
+					<c:when test="${r.teacher!=null }">
 					<div align="left"
 						style="margin-top: 10px; margin-left: 25px; width: 400px; height: 120px; border: 1px solid black;">
 
 						<div align="center"
 							style="display: inline-block; float: left; margin-top: 10px; margin-left: 10px;">
-							<img class="myT_stphoto" src="img/test.jpg"
+							<img class="myT_stphoto" src="profileImageView.do?id=${r.teacher}"
 								style="width: 50px; height: 50px;"><br>
-							<h5 style="font-size: 15px; margin-top: 10px;">김지민</h5>
+							<h5 style="font-size: 15px; margin-top: 10px;">${r.teacher }</h5>
 						</div>
 
 						<div
-							style="display: inline-block; float: left; margin-left: 10px;">
+							style="display: inline-block; float: left; margin-left: 10px; width:300px;">
 							<br> <input type="button" value="선생님 프로필"
 								style="width: 120px; margin-left: 12px;"
-								onclick="t_profile_open('id')">
+								onclick="t_profile_open('${r.teacher}')">
 							<!-- 선생님 아이디를 가지고 간다 -->
+							<c:if test="${r.r_status==2 }">
 							<input type="button" value="선생님 수락"
-								style="width: 120px; margin-left: 12px;"
-								onclick="t_accept_open('id')">
-							<!-- 선생님 아이디를 가지고 간다 -->
-
-						</div>
-
-
-						<br>
-
-					</div>
-					<br>
-
-					<div align="left"
-						style="margin-top: 10px; margin-left: 25px; width: 400px; height: 120px; border: 1px solid black;">
-
-						<div align="center"
-							style="display: inline-block; float: left; margin-top: 10px; margin-left: 10px;">
-							<img class="myT_stphoto" src="img/test.jpg"
-								style="width: 50px; height: 50px;"><br>
-							<h5 style="font-size: 15px; margin-top: 10px;">김지민</h5>
-						</div>
-
-						<div
-							style="display: inline-block; float: left; margin-left: 10px;">
-							<br> <input type="button" value="선생님 프로필"
-								style="width: 120px; margin-left: 12px;"
-								onclick="t_profile_open('id')"> <input type="button"
-								value="선생님 수락" style="width: 120px; margin-left: 12px;"
-								onclick="t_accept_open('id')">
-							<!-- 선생님 아이디를 가지고 간다 -->
-
-						</div>
-
-
-						<br>
-
-					</div>
-				</div>
-
-				<div id="my_req" align="left"
-					style="border: 1px solid black; height: 400px; width: 550px; display: inline:block; float: left; margin-right: 50px;">
-					<div style="margin-top: 10px; margin-left: 10px;">
-						<h5 style="font-size: 15px;">[원데이]/[요리]</h5>
-						<h5 style="font-size: 15px;">[요청사항]블루베리 다쿠아즈를 만들고 싶어요 ㅠ</h5>
-					</div>
-
-					<div
-						style="display: inline:block; margin-top: 5px; margin-left: 10px; float: left;">
-						<h5 style="font-size: 15px;">2019-09-15</h5>
-
-					</div>
-
-					<div style="display: inline:block; float: left; margin-left: 20px;">
-						<input type="button" style="width: 120px;" value="삭제"
-							onclick="del_conf('my_req_del','${number}')">
-					</div>
-
-					<br>
-					<div align="left"
-						style="margin-top: 10px; margin-left: 25px; width: 400px; height: 120px; border: 1px solid black;">
-
-						<div align="center"
-							style="display: inline-block; float: left; margin-top: 10px; margin-left: 10px;">
-							<img class="myT_stphoto" src="img/test.jpg"
-								style="width: 50px; height: 50px;"><br>
-							<h5 style="font-size: 15px; margin-top: 10px;">김지민</h5>
-						</div>
-
-						<div
-							style="display: inline-block; float: left; margin-left: 10px;">
-							<br> <input type="button" value="선생님 프로필"
-								style="width: 120px; margin-left: 12px;"
-								onclick="t_profile_open('id')">
-							<!-- 선생님 아이디를 가지고 간다 -->
-							<input type="button" value="선생님 수락"
-								onclick="t_accept_open('id')"
+								onclick="t_accept_open('${r.number}','${r.teacher }')"
 								style="width: 120px; margin-left: 12px;">
+							</c:if>
+							
+							<c:if test="${r.r_status==3 }">
+								<h5 style="display:inline-block; font-size:20px;">수락완료</h5>
+							</c:if>	
+							<input type="button" value="선생님 거절" style="margin-left:12px; margin-top:10px; width:120px;" onclick="rejectT('${r.number}')">	
 
 						</div>
 
@@ -954,36 +903,14 @@ phy555@naver.com
 						<br>
 
 					</div>
-					<br>
-
-					<div align="left"
-						style="margin-top: 10px; margin-left: 25px; width: 400px; height: 120px; border: 1px solid black;">
-
-						<div align="center"
-							style="display: inline-block; float: left; margin-top: 10px; margin-left: 10px;">
-							<img class="myT_stphoto" src="img/test.jpg"
-								style="width: 50px; height: 50px;"><br>
-							<h5 style="font-size: 15px; margin-top: 10px;">김지민</h5>
-						</div>
-
-						<div
-							style="display: inline-block; float: left; margin-left: 10px;">
-							<br> <input type="button" value="선생님 프로필"
-								style="width: 120px; margin-left: 12px;"
-								onclick="t_profile_open('id')">
-							<!-- 선생님 아이디를 가지고 간다 -->
-
-							<input type="button" value="선생님 수락"
-								style="width: 120px; margin-left: 12px;"
-								onclick="t_accept_open('id')">
-
-						</div>
-
-
-						<br>
-
-					</div>
+					</c:when>
+					</c:choose>
 				</div>
+				
+				</c:forEach>
+				
+				
+				
 			</div>
 		</div>
 
@@ -992,4 +919,6 @@ phy555@naver.com
 
 
 </body>
+
+<script src="js/request.js" type="text/javascript"></script>
 </html>

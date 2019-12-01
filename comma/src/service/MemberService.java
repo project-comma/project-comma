@@ -399,4 +399,30 @@ public class MemberService implements IMemberService {
 
 		return 0;
 	}
+	
+	public HashMap<String, Object> myTRequest(HashMap<String, Object> params){
+		
+		
+		HashMap<String, Object> res = new HashMap<String, Object>(); 
+		ArrayList<HashMap<String, Object>> list = dao.getMyTRequest((String)params.get("teacher"));
+		
+		
+		res.put("myTRequest", list);
+		
+		
+		return res;
+	}
+	
+	public HashMap<String, Object> myRequest(HashMap<String, Object> params){
+		
+		
+		HashMap<String, Object> res = new HashMap<String, Object>(); 
+		ArrayList<HashMap<String, Object>> list = dao.getMyRequest((String)params.get("id"));
+		
+		
+		res.put("myRequest", list);
+		
+		
+		return res;
+	}
 }

@@ -25,18 +25,29 @@
 			<!-- 사진과 이름 소개부분 -->
 			<div style="height: 150px;">
 				<!-- 선생님 사진 부분 -->
-				<div style="display: inline-block; float: left;">
+				<div id="tp_img" style="display: inline-block; float: left;">
 					<img src="img/cat.jpg" class="rounded-circle" alt="Cinque Terre" align="left"
 						style="height: 150px; width: 150px; margin-left: 100px;">
 				</div>
 				<!-- 선생님 소개부분 -->
 				<div style="display: inline-block; float: left;">
 					<div style="height: 150px; width: 400px; margin-left: 40px;">
-						<h3 style="text-align: left">선생님이름</h3>
-						<pre style="text-align: left">선생님정보들
-뭔지
-잘모겟지만 
-DB에서 뿌려주는 부분 입니다</pre>
+					
+						<div id="tp_name" align="left">
+							<h3 style="text-align: left">선생님이름</h3>
+						</div>
+						<div id="tp_email" align="left">
+							<h5></h5>
+						</div>
+						
+						<div id="tp_gender" align="left">
+							<h5></h5>
+						</div>
+						
+						<div id="tp_phone" align="left">
+							<h5></h5>
+						</div>
+						
 					</div>
 			
 				</div>
@@ -47,11 +58,21 @@ DB에서 뿌려주는 부분 입니다</pre>
 			</div>
 			<div style="margin-left: 100px; height: 200px;">
 				<h3 style="text-align: left">상세 자격정보</h3>
-				<pre style="text-align: left">선생님 상세정보
-를
-열심히
-DB에서 뿌려주는 부분 입니다
-				</pre>
+				<div id="tp_career" align="left">
+				
+					<h5></h5>
+				</div>
+				
+				<div id="tp_education" align="left">
+					<h5></h5>
+				</div>
+				<div id="tp_license" align="left">
+					<h5></h5>
+				</div>
+				
+				<div id="tp_sns" align="left">
+					<h5></h5>
+				</div>
 			</div>
 		</div>
 

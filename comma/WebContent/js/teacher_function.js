@@ -3,6 +3,43 @@
  */
 
 function t_profile_open(id) {// 선생님 프로필 창 열기
+
+	
+	
+	$.ajax({
+		type:'post',
+		url:'memberInfo.do',
+		dataType:'json',
+		data:{id:id},
+		success:function(data){
+			
+			$.each(data, function(key, val){
+				
+				if(key=='id'){
+					$("#tp_img img").attr('src', 'profileImageView.do?id='+val);
+				}else if(key=='name'){
+					$("#tp_name h3").text('[이름]'+val);
+				}else if(key=='email'){
+					$("#tp_email h5").text('[이메일]'+val);
+				}else if(key=='gender'){
+					$("#tp_gender h5").text('[성별]'+(val=='man'?'남':'여'));
+				}else if(key=='p_number'){
+					$("#tp_phone h5").text('[연락처]'+phoneFormat(val));
+				}else if(key=='t_career'){
+					$("#tp_career h5").text('[경력]'+val);
+				}else if(key=='t_license'){
+					$("#tp_license h5").text('[자격증]'+val);
+				}else if(key=='t_sns'){
+					$("#tp_sns h5").text('[소셜미디어]'+val);
+				}else if(key=='t_education'){
+					$("#tp_education h5").text('[학력]'+val);
+				}
+			});
+		},
+		error:function(){
+			alert("에러!");
+		}
+	});
 	$('#t_profile').show();
 	$(".dim").show();
 
@@ -11,28 +48,39 @@ function t_profile_close() {// 선생님 프로필 창 닫기
 	$("#t_profile").hide();
 	$(".dim").hide();
 }
-function t_accept_open(id) {// 선생님 수락창 열기
-	$("#t_req_accept").show();
-	$(".dim").show();
+function t_accept_open(number, teacher) {// 선생님 수락창 열기
+
+	var conf = confirm('수락하시겠습니까?');
+	
+	if(conf){
+		t_accept_ajax(number, teacher);
+	}else{
+		return;
+	}
+	
+	
 }
 function t_accept_close() {// 선생님 수락 창 닫기
 	$("#t_req_accept").hide();
 	$(".dim").hide();
 }
-function t_accept_ajax(id) {// 선생님 수락 ajax
+function t_accept_ajax(number, teacher) {// 선생님 수락 ajax
 
 	$.ajax({
 		url : "acceptT.do",
 		type : "post",
-		contentType : "application/json",
-		data : {
-			id : id
-		},
 		dataType : "json",
+		data : {
+			number : number,
+			teacher : teacher
+		},
 		success : function(data) {
+			
+			alert('수락되었습니다.');
 //			console.log(data);
 		},
 		error : function() {
+			alert('에러');
 			console.log("error");
 		
 		}
@@ -92,4 +140,77 @@ function modeSwitch(mode){
 	}else{
 		$("#tSwitch").prop("checked", false);
 	}
+}
+
+
+
+function rejectT(number){
+	
+	var conf = confirm('제안을 거절 하시겠습니까?');
+	
+	if(conf){
+		
+		$.ajax({
+			type:'post',
+			url:'offerRequest.do',
+			dataType:'json',
+			data:{
+				number:number,
+				type:'0',
+				
+			},
+			success:function(){
+				alert("완료되었습니다.");
+				location.href='mypage.do';
+			},
+			error:function(){
+				alert("에러!");
+			}
+		});
+	}else{
+		
+	}
+}
+
+
+function phoneFormat(num){
+
+    
+
+    var formatNum = '';
+
+    
+
+    if(num.length==11){
+
+
+        formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+
+
+    }else if(num.length==8){
+
+        formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+
+    }else{
+
+        if(num.indexOf('02')==0){
+
+            formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+
+            
+
+        }else{
+
+            formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+
+            
+
+        }
+
+    }
+
+    return formatNum;
+
+    
+
 }

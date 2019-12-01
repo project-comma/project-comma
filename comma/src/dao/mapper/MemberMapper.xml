@@ -61,6 +61,12 @@
   </select>
 
 	  
+  <select id="getMyTRequest" resultType="java.util.HashMap" parameterType="String">
+  	select * from request where teacher=#{teacher} order by number desc
+  </select>
   
+  <select id="getMyRequest" resultType="java.util.HashMap" parameterType="String">
+  	select * from request where id=#{id} order by number desc
+  </select>
   
   </mapper>

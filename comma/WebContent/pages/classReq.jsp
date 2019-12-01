@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	    
 <!DOCTYPE html>
 <html>
 
@@ -14,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/cssconfig.css">
     <title>Insert title here</title>
 </head>
-
+<script src="js/request.js" type="text/javascript"></script>
 
 <body>
     <jsp:include page="header.jsp"></jsp:include><br><br><br>
@@ -75,7 +76,11 @@
             <div class="menu" align="center" style="border-bottom:1px solid #555; width:800px;"></div>
             
             <br><br><br>
-            <button type="button" class="btn btn-outline-secondary" style="margin-left: 150px">선생님하기 요청</button>
+            
+            <c:if test="${req.teacher==null}">
+            
+            	<button type="button" class="btn btn-outline-secondary" style="margin-left: 150px" onclick="reqOffer('${req.number}','1','<%=session.getAttribute("id")%>')">선생님하기 요청</button>
+            </c:if>
             
             <button type="button" class="btn btn-outline-secondary" style="margin-left: 50px; width: 300px" onclick="location.href='talk.do'">1:1톡</button>
 
@@ -88,5 +93,5 @@
 
 
 </body>
-
+<script src="js/request.js" type="text/javascript"></script>
 </html>

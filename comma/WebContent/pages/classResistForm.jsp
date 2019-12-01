@@ -186,18 +186,6 @@
 						</div>
 						<br> <br> <br> <br> <br>
 
-						<div class="input-group mb-3 input-group-lg">
-							<div class="input-group-prepend">
-								<span class="input-group-text"> 사진 </span>
-							</div>
-							<input type="text" name="c_image" class="form-control"
-								placeholder="수업과 관련된 사진을 올려주세요"> <input type="file" name="image" value="파일 업로드">
-
-						</div>
-
-
-
-
 
 						<input type="button" id="addImage" value="추가"> <br>
 						<div>

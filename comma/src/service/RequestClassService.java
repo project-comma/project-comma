@@ -33,7 +33,9 @@ public class RequestClassService implements IRequestClassService{
 	}
 
 	@Override
-	public int removeRequest(String id) {
+	public int removeRequest(int number) {
+		
+		dao.deleteRequestClass(number);
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -81,5 +83,40 @@ public class RequestClassService implements IRequestClassService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int offerRequest(HashMap<String, Object> params) {
+		// TODO Auto-generated method stub
+		
+		params.put("offer", 2);
+		dao.TeacherOfferUpdate(params);
+		
+		return 0;
+	}
+
+	@Override
+	public int compRequest(HashMap<String, Object> params) {
+		// TODO Auto-generated method stub
+		
+		params.put("offer", 3);
+		dao.TeacherOfferUpdate(params);
+		
+		return 0;
+	}
+
+	@Override
+	public int rejectRequest(HashMap<String, Object> params) {
+		// TODO Auto-generated method stub
+		
+		params.put("offer", 1);
+		params.put("teacher", null);
+		
+		dao.TeacherOfferUpdate(params);
+		
+		
+		return 0;
+	}
+	
+	
 
 }

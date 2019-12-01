@@ -1,11 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+	integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+	crossorigin="anonymous">
+	
+</script>
+
+<script src="js/calandar.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		var date = new Date();
+		
+		$("#myT_phonenumber").text(phoneFormat($("#myT_phonenumber").text()));
+		calandar_view(date.getFullYear(), date.getMonth()+1);
+	});
+</script>
+
 <style>
 .mypageT_resisclass_btn {
 	margin-left: 10px;
@@ -38,30 +58,27 @@
 					</td>
 
 
-					<td width="550" style="vertical-align: top;">
+					<td width="700" style="vertical-align: top;">
 						<div style="vertical-align: midle; height: 180px;">
-							<pre style="margin-top: 10px;">
-
-박하영(Teacher)
-
-phy555@naver.com
-
-010-3265-4589
-				</pre>
+							<h5>${info.name }</h5>
+							<h5>${info.email }</h5>
+							<h5 id="myT_phonenumber">${info.p_number }</h5>
 						</div>
 
 
 						<div id="memberButtons"
 							style="vertical-align: midle; height: 40px;">
 							<input type="button" class="btn btn-light" id="modify_info"
-								value="정보변경" onclick="location.href='changeInfo_tForm.do'">
+								value="경력사항변경" onclick="location.href='changeInfo_tForm.do'">
 							<input type="button" class="btn btn-light" id="modify_info"
 								value="실시간톡" onclick="location.href='talk.do'"> <input
 								type="button" class="btn btn-light" id="modify_info" value="탈퇴"
 								onclick="drop_member_open(${id})">
 							<input type="button" class="btn btn-light" id="modify_info"
 								value="클래스 등록" onclick="location.href='classResist.do'">
-
+							<input type="button" class="btn btn-light"
+								id="modify_info" value="정보변경"
+								onclick="location.href='changeInfo_sForm.do'">
 						</div>
 					</td>
 				</tr>
@@ -223,6 +240,36 @@ phy555@naver.com
 
 			<div align="right"></div>
 			<br>
+			
+			<div style="width:100px; display:inline-block; vertical-align:top; height:80px;">
+                    <select id="myT_Year" name="Year" class="custom-select" style="height:49px;">
+						<option selected>2019</option>
+						<option value="2019">2019</option>
+						<option value="2020">2020</option>
+					</select>
+					
+			</div>
+			
+			<div style="width:100px; display:inline-block; vertical-align:top; height:80px;">
+                    <select id="myT_Month" name="Month" class="custom-select" style="height:49px;">
+						<option selected>12</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+					
+			</div>
+			
+			<input type="button" class="btn btn-success" value="일정보기" onclick="calandar_update()">
 			<div align="center">
 				<table id="myT_table" border="1">
 					<tr>
@@ -495,131 +542,85 @@ phy555@naver.com
 						style="margin-top: 10px; margin-left: 25px; width: 450px;">
 						<h4 style="font-weight: 600; font-size: 17px;">검토중</h4>
 					</div>
+					
+				<c:forEach var="r" items="${myTRequest }" begin="0" end="1">
 
+					<c:choose>
+					
+					<c:when test="${r.r_status==2 }">
 					<div align="left"
 						style="margin-top: 10px; margin-left: 25px; width: 450px; height: 120px; display: inline-block; float: left;">
 
-						<div align="center"
-							style="display: inline-block; float: left; vertical-align: center;">
-							<img class="myT_stphoto" src="img/test.jpg"
+						<div align="center" style="display: inline-block; float: left; vertical-align: center;">
+							<img class="myT_stphoto" src="profileImageView.do?id=${r.id}"
 								style="width: 70px; height: 70px;"><br>
-							<h5 style="font-size: 15px; margin-top: 10px;">김지민</h5>
+							<h5 style="font-size: 15px; margin-top: 10px;">${r.id }</h5>
 						</div>
 
 						<div
 							style="display: inline-block; float: left; margin-left: 10px;">
 							<div>
-								<h5 style="font-size: 15px;">[원데이]/[요리]</h5>
-								<h5 style="font-size: 15px;">[요청사항] 블루베리 다쿠아즈를 만들고 싶어요ㅠ</h5>
+								<h5 style="font-size: 15px;">[분야]/[${r.c_category }]</h5>
+								<h5 style="font-size: 15px;">[요청사항] ${r.c_title } ${r.number }</h5>
 							</div>
 
 							<div style="margin-top: 10px;">
 								<span> <img src="img/위치.png"
 									style="width: 30px; height: 30px;">
-								</span> <span> 서울시 종로구 </span> <span style="float: right;"> <input
-									type="button" value="신청철회" onclick="class_req_retract_open()">
+								</span> <span> ${r.c_location } </span> <span style="float: right;"> <input
+									type="button" value="신청철회" onclick="class_req_retract('${r.number}')">
 								</span>
 							</div>
 						</div>
 						<br>
 					</div>
+					</c:when>
+					</c:choose>
+			</c:forEach>
 
-					<div align="left"
-						style="margin-top: 10px; margin-left: 25px; width: 450px; height: 120px; display: inline-block; float: left;">
-
-						<div align="center"
-							style="display: inline-block; float: left; vertical-align: center;">
-							<img class="myT_stphoto" src="img/test.jpg"
-								style="width: 70px; height: 70px;"><br>
-							<h5 style="font-size: 15px; margin-top: 10px;">김지민</h5>
-						</div>
-
-						<div
-							style="display: inline-block; float: left; margin-left: 10px;">
-							<div>
-								<h5 style="font-size: 15px;">[원데이]/[요리]</h5>
-								<h5 style="font-size: 15px;">[요청사항] 블루베리 다쿠아즈를 만들고 싶어요ㅠ</h5>
-							</div>
-
-							<div style="margin-top: 10px;">
-								<span> <img src="img/위치.png"
-									style="width: 30px; height: 30px;">
-								</span> <span> 서울시 종로구 </span> <span style="float: right;"> <input
-									type="button" value="신청철회" onclick="class_req_retract_open()">
-								</span>
-							</div>
-						</div>
-						<br>
-
-
-
-					</div>
 
 					<br>
+					
 
 					<div align="left"
 						style="margin-top: 10px; margin-left: 25px; width: 450px;">
 						<h4 style="font-weight: 600; font-size: 17px;">수락완료</h4>
 					</div>
 
+				<c:forEach var="r" items="${myTRequest }" begin="0" end="1">
+
+					<c:choose>
+					
+					<c:when test="${r.r_status==3 }">
 					<div align="left"
 						style="margin-top: 10px; margin-left: 25px; width: 450px; height: 120px; display: inline-block; float: left;">
 
-						<div align="center"
-							style="display: inline-block; float: left; vertical-align: center;">
-							<img class="myT_stphoto" src="img/test.jpg"
+						<div align="center" style="display: inline-block; float: left; vertical-align: center;">
+							<img class="myT_stphoto" src="profileImageView.do?id=${r.id}"
 								style="width: 70px; height: 70px;"><br>
-							<h5 style="font-size: 15px; margin-top: 10px;">김지민</h5>
+							<h5 style="font-size: 15px; margin-top: 10px;">${r.id }</h5>
 						</div>
 
 						<div
 							style="display: inline-block; float: left; margin-left: 10px;">
 							<div>
-								<h5 style="font-size: 15px;">[원데이]/[요리]</h5>
-								<h5 style="font-size: 15px;">[요청사항] 블루베리 다쿠아즈를 만들고 싶어요ㅠ</h5>
+								<h5 style="font-size: 15px;">[분야]/[${r.c_category }]</h5>
+								<h5 style="font-size: 15px;">[요청사항] ${r.c_title } ${r.number }</h5>
 							</div>
 
 							<div style="margin-top: 10px;">
 								<span> <img src="img/위치.png"
 									style="width: 30px; height: 30px;">
-								</span> <span> 서울시 종로구 </span>
-
+								</span>
+								
+								<span> ${r.c_location } </span>
 							</div>
 						</div>
 						<br>
-
-
-
 					</div>
-					<div align="left"
-						style="margin-top: 10px; margin-left: 25px; width: 450px; height: 120px; display: inline-block; float: left;">
-
-						<div align="center"
-							style="display: inline-block; float: left; vertical-align: center;">
-							<img class="myT_stphoto" src="img/test.jpg"
-								style="width: 70px; height: 70px;"><br>
-							<h5 style="font-size: 15px; margin-top: 10px;">김지민</h5>
-						</div>
-
-						<div
-							style="display: inline-block; float: left; margin-left: 10px;">
-							<div>
-								<h5 style="font-size: 15px;">[원데이]/[요리]</h5>
-								<h5 style="font-size: 15px;">[요청사항] 블루베리 다쿠아즈를 만들고 싶어요ㅠ</h5>
-							</div>
-
-							<div style="margin-top: 10px;">
-								<span> <img src="img/위치.png"
-									style="width: 30px; height: 30px;">
-								</span> <span> 서울시 종로구 </span>
-							</div>
-						</div>
-						<br>
-
-
-
-					</div>
-
+					</c:when>
+					</c:choose>
+			</c:forEach>
 				</div>
 			</div>
 			<br>
@@ -631,4 +632,7 @@ phy555@naver.com
 		</div>
 	</div>
 </body>
+
+
+<script src="js/calandar.js" type="text/javascript"></script>
 </html>

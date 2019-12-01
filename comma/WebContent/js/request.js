@@ -11,19 +11,23 @@
 	 
  }
  
- function class_req_retract_open(){
-	 $("#req_delete").show();
-	 $(".dim").show();
+ function class_req_retract(number){
+	 
+	 $.ajax({
+		 type:'post',
+		 url:'offerRequest.do',
+		 dataType:'json',
+		 data:{number:number, type:'0'},
+		 success:function(){
+			 alert("철회되었습니다.");
+			 location.href='mypage.do';
+		 },
+		 error:function(){
+			 alert("에러!");
+		 }
+	 });
 	 
  }
- function class_req_retract_close(){
-	 $("#req_delete").hide();
-	 $(".dim").hide();
-	 
- }
- function class_req_retract_ajax() {
-	
-}
  
  
  function addReqList(page, cat, key){
@@ -95,4 +99,54 @@
 	 
 	 location.href='classReq.do?number='+number;
  }
+ 
+ 
+ 
+ function reqOffer(number, type, id){
+	 
+	 
+	 $.ajax({
+		
+		 type:'post',
+		 url:'offerRequest.do',
+		 dataType:'json',
+		 data:{
+			 number:number,
+			 type:type,
+			 id:id
+		 },
+		 success:function(data){
+			 alert(data.msg);
+		 },
+		 error:function(){
+			 alert("에러!");
+		 }
+			 
+	 });
+ }
+ 
+ 
+ function delRequest(number){
+	 
+	 var conf = confirm('요청한클래스를 삭제하시겠습니까?');
+	 
+	 if(conf){
+		 $.ajax({
+			type:'post',
+			url:'deleteReq.do',
+			dataType:'json',
+			data:{number:number},
+			success:function(){
+				alert("삭제되었습니다.");
+				location.href='mypage.do';
+			},
+			error:function(){
+				alert("에러!")
+			}
+		 });
+	 }else{
+		 return;
+	 }
+ }
+ 
  

@@ -345,3 +345,36 @@ function accountCheck(me){
 	}
 }
 
+function tc_modify(){
+	var caCount = 0;
+	$("h5[id=catH5]").each(function(index, item){
+		
+		caCount = caCount + 1;
+	});
+	
+	if(caCount == 0){
+		alert("경력사항을 입력해주세요.");
+		return;
+	}
+	
+	
+	//폼데이터 등록
+	var formData = $("#TmodifyForm").serializeObject();
+	
+	$.ajax({
+		
+		url:"changeInfo_t.do",
+		cache: false,
+		type:"POST",
+		contentType:"application/json; charset=UTF-8",
+		data:JSON.stringify(formData),
+		success:function(data){
+			alert("들왔어?");
+			//var form = new FormData(document.getElementById("t_resistForm"));
+			location.href='mypage.do';
+		},
+		error:function(xhr, status, error){
+			alert("["+xhr.status+"]" + error);
+		}
+	});
+}

@@ -13,4 +13,9 @@ public interface IRequestClassDao {
 	public ArrayList<HashMap<String, Object>> selectList(HashMap<String, Object> params);
 	
 	public ArrayList<HashMap<String, Object>> searchList(HashMap<String, Object> params);
+	
+	public int TeacherOfferUpdate(HashMap<String, Object> params);
+	
+	
+	
 }

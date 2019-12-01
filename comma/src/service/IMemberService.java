@@ -38,5 +38,8 @@ public interface IMemberService {
 	public File getAttachFile(String id);
 
 	int modifyMember_s(String id, HashMap<String, Object> params, MultipartFile file);
-
+	
+	public HashMap<String, Object> myTRequest(HashMap<String, Object> params);
+	
+	public HashMap<String, Object> myRequest(HashMap<String, Object> params);
 }

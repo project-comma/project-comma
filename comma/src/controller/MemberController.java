@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,9 +92,12 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 
 		String id = (String) session.getAttribute("id");
-
+		
+		
 		HashMap<String, Object> info = mService.MemberInfo(id);
-
+		
+		
+		
 		mav.addObject("info", info);
 
 		mav.setViewName("changeInfo_sForm");
@@ -131,16 +136,73 @@ public class MemberController {
 
 		HashMap<String, Object> info = mService.MemberInfo(id);
 
-		mav.addObject("info", info);
+		
+		//경력
+		String[] careers = ((String)info.get("t_career")).split("-");
+		
+		ArrayList<HashMap<String, Object>> c = new ArrayList<HashMap<String,Object>>();
+		for(String s : careers) {
+			HashMap<String, Object> car = new HashMap<String, Object>();
+			
+			String[] cars = s.split(":");
+			
+			car.put("cat", cars[0]);
+			car.put("car", cars[1]);
+			
+			c.add(car);
+		}
+		
+		info.put("careerList", c);
+		//경력END
+		
+		//학력ST
+		String[] educs = ((String)info.get("t_education")).split("-");
+		
+		ArrayList<HashMap<String, Object>> e = new ArrayList<HashMap<String,Object>>();
+		for(String s : educs) {
+			HashMap<String, Object> ed = new HashMap<String, Object>();
+			
+			String[] cars = s.split(":");
+			
+			ed.put("edu", cars[0]);
+			ed.put("part", cars[1]);
+			
+			e.add(ed);
+		}
+		
+		info.put("eduList", e);
+		//학력END
+		
+		//자격증ST
+		String[] lics = ((String)info.get("t_license")).split("-");
+		
+		ArrayList<HashMap<String, Object>> l = new ArrayList<HashMap<String,Object>>();
+		for(String s : lics) {
+			HashMap<String, Object> lc = new HashMap<String, Object>();
+			
+			
+			
+			lc.put("lic", s);
+			
+			
+			l.add(lc);
+		}
+		
+		info.put("licList", l);
+		//자격증END
+		
+		System.out.println(info);
+		mav.addAllObjects(info);
+		//mav.addObject("info", info);
 
-		mav.setViewName("changeInfo_sForm");
+		
 		mav.setViewName("changeInfo_tForm");
 		return mav;
 	}
 
 	// 선생님 정보 변경 페이지
-	@RequestMapping("changeInfo_t.do")
-	public ModelAndView changeInfo_t(HttpSession session, @RequestParam HashMap<String, Object> params) {
+	@RequestMapping(value = "changeInfo_t.do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String changeInfo_t(HttpSession session, @RequestBody HashMap<String, Object> params) {
 		ModelAndView mav = new ModelAndView();
 		String session_id = (String) session.getAttribute("id");
 		System.out.println("controller"+params);
@@ -149,15 +211,16 @@ public class MemberController {
 		HashMap<String, Object> mId = mService.MemberInfo(session_id);
 		int mState = (int) mId.get("state");
 
+		System.out.println(params);
 		if (session_id != null && mState == 2) {
 			int result = mService.modifyMember(session_id, params);
 			System.out.println("컨트롤러에 리턴된값=" + result);
-			mav.setViewName("main");
-			return mav;
+			
+			return "redirect:mypage.do";
 
 		} else {
-			mav.setViewName("changeInfo_tForm");
-			return mav;
+			
+			return "redirect:mypage.do";
 
 		}
 
@@ -186,9 +249,33 @@ public class MemberController {
 
 		if (mode.equals("st")) {
 			System.out.println("학생!");
+			
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			
+			params.put("id", (String)session.getAttribute("id"));
+			
+			HashMap<String, Object> info = mService.MemberInfo((String)session.getAttribute("id"));
+			
+			HashMap<String, Object> res = mService.myRequest(params);
+			
+			mav.addObject("info", info);
+			
+			mav.addAllObjects(res);
+			
 			mav.setViewName("mypage_s");
+			
 		} else if (mode.equals("tc")) {
 			System.out.println("선생님!");
+			
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			
+			params.put("teacher", (String)session.getAttribute("id"));
+			HashMap<String, Object> info = mService.MemberInfo((String)session.getAttribute("id"));
+			HashMap<String, Object> res = mService.myTRequest(params);
+			
+			mav.addObject("info", info);
+			mav.addAllObjects(res);
+			
 			mav.setViewName("mypage_t");
 		} else if (mode.equals("ad")) {
 			System.out.println("관리자!");
@@ -357,16 +444,7 @@ public class MemberController {
 
 	}
 
-	// 선생님 수락
-	@ResponseBody
-	@RequestMapping("acceptT.do")
-	public Map acceptT(@RequestParam HashMap<String, Object> params) {
-		Map<String, Object> map = new HashMap<String, Object>();
-
-//		map.put("controller", "t_accept");
-		return map;
-
-	}
+	
 
 	// 프로필사진 갖고오는 메소드
 	@RequestMapping("profile.do")
@@ -395,5 +473,19 @@ public class MemberController {
 			session.setAttribute("mode", "tc");
 		}
 
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="memberInfo.do")
+	public HashMap<String, Object> memberInfo(@RequestParam HashMap<String, Object> params){
+		
+		
+		String id = (String)params.get("id");
+		
+		HashMap<String, Object> res = mService.MemberInfo(id);
+		
+		return res;
 	}
 }

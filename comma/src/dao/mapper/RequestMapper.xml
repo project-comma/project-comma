@@ -49,4 +49,10 @@
   	order by number desc limit #{skip}, #{qty}
   </select>
   
+  
+  
+  <update id="TeacherOfferUpdate" parameterType="java.util.HashMap">
+  	update request set teacher=#{teacher}, r_status="${offer}" where number=${number}
+  </update>
+  
   </mapper>

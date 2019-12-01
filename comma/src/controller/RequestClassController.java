@@ -42,7 +42,7 @@ public class RequestClassController {
 		} else if (res == Commons.ID_OVERLAP) {
 
 		}
-		mav.setViewName("classReqList");
+		mav.setViewName("redirect:classReqList.do");
 		return mav;
 	}
 	
@@ -202,10 +202,14 @@ public class RequestClassController {
 	public Map deleteReq(@RequestParam HashMap<String, Object> params) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("controller", "deleteReq");
+		
+		String num = (String)params.get("number");
+		
+		int number = Integer.parseInt(num);
+		
+		rService.removeRequest(number);
+		
 
-		// JSONResult
-		// return JSONResult.success(result);
 
 		return map;
 
@@ -218,4 +222,55 @@ public class RequestClassController {
 
 		return mav;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="offerRequest.do")
+	public HashMap<String, Object> offerRequest(@RequestParam HashMap<String, Object> params){
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		int tp = Integer.parseInt((String)params.get("type"));
+		
+		String id = (String)params.get("id");
+		HashMap<String, Object> reqmem = rService.viewRequest(Integer.parseInt((String)params.get("number")));
+		
+		String reqid = (String)reqmem.get("id");
+		if(!reqid.equals(id)) {
+			
+			params.put("teacher", id);
+		}else {
+			res.put("msg", "같은 아이디입니다.");
+			return res;
+		}
+		
+		if(tp==0) {
+			System.out.println(params);
+			rService.rejectRequest(params);
+		}else if(tp==1) {
+			rService.offerRequest(params);
+			res.put("result", 1);
+			res.put("msg", "전달되었습니다.");
+			
+		}else if(tp==2) {
+			rService.compRequest(params);
+		}
+		
+		
+		
+		return res;
+	}
+	
+	
+		// 선생님 수락
+		@ResponseBody
+		@RequestMapping("acceptT.do")
+		public Map acceptT(@RequestParam HashMap<String, Object> params) {
+			Map<String, Object> map = new HashMap<String, Object>();
+
+			
+			System.out.println(params);
+			rService.compRequest(params);
+			return map;
+
+		}
 }
