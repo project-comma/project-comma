@@ -218,7 +218,7 @@
 					<ul class="navbar-nav" style="display: inline-block;">
 						<li class="nav-item">
 							<h4>
-								<a class="nav-link" href="classList.do">class</a>
+								<a class="nav-link" href="classListForm.do">class</a>
 							</h4>
 						</li>
 

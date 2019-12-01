@@ -32,8 +32,13 @@
   	
   </update>
   
-  <select id="selectSearch" resultType="java.util.ArrayList" parameterType="java.util.HashMap">
-  	select * from class where c_name= #{c_name} or id = #{id}
+  <select id="selectSearch" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+  	select * from class where 1=0
+  	<if test="keyword!=null">
+  		or c_name like '%${keyword}%'
+  		or c_category like '%${keyword}%'
+  		or c_location like '%${keyword}%'
+  	</if>
   </select>
   
   <select id="params" resultType="java.util.HashMap" parameterType="String">

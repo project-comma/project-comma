@@ -59,34 +59,85 @@ public class ClassController {
 
 	}
 
-	// 클래스폼페이지 이동
-	@RequestMapping("classList.do")
-	public ModelAndView classList() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("classListForm");
-		return mav;
+//	// 클래스폼페이지 이동
+//	@RequestMapping("classList.do")
+//	public ModelAndView classList() {
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("classListForm");
+//		return mav;
+//
+//	}
+//
+//	//클래스 리스트 보여주기
+//	@RequestMapping("classAllList.do")
+//	public void classAllList(HttpServletResponse response) throws IOException {
+//		ArrayList<HashMap<String, Object>> result = cService.allList();
+//
+////		System.out.println(result);
+//		JSONArray jarr = new JSONArray();
+//		for (int i = 0; i < result.size(); i++) {
+//			JSONObject jo = new JSONObject();
+//			jo.put("c_name", result.get(i).get("c_name"));
+//			jo.put("c_image", result.get(i).get("c_image"));
+//			jo.put("c_price", result.get(i).get("c_price"));
+//			jo.put("c_number", result.get(i).get("c_number"));
+//			jarr.put(jo);
+//		}
+//		
+//		response.getWriter().println(jarr);
+//
+//	}
+	
+	// 클래스 리스트
+		@RequestMapping("classListForm.do")
+		public ModelAndView classListForm(
+				@RequestParam(required=false) String keyword,
+				@RequestParam(required=false) String category
+				) {
+			ModelAndView mav = new ModelAndView();
+			
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			System.out.println(keyword);
+			System.out.println(category);
+			
+			HashMap<String, Object> res = null;
+			
+			if(keyword==null && category==null) {
+				System.out.println("둘다없어~");
+				params.put("type", 0);
+				res = cService.searchClass(params);
+				
+			}else if(keyword!=null && category==null) {
+				System.out.println("키워드!");
+				params.put("keyword", keyword);
+				params.put("type", 1);
+				res = cService.searchClass(params);
+				
+			}else if(keyword==null && category!=null) {
+				System.out.println("카테고리!");
+				params.put("type", 2);
+				params.put("category", category);
+				res = cService.searchClass(params);
+				
+			}else {
+				params.put("keyword", keyword);
+				params.put("category", category);
+				params.put("type", 3);
+				res = cService.searchClass(params);
+				
+			}
+			
+			
+			mav.addAllObjects(res);
+			mav.addAllObjects(params);
+			
+			System.out.println(res);
+			System.out.println(params);
+			mav.setViewName("classListForm");
 
-	}
-
-	//클래스 리스트 보여주기
-	@RequestMapping("classAllList.do")
-	public void classAllList(HttpServletResponse response) throws IOException {
-		ArrayList<HashMap<String, Object>> result = cService.allList();
-
-//		System.out.println(result);
-		JSONArray jarr = new JSONArray();
-		for (int i = 0; i < result.size(); i++) {
-			JSONObject jo = new JSONObject();
-			jo.put("c_name", result.get(i).get("c_name"));
-			jo.put("c_image", result.get(i).get("c_image"));
-			jo.put("c_price", result.get(i).get("c_price"));
-			jo.put("c_number", result.get(i).get("c_number"));
-			jarr.put(jo);
+			System.out.println("클래스!!");
+			return mav;
 		}
-		
-		response.getWriter().println(jarr);
-
-	}
 
 	
 	
@@ -281,13 +332,33 @@ public class ClassController {
 
 	}
 
+	
+	
 	// 클래스 검색
-	@RequestMapping("searchClass.do")
-	public ModelAndView searchClass(@RequestParam HashMap<String, Object> params) {
-		ModelAndView mav = new ModelAndView();
-		ArrayList<HashMap<String, Object>> result = cService.searchClass(params);
-		return mav;
-	}
+//	@RequestMapping("searchClass.do")
+//	public void searchClass(HttpServletResponse response,@RequestParam HashMap<String, Object> params) throws IOException {
+//		ModelAndView mav = new ModelAndView();
+//		
+//		System.out.println(params);
+//		ArrayList<HashMap<String, Object>> result = cService.searchClass(params);
+//		
+//		JSONArray jarr = new JSONArray();
+//		for (int i = 0; i < result.size(); i++) {
+//			JSONObject jo = new JSONObject();
+//			jo.put("c_name", result.get(i).get("c_name"));
+//			jo.put("c_image", result.get(i).get("c_image"));
+//			jo.put("c_price", result.get(i).get("c_price"));
+//			jo.put("c_number", result.get(i).get("c_number"));
+//			jarr.put(jo);
+//		}
+////		mav.addObject(jarr);
+////		mav.setViewName("classListForm");
+//		response.getWriter().println(jarr);
+////		return mav;
+//		
+//		
+//		
+//	}
 
 	// 클래스 삭제
 	@RequestMapping("deleteClass.do")

@@ -46,9 +46,18 @@ public class ClassService implements IClassService{
 	}
 
 	@Override
-	public ArrayList<HashMap<String, Object>> searchClass(HashMap<String, Object> params) {//검색클레스
-		ArrayList<HashMap<String, Object>> result= dao.selectSearch(params);
-		return result;
+	public HashMap<String, Object> searchClass(HashMap<String, Object> params) {//검색클레스
+		
+		ArrayList<HashMap<String, Object>> list = dao.selectSearch(params);
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		
+		res.put("classList", list);
+		
+		System.out.println(res);
+		// TODO Auto-generated method stub
+		return res;
 	}
 
 	@Override

@@ -24,22 +24,10 @@
 </head>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 
-						function main() {
-							$
-									.ajax({
-										type : "get",
-										url : "mainList.do",
-										dataType : "json",
-										success : function(arr) {
-											// 				alert(arr);
-
-
-	
-	
+				
+										
 	
 	function main() {
 		$.ajax({
@@ -54,7 +42,7 @@
 					var number = $(arr[i].c_number);
 					var div = $("<a href='classForm.do?number="+arr[i].c_number+"' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
 					
-// 					var img = $("<img width='300px' height='300px'>");
+
 					var img = $("<div>")
 					img.text(arr[i].c_image);
 					var name = $("<div>");
@@ -77,35 +65,7 @@
 		})
 	}
 	main();
-
-											for (var i = 0; i < arr.length; i++) {
-												var div = $("<div style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
-												// 					var img = $("<img width='300px' height='300px'>");
-												var img = $("<div>")
-												img.text(arr[i].c_image);
-												var name = $("<div>");
-												name.text(arr[i].c_name);
-												var price = $("<div>");
-												price.text(arr[i].c_price);
-												div.append(img).append(name)
-														.append(price);
-												$("#classList").append(div);
-											}
-
-
-										},
-										error : function(xhrReq, status, error) {
-											alert("에러창")
-											console.log(xhrReq + ' / ' + status
-													+ ' / ' + error);
-
-										}
-
-									})
-						}
-						main();
-
-					})
+})
 </script>
 
 <body>
@@ -165,14 +125,14 @@
 		
 
 	</div>
-	<div  align="center" style="background-color: rgba(0, 0, 0, 0.5); z-index:31;width: 1200px; 
-	height: 600px; left:351px; top: 330px; position: relative;">
+<!-- 	<div  align="center" style="background-color: rgba(0, 0, 0, 0.5); z-index:31;width: 1200px;  -->
+<!-- 	height: 600px; left:351px; top: 330px; position: relative;"> -->
 				
-				<div>
-				<h1 style="color: white;">안녕 하세요</h1>
-				</div>
+<!-- 				<div> -->
+<!-- 				<h1 style="color: white;">안녕 하세요</h1> -->
+<!-- 				</div> -->
 				
-				</div>
+<!-- 				</div> -->
 	<br>
 	<br>
 
