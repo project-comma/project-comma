@@ -14,7 +14,7 @@ public interface IClassService {
 	public int removeClass(String number);
 	public int modifyClass(HashMap<String, Object> params);
 	public HashMap<String, Object> viewClass(int number);
-	public ArrayList<HashMap<String, Object>> searchClass(HashMap<String, Object> params);
+	public HashMap<String, Object> searchClass(HashMap<String, Object> params);
 	public ArrayList<HashMap<String, Object>> popList();
 	public ArrayList<HashMap<String, Object>> allList();
 	public ArrayList<HashMap<String, Object>> historyClass(int max);

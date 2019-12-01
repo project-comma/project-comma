@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,47 +15,47 @@
 </script>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 
-						function classList() {
-							$
-									.ajax({
-										type : "get",
-										url : "classAllList.do",
-										dataType : "json",
-										success : function(arr) {
-											// 				alert(arr);
+// 						function classList() {
+						
+// 							$.ajax({
+// 										type : "get",
+// 										url : "classAllList.do",
+// 										dataType : "json",
+// 										success : function(arr) {
+// 											// 				alert(arr);
 
-											for (var i = 0; i < arr.length; i++) {
+// 											for (var i = 0; i < arr.length; i++) {
 												
-												var div = $("<a href='classForm.do?number="+arr[i].c_number+"' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>")
-												// 					var img = $("<img width='300px' height='300px'>");
-												var img = $("<div>")
-												img.text(arr[i].c_image);
-												var name = $("<div>");
-												name.text(arr[i].c_name);
-												var price = $("<div>");
-												price.text(arr[i].c_price);
+// 												var div = $("<a href='classForm.do?number="+arr[i].c_number+"' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>")
+// 												// 					var img = $("<img width='300px' height='300px'>");
+// 												var img = $("<div>")
+// 												img.text(arr[i].c_image);
+// 												var name = $("<div>");
+// 												name.text(arr[i].c_name);
+// 												var price = $("<div>");
+// 												price.text(arr[i].c_price);
 												
-												div.append(img).append(name).append(price);
-												$("#classList").append(div);
-											}
+// 												div.append(img).append(name).append(price);
+// 												$("#classList").append(div);
+// 											}
 
-										},
-										error : function(xhrReq, status, error) {
-											alert("에러창")
-											console.log(xhrReq + ' / ' + status
-													+ ' / ' + error);
+// 										},
+// 										error : function(xhrReq, status, error) {
+// 											alert("에러창")
+// 											console.log(xhrReq + ' / ' + status
+// 													+ ' / ' + error);
 
-										}
+// 										}
 
-									})
-						}
-						classList();
+// 									})
+// 						}
+// 						classList();
+						
+					
 
-					})
+})
 </script>
 
 
@@ -131,16 +132,41 @@
 				<a href="" class="iconText">기타등등</a>
 			</div>
 			<br> <br> <br>
-			<form action="">
+			
+			<form action="classListForm.do">
 				<div align="center">
 					<div class="input-group mb-3" style="width: 600px;">
-						<input type="text" class="form-control" placeholder="검색어를 입력해주세요.">
+						<input type="text" name="keyword" class="form-control" placeholder="검색어를 입력해주세요.">
 						<div class="input-group-append">
 							<button class="btn btn-secondary" type="submit">검색</button>
 						</div>
 					</div>
 				</div>
 			</form>
+			
+			<div align="center">
+		<div align="left" style="width: 1200px" id="classList">
+		
+		
+			<c:forEach var="c" items="${classList}">
+					
+					<a href='classForm.do?number=${c.c_number }' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>
+						<div>${c.id }</div>
+						<div>${c.c_content }</div>
+						<div>${c.c_price }</div>
+						</a>
+					
+			
+			</c:forEach>
+
+
+		</div>
+
+	</div>
+			
+			
+			
+			
 			<div>
 				<button type="button" class="btn btn-outline-secondary"
 					id="filter_btn" style="float: right; margin-right: 20px">필터</button>
@@ -307,20 +333,6 @@
 
 	</div>
 
-	<div align="center">
-		<div align="left" style="width: 1200px" id="classList">
-		
-			<!-- 				<div style="width:300px; height: 400px;" id="classList"> -->
-			<!-- 					<img src="img/시간.png" width="300px" height="300px"> -->
-			<!-- 					<img src="img/시간.png" width="80px" height="80px"> -->
-			<!-- 					<div>이상훈 </div> -->
-			<!-- 					<div>내용내용내용내용내용내용내용내용</div> -->
-			<!-- 					<div>가격</div> -->
-			<!-- 				</div> -->
-
-
-		</div>
-
-	</div>
+	
 </body>
 </html>

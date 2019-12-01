@@ -42,6 +42,7 @@ public class MemberController {
 	public String t_ResistForm() {
 		return "t_ResistForm";
 	}
+	
 
 //	선생님등록 페이지
 	@RequestMapping(value = "t_Resist.do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
