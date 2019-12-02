@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import dao.IClassDao;
 
@@ -42,6 +43,7 @@ public class ClassService implements IClassService{
 	@Override
 	public HashMap<String, Object> viewClass(int number) {//클레스 상세내용
 		HashMap<String, Object> result = dao.selectOne(number);
+	
 		return result;
 	}
 

@@ -11,14 +11,8 @@
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	이미지${c_image }
-	내용${c_content }
-	시작시간${c_starttime }
-	수업시간${c_classtime }
-	가격${c_price }
-	위치${c_location }
-	인원수${c_member }
-	시작날짜${c_startday }
+	
+	
 
 	<div align="center"><!-- 전체 div -->
 	
@@ -110,7 +104,7 @@
 						<div class="CR_span1" align="center">
 							<img src="img/시간.png" id="profileP"
 								style="width: 200px; height: 200px; margin-top: 50px"> <br>
-							<a href="" class="">${sessionScope.id }</a>
+							<a href="" class="">${id}</a>
 						</div>
 					</td>
 
@@ -152,7 +146,9 @@
 			<div style="margin-top: 50px">
 				<h3>선생님 소개</h3>
 				<br>
-				<pre id="T-introduce">선생인 소개를 칸 입니다 </pre>
+				<pre id="T-introduce">${t_career } </pre>
+				<pre id="T-introduce">${t_education } </pre>
+				<pre id="T-introduce">${t_license } </pre>
 			</div>
 
 			<div align="center"
@@ -201,13 +197,26 @@
 <%--    					 <div class="card-body">${c_startday } ${c_starttime }</div>   --%>
     				
    				 </div>
-   				 
-   				 <c:forEach items="${c_startday }" var="c">
-						<tr>
-							<td align="center">${c }</td>
+   				 <div style="width: 140px; float: left">
+   				 <c:forEach items="${c_startday}" var="c">
+						
+							<div align="center">${c } </div>
 							
-						</tr>
+							
+							
+						
 					</c:forEach>
+					</div>
+					
+   				 <div style="width: 140px; float: left">
+   				 <c:forEach items="${c_starttime}" var="cs">
+						<div align="center">${cs } </div>
+						
+					</c:forEach>
+   				</div>
+				
+					
+   				 
 			</div>
 			
 			<div style="height:150px;">
@@ -220,6 +229,7 @@
 		</div><!-- 수업날짜, 문의하기, 신청하기 END -->
 		
 	</div><!-- 전체 div END -->
+	
 
 </body>
 </html>

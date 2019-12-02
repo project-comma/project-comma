@@ -61,7 +61,7 @@
 							if (resultStr.result == "1") {
 
 							alert("수업이름을 입력해주세요");
-
+							
 							}
 							if (resultStr.result == "2") {
 
@@ -85,6 +85,7 @@
 							}
 							if(resultStr.result == "6") {
 								alert("클래스 등록됨")
+								location.href = "mainForm.do"
 								
 							}
 
@@ -186,7 +187,8 @@
 						</div>
 						<br> <br> <br> <br> <br>
 
-
+						<input type="text" name="c_image" value="사진">
+						
 						<input type="button" id="addImage" value="추가"> <br>
 						<div>
 							<table border="1" id="tableAdd2">
