@@ -23,12 +23,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mysql.jdbc.PreparedStatement.ParseInfo;
 
 import service.IClassService;
+import service.IMemberService;
 
 @Controller
 public class ClassController {
 
 	@Autowired
 	private IClassService cService;
+	@Autowired
+	private IMemberService mService;
 
 	@RequestMapping("mainForm.do")
 	public ModelAndView main() {
@@ -153,34 +156,67 @@ public class ClassController {
 //		System.out.println(id);
 		ModelAndView mav = new ModelAndView();
 		HashMap<String, Object> result = cService.viewClass(inumber);
+		String mid = (String) result.get("id");
+		System.out.println("아이디="+mid);
+		HashMap<String, Object> result2 = mService.MemberInfo(mid);
+		
+		
+		mav.addObject("t_career", result2.get("t_career"));
+		mav.addObject("t_education", result2.get("t_education"));
+		mav.addObject("t_license", result2.get("t_license"));
+		
 		System.out.println(result.get("c_startday"));
+		System.out.println(result.get("c_starttime"));
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		HashMap<String, Object> res2 = new HashMap<String, Object>();
+		
 		
 		String resultStr= (String) result.get("c_startday");
 		String[] arr = resultStr.split("@");
 		
 		String resultStr2 = (String) result.get("c_starttime");
 		String[] arr2 = resultStr2.split("@");
-		for (int i = 0; i < arr.length; i++) {
-			
-			String c_startday = arr[i];
-			
-			
-			mav.addObject("c_startday", c_startday);
-			
-		}
+//		for (int i = 0; i < arr.length; i++) {
+//			
+//			res.put("c_startday", arr[i]);
+//			System.out.println(arr[0]);
+//			System.out.println(arr[1]);
+//			System.out.println("hello");
+//			System.out.println(arr.length);
+//		}
+		res.put("c_startday", arr);
+		res.put("c_starttime", arr2);
 		
-		for (int i = 0; i < arr2.length; i++) {
-			String c_starttime = arr2[i];
+
+
+		mav.addAllObjects(res);		
 			
-			mav.addObject("c_starttime", c_starttime);
-		}
-				
+		
+//		
+//		for (int i = 0; i < arr.length; i++) {
+//			
+//			String c_startday = arr[i];
+//			
+//			
+//			mav.addObject("c_startday", c_startday);
+//			
+//		}
+//		
+//		for (int i = 0; i < arr2.length; i++) {
+//			String c_starttime = arr2[i];
+//			
+//			mav.addObject("c_starttime", c_starttime);
+//		}
+//				
 		mav.addObject("c_image", result.get("c_image"));
 		mav.addObject("c_content", result.get("c_content"));
 		mav.addObject("c_classtime", result.get("c_classtime"));
 		mav.addObject("c_price", result.get("c_price"));
 		mav.addObject("c_location", result.get("c_location"));
 		mav.addObject("c_member", result.get("c_member"));
+		mav.addObject("id", result.get("id"));
+		
+		
 		
 		mav.setViewName("class");
 		
@@ -251,21 +287,34 @@ public class ClassController {
 			
 			params.put("id", session_id);
 			
-			ArrayList<String> startday = (ArrayList<String>) params.get("c_startday");
 			String c_startday = "";
-			for (String s : startday) {
+			try {
 				
-				c_startday += s+"@";
+				ArrayList<String> startday = (ArrayList<String>) params.get("c_startday");
+				for (String s : startday) {
+					
+					c_startday += s+"@";
+				}
+				params.put("c_startday", c_startday);
+			} catch (ClassCastException e) {
+				
 			}
-			params.put("c_startday", c_startday);
 			
-			ArrayList<String> starttime = (ArrayList<String>) params.get("c_starttime");
+			
 			String c_starttime = "";
-			for (String s : starttime) {
+			try {
 				
-				c_starttime += s+"@";
+				ArrayList<String> starttime = (ArrayList<String>) params.get("c_starttime");
+				for (String s : starttime) {
+					
+					c_starttime += s+"@";
+				}
+				params.put("c_starttime", c_starttime);
+			} catch (ClassCastException e) {
+				// TODO: handle exception
 			}
-			params.put("c_starttime", c_starttime);
+			
+			
 			params.put("c_state", 2);
 			
 			
@@ -281,11 +330,12 @@ public class ClassController {
 			
 			
 			
-			
 
 			
 			
 		}
+		
+		
 		
 		
 
