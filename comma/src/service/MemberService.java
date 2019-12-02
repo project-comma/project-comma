@@ -279,6 +279,7 @@ public class MemberService implements IMemberService {
 
 	public File getProfileImage(String id, HttpServletRequest request) {
 
+		
 		HashMap<String, Object> mem = dao.selectMember(id);
 
 		String fileName = (String) mem.get("image");
@@ -424,5 +425,27 @@ public class MemberService implements IMemberService {
 		
 		
 		return res;
+	}
+	
+	
+	public HashMap<String, Object> getacceptList(int state){
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		ArrayList<HashMap<String, Object>> list = dao.acceptTList(state);
+		
+		res.put("acceptList", list);
+		
+		
+		return res;
+	}
+	
+	
+	public int TeacherAccept(String id) {
+		
+		
+			
+		dao.TeacherAccept(id);
+		
+		return 0;
 	}
 }

@@ -78,6 +78,7 @@ function t_accept_ajax(number, teacher) {// 선생님 수락 ajax
 			
 			alert('수락되었습니다.');
 //			console.log(data);
+			location.href='mypage.do';
 		},
 		error : function() {
 			alert('에러');

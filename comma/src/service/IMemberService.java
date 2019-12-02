@@ -42,4 +42,9 @@ public interface IMemberService {
 	public HashMap<String, Object> myTRequest(HashMap<String, Object> params);
 	
 	public HashMap<String, Object> myRequest(HashMap<String, Object> params);
+	
+	
+	public HashMap<String, Object> getacceptList(int state);
+	
+	public int TeacherAccept(String id); 
 }

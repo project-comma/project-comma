@@ -837,11 +837,15 @@
 			<br>
 
 			<!-- 요청한 클래스 -->
+			
+			<div>
 
-			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;"
+			<h3 style="display:inline-block; font-weight: 800; font-size: 25px; margin-left: 22px;"
 				id="s_nav6">요청한 클래스</h3>
+				
+			<h5 style="display:inline-block; float:right;" onclick="location.href='myRequestList.do'">더보기>></h5>	
 
-
+			</div>
 
 			<div align="left"
 				style="width: 1200px; height: 400px; border-bottom: 1px solid black;">

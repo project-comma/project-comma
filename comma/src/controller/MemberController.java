@@ -279,6 +279,11 @@ public class MemberController {
 			mav.setViewName("mypage_t");
 		} else if (mode.equals("ad")) {
 			System.out.println("관리자!");
+			
+			
+			HashMap<String, Object> res = mService.getacceptList(5);
+			
+			mav.addAllObjects(res);
 			mav.setViewName("admin");
 		}
 
@@ -485,6 +490,67 @@ public class MemberController {
 		String id = (String)params.get("id");
 		
 		HashMap<String, Object> res = mService.MemberInfo(id);
+		
+		return res;
+	}
+	
+	
+	@RequestMapping("myRequestList.do")
+	public ModelAndView myRequestList(HttpSession session){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("id", (String)session.getAttribute("id"));
+		
+		
+		res = mService.myRequest(params);
+		
+		
+		System.out.println(res);
+		mav.addAllObjects(res);
+		
+		mav.setViewName("myReqList");
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("myTRequestList.do")
+	public ModelAndView myTRequestList(@RequestParam String teacher, HttpSession session){
+		
+		ModelAndView mav = new ModelAndView();
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("teacher", teacher);
+		
+		
+		res = mService.myTRequest(params);
+		
+		mav.addAllObjects(res);
+		
+		mav.setViewName("reqOfferList");
+		
+		System.out.println(res);
+		return mav;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="teacherAccept.do")
+	public HashMap<String, Object> teacherAccept(@RequestParam HashMap<String, Object> params){
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		String id = (String)params.get("id");
+		
+		mService.TeacherAccept(id);
 		
 		return res;
 	}

@@ -21,4 +21,6 @@ public interface IMemberDao {
 	public ArrayList<HashMap<String, Object>> listMember(HashMap<String, Object> params);
 	public ArrayList<HashMap<String, Object>> getMyTRequest(String teacher);
 	public ArrayList<HashMap<String, Object>> getMyRequest(String id);
+	public ArrayList<HashMap<String, Object>> acceptTList(int state);
+	public int TeacherAccept(String id);
 }

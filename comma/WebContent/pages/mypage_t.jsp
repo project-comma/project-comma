@@ -537,7 +537,8 @@
 
 				<div align="left" style="width: 1000px;">
 					<br>
-					<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="t_nav4">요청클래스</h3>
+					<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px; display:inline-block;" id="t_nav4">요청클래스</h3>
+					<h4 style="font-weight: 600; font-size: 17px; display:inline-block; float:right;" onclick="location.href='myTRequestList.do?teacher=${sessionScope.id}'">더보기>></h4>
 					<div align="left"
 						style="margin-top: 10px; margin-left: 25px; width: 450px;">
 						<h4 style="font-weight: 600; font-size: 17px;">검토중</h4>
