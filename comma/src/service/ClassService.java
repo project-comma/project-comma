@@ -1,12 +1,19 @@
 package service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import dao.IClassDao;
 
@@ -19,12 +26,31 @@ public class ClassService implements IClassService{
 	
 	
 	@Override
-	public int resistClass(HashMap<String, Object> params) {//요청클래스
+	public int resistClass(MultipartFile file,HashMap<String, Object> params) {//요청클래스
+		
+		
+		String path = "C:/image/"; //사진 저장할 폴더 위치
+		
+		File dir = new File(path);
+		
+		String fileName = file.getOriginalFilename();
+		
+		File attachFile = new File(path + fileName); //경로와 함께 파일명을 저장
+		
+		try {
+			file.transferTo(attachFile);
+			params.put("c_image", fileName);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		int result = dao.insertClass(params);
 		
 		
-		
-		System.out.println("서비스"+result);
 		return result;
 	}
 
@@ -106,6 +132,8 @@ public class ClassService implements IClassService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
 	
 	
 	

@@ -188,6 +188,7 @@
 						<br> <br> <br> <br> <br>
 
 						<input type="text" name="c_image" value="사진">
+						<input type="file" name="c_image" value="사진">
 						
 						<input type="button" id="addImage" value="추가"> <br>
 						<div>
