@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 import com.mysql.jdbc.PreparedStatement.ParseInfo;
 
@@ -36,22 +33,6 @@ public class ClassController {
 	private IClassService cService;
 	@Autowired
 	private IMemberService mService;
-	
-	@RequestMapping("chargeApi.do")
-	public ModelAndView chargeApi(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		
-		String session_id = (String) session.getAttribute("id");
-		HashMap<String, Object> result = mService.MemberInfo(session_id);
-		
-		
-		
-		mav.addObject("id", result.get("id"));
-		mav.addObject("name", result.get("name"));
-		mav.addObject("email", result.get("email"));
-		mav.setViewName("chargeApi");
-		return mav;
-	}
 
 	@RequestMapping("mainForm.do")
 	public ModelAndView main() {
@@ -246,7 +227,7 @@ public class ClassController {
 
 	// 클래스 등록
 	@RequestMapping("classResistBtn.do")
-	public void c_Resist(@RequestParam("c_image") MultipartFile file,HttpSession session,HttpServletResponse response, @RequestBody HashMap<String, Object> params) throws IOException {
+	public void c_Resist(HttpSession session,HttpServletResponse response, @RequestBody HashMap<String, Object> params) throws IOException {
 //		ModelAndView mav = new ModelAndView();
 
 		
@@ -257,7 +238,7 @@ public class ClassController {
 //		System.out.println(params);
 		
 		
-		
+		System.out.println(params);
 		
 		
 				
@@ -339,7 +320,7 @@ public class ClassController {
 			
 			
 			
-			cService.resistClass(file,params);
+			cService.resistClass(params);
 			String result = "6";
 		
 			
@@ -360,6 +341,22 @@ public class ClassController {
 		
 
 		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="classFileUpload.do")
+	public HashMap<String, Object> classFileUpload(MultipartHttpServletRequest fiReq){
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		HashMap<String, Object> info = cService.latestInfo();
+		
+		int number = (int)info.get("c_number");
+		
+		cService.classFileUpload(fiReq, number);
+		
+		return res;
 	}
 
 	// 클래스 등록폼
@@ -463,28 +460,4 @@ public class ClassController {
 
 		return mav;
 	}
-	
-	// 클래스등록 파일 업로드
-		@RequestMapping("c_ResistFile.do")
-		@ResponseBody
-		public Object t_ResistFile(MultipartHttpServletRequest request, HttpSession session) {
-
-			System.out.println("드루와드루와~");
-
-			String id = (String) session.getAttribute("id");
-
-			HashMap<String, Object> params = mService.MemberInfo(id);
-
-			int result = mService.resistProfileImage(id, request);
-
-			return "안녕?";
-		}
-
-		@RequestMapping("classImageView.do")
-		public View profileView(String id, HttpServletRequest request) {
-
-			View view = new DownloadView(mService.getProfileImage(id, request));
-
-			return view;
-		}
 }

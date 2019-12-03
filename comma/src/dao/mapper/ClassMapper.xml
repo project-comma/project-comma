@@ -74,7 +74,13 @@
 	
   </select>
   
+  <update id="fileUpload" parameterType="java.util.HashMap">
+  	update class set c_image=#{files} where c_number=#{number}
+  </update>
   
+  <select id="latestInfo" resultType="java.util.HashMap">
+  	select * from class order by c_number desc limit 1
+  </select>
   
   
   

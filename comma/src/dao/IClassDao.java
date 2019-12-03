@@ -20,6 +20,6 @@ public interface IClassDao {
 	public ArrayList<HashMap<String, Object>> allClass();
 //	public List<HashMap<String, Object>> popClass();
 	
-	public int classImageUpdate(HashMap<String, Object> params);
-
+	public int fileUpload(HashMap<String, Object> params);
+	public HashMap<String, Object> latestInfo();
 }

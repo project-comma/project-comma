@@ -58,36 +58,35 @@
 							dataType : "json",
 							success : function(resultStr) {
 
-							if (resultStr.result == "1") {
-
-							alert("수업이름을 입력해주세요");
 							
-							}
-							if (resultStr.result == "2") {
-
-							alert("카테고리를 입력해주세요");
-
-							}
-							if (resultStr.result == "3") {
-
-							alert("수업에 관련된 사진을 올려주세요");
-
-							}
-							if (resultStr.result == "4") {
-
-							alert("수업내용을 입력해주세요");
-
-							}
-							if (resultStr.result == "5") {
-
-							alert("수업가격을 입력해주세요");
-
-							}
 							if(resultStr.result == "6") {
-								alert("클래스 등록됨")
-								location.href = "mainForm.do"
+								alert("클래스 등록됨");
 								
+								var form = new FormData(document.getElementById("classForm"));
+								$.ajax({
+									url:"classFileUpload.do",
+									cache: false,
+									data: form,
+									dataType: 'text',
+									processData: false,
+									contentType: false,
+									type: 'POST',
+									success: function(response){
+										alert("등록되었습니다.");
+										
+										location.href="mypage.do";
+									},
+									error: function(jqXHR, error){
+										alert('error : ' + error);
+									}
+								});
+								
+								
+							}else{
+								return;
 							}
+							
+							
 
 						},
 						error : function(xhrReq, status, error) {
@@ -124,13 +123,15 @@
 
 					})
 					
+					var imgnum = 1;
 					$("#addImage").click(function () {
+						
 						
 						var image = $("#image").val();
 						var tr = $("<tr>")
-						var td1 = $("<td><input readonly='readonly' type='file' value='"+image+"' name='c_image'></td>")
+						var td1 = $("<td><input type='file' name='c_image"+imgnum+"'></td>")
 						
-
+						imgnum = imgnum + 1;
 						
 
 						var btn = $("<td><input type='button' id='delBtn1' value='삭제' onclick='delBtn2(this)' ></td>")
@@ -156,7 +157,7 @@
 			</div>
 
 
-			<form action="classResistBtn.do" id="classForm">
+			<form action="classResistBtn.do" id="classForm" enctype="multipart/form-data" accept-charset="UTF-8">
 				<div align="center" style="margin-top: 50px;">
 					<div id="inputinput">
 						<div class="input-group mb-3 input-group-lg">
@@ -188,7 +189,6 @@
 						<br> <br> <br> <br> <br>
 
 						<input type="text" name="c_image" value="사진">
-						<input type="file" name="c_image" value="사진">
 						
 						<input type="button" id="addImage" value="추가"> <br>
 						<div>

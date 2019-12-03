@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -26,31 +24,12 @@ public class ClassService implements IClassService{
 	
 	
 	@Override
-	public int resistClass(MultipartFile file,HashMap<String, Object> params) {//요청클래스
-		
-		
-		String path = "C:/image/"; //사진 저장할 폴더 위치
-		
-		File dir = new File(path);
-		
-		String fileName = file.getOriginalFilename();
-		
-		File attachFile = new File(path + fileName); //경로와 함께 파일명을 저장
-		
-		try {
-			file.transferTo(attachFile);
-			params.put("c_image", fileName);
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	public int resistClass(HashMap<String, Object> params) {//요청클래스
 		int result = dao.insertClass(params);
 		
 		
+		
+		System.out.println("서비스"+result);
 		return result;
 	}
 
@@ -135,7 +114,67 @@ public class ClassService implements IClassService{
 	
 	
 	
+	public int classFileUpload(MultipartHttpServletRequest fiReq, int number) {
+		
+		
+		Iterator<String> iter = fiReq.getFileNames();
+		
+		System.out.println(iter);
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		String path = "C:/image/classfile/";
+		
+		String fileNames = "";
+		
+		MultipartFile classfile = null;
+		
+		while(iter.hasNext()) {
+			System.out.println("파일");
+			classfile = fiReq.getFile(iter.next());
+			
+			String fileName = classfile.getOriginalFilename();
+			
+			System.out.println(fileName);
+			
+			
+			
+			File attachFile = new File(path+fileName);
+			
+			System.out.println(attachFile.getAbsolutePath());
+			
+			try {
+				classfile.transferTo(attachFile);
+				
+				if(fileName!=null ) {
+					
+					fileNames = fileNames + fileName + "-";
+				}
+			} catch (IOException e) {
+				// TODO: handle exception
+			}
+			
+			
+			
+			
+		}
+		
+		System.out.println("fileNames : "+fileNames);
+		params.put("number", number);
+		params.put("files", fileNames);
+		
+		dao.fileUpload(params);
+		
+		return 0;
+	}
 	
+	
+	public HashMap<String, Object> latestInfo(){
+		
+		HashMap<String, Object> res = dao.latestInfo();
+		
+		
+		return res;
+	}
 	
 
 }

@@ -29,7 +29,7 @@
 	<div align="center">
     <h2 style="font-weight:900">선생님 등록</h2><br>
 
-    <form id="t_resistForm" action="t_Resist.do" enctype="multimart/form-data" accept-charset="UTF-8">
+    <form id="t_resistForm" action="t_Resist.do" enctype="multipart/form-data" accept-charset="UTF-8">
         
         
         <div align="center"><!-- 밑줄 상단 구간 -->
