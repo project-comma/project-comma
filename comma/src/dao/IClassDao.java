@@ -19,5 +19,7 @@ public interface IClassDao {
 	public ArrayList<HashMap<String, Object>> popClass();
 	public ArrayList<HashMap<String, Object>> allClass();
 //	public List<HashMap<String, Object>> popClass();
+	
+	public int classImageUpdate(HashMap<String, Object> params);
 
 }

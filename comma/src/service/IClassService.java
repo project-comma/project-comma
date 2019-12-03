@@ -1,16 +1,21 @@
 package service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 public interface IClassService {
 
 	
-	public int resistClass(HashMap<String, Object> params);
+	public int resistClass(MultipartFile file ,HashMap<String, Object> params);
 	public int removeClass(String number);
 	public int modifyClass(HashMap<String, Object> params);
 	public HashMap<String, Object> viewClass(int number);
@@ -25,6 +30,8 @@ public interface IClassService {
 	
 	public int addReview(HashMap<String, Object> params);
 	public int addLog(HashMap<String, Object> params);
+	
+	
 	
 	
 	

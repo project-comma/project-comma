@@ -224,7 +224,7 @@
 			</div>
 			
 			<div>
-				<input type="button" class="btn btn-secondary" style="width:250px;" value="신청하기">
+				<input type="button" onclick="location.href='chargeApi.do'" class="btn btn-secondary" style="width:250px;" value="신청하기">
 			</div>
 		</div><!-- 수업날짜, 문의하기, 신청하기 END -->
 		
