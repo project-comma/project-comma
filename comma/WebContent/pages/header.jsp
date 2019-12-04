@@ -57,11 +57,17 @@
 </script>
 
 <script src="js/teacher_function.js" type="text/javascript"></script>
+<!-- 네이버 로그인 -->
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		modeSwitch("<%=(String)session.getAttribute("mode") %>");
+		modeSwitch("<%=(String) session.getAttribute("mode")%>");
 
 		var log = false;
 		$('#joinid').blur(function() {
@@ -102,7 +108,7 @@
 					data : params,
 					dataType : "json",
 					success : function(resultStr) {
-						
+
 						if (resultStr.result) {
 							log = false;
 
@@ -121,16 +127,6 @@
 				alert("밖놉")
 
 		})
-		
-		
-		
-		
-		
-	
-	
-		
-		
-		
 
 	})
 </script>
@@ -176,8 +172,8 @@
 						style="float: right; margin-left: 7px;">
 
 						<input type="checkbox" class="custom-control-input" id="tSwitch"
-							style="float: left;" onclick="modeChange(this)"> <label class="custom-control-label"
-							for="tSwitch">선생님모드ON</label>
+							style="float: left;" onclick="modeChange(this)"> <label
+							class="custom-control-label" for="tSwitch">선생님모드ON</label>
 
 					</div>
 
@@ -190,7 +186,8 @@
 						onclick="location.href='logout.do'">
 					<input type="button" class="btn btn-outline-secondary"
 						value="공지사항작성" id="n_res_btn"
-						style="float: right; margin-left: 7px;" onclick="notice_write_open()"> `
+						style="float: right; margin-left: 7px;"
+						onclick="notice_write_open()"> `
 			
 			</c:when>
 			</c:choose>
@@ -276,7 +273,8 @@
 					</div>
 					<div style="font-size: 12px">아이디는 이메일 형식으로 입력 할수 없습니다</div>
 					<div align="left" style="margin-left: 100px;">
-						<input type="text" id="joinid" name="id" placeholder=" ID" class="text_1"><span id="idok" style="margin-left: 5px;">중복여부</span>
+						<input type="text" id="joinid" name="id" placeholder=" ID"
+							class="text_1"><span id="idok" style="margin-left: 5px;">중복여부</span>
 					</div>
 					<div>
 						<input type="text" name="email" placeholder=" Email"
@@ -293,15 +291,15 @@
 					</div>
 
 					<div>
-						<input type="radio" name="gender" value="man"> 남자
-						<input
+						<input type="radio" name="gender" value="man"> 남자 <input
 							type="radio" name="gender" value="woman">여자
 					</div>
 					<pre style="font-size: 12px; height: 65px;"> 본 회원가입은 쉼의 학생으로 가입되는것입니다.
 쉼의 선생님 가입을 원할경우 학생 가입후
  마이페이지에서 선생님 가입을 해주세요.</pre>
 					<div>
-						<input type="button" id="joinBtn" class="btn btn-outline-secondary"
+						<input type="button" id="joinBtn"
+							class="btn btn-outline-secondary"
 							style="width: 200px; margin-bottom: 10px;" value="가입하기">
 
 					</div>
@@ -320,7 +318,7 @@
 	<!-- --------로그인------------- -->
 
 	<form action="login.do">
-		<!--   회원가입 창 html -->
+
 		<div align="center">
 
 			<div align="center" class="popup" id="login_form">
@@ -352,9 +350,21 @@
 
 					</div>
 					<div>
-						<button type="submit" class="btn btn-outline-secondary"
-							style="width: 200px; margin-bottom: 10px">네이버로 로그인 하기</button>
+						<div id="naver_id_login" onclick="login_form_close()"></div>
 
+						<script type="text/javascript">
+							var naver_id_login = new naver_id_login(
+									"ASwJs8HU_hFZHXu7ZiBr",
+									"http://localhost:8080/comma/pages/naver_login_callback.jsp");
+							var state = naver_id_login.getUniqState();
+							naver_id_login.setButton("white", 2, 50);
+							naver_id_login
+									.setDomain("http://localhost:8080/comma/mainForm.do");
+							naver_id_login.setState(state);
+							naver_id_login.setPopup();
+							naver_id_login.init_naver_id_login();
+						</script>
+				
 					</div>
 					<div>
 						<button type="submit" class="btn btn-outline-secondary"
