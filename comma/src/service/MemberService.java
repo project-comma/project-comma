@@ -51,7 +51,7 @@ public class MemberService implements IMemberService {
 
 	@Override
 	public int modifyMember(String id, HashMap<String, Object> params) {// 회원정보 수정 학생,선생둘다
-		System.out.println("service"+params);
+		System.out.println("service" + params);
 		params.put("id", id);
 		String t_career = "";
 		String t_education = "";
@@ -60,24 +60,24 @@ public class MemberService implements IMemberService {
 		String education = (String) params.get("t_education");
 		String license = (String) params.get("t_license");
 		HashMap<String, Object> result = dao.selectMember(id);
-		if(sns==null||sns.equals("")) {
-			sns=(String) result.get("t_sns");
+		if (sns == null || sns.equals("")) {
+			sns = (String) result.get("t_sns");
 			params.put("t_sns", sns);
-			
+
 		}
-		if(education==null||education.equals("")) {
-			education=(String) result.get("t_education");
+		if (education == null || education.equals("")) {
+			education = (String) result.get("t_education");
 			params.put("t_education", education);
-			
+
 		}
-		if(license==null||license.equals("")) {
-			license=(String) result.get("t_license");
+		if (license == null || license.equals("")) {
+			license = (String) result.get("t_license");
 			params.put("t_license", license);
-			
+
 		}
 		System.out.println(params);
 
-		try { 
+		try {
 
 			ArrayList<String> career = (ArrayList<String>) params.get("t_careerObject");
 			for (String s : career) {
@@ -144,7 +144,6 @@ public class MemberService implements IMemberService {
 		} else {
 			return 1;
 		}
-
 
 	}
 
@@ -279,7 +278,6 @@ public class MemberService implements IMemberService {
 
 	public File getProfileImage(String id, HttpServletRequest request) {
 
-		
 		HashMap<String, Object> mem = dao.selectMember(id);
 
 		String fileName = (String) mem.get("image");
@@ -400,52 +398,80 @@ public class MemberService implements IMemberService {
 
 		return 0;
 	}
-	
-	public HashMap<String, Object> myTRequest(HashMap<String, Object> params){
-		
-		
-		HashMap<String, Object> res = new HashMap<String, Object>(); 
-		ArrayList<HashMap<String, Object>> list = dao.getMyTRequest((String)params.get("teacher"));
-		
-		
-		res.put("myTRequest", list);
-		
-		
-		return res;
-	}
-	
-	public HashMap<String, Object> myRequest(HashMap<String, Object> params){
-		
-		
-		HashMap<String, Object> res = new HashMap<String, Object>(); 
-		ArrayList<HashMap<String, Object>> list = dao.getMyRequest((String)params.get("id"));
-		
-		
-		res.put("myRequest", list);
-		
-		
-		return res;
-	}
-	
-	
-	public HashMap<String, Object> getacceptList(int state){
+
+	public HashMap<String, Object> myTRequest(HashMap<String, Object> params) {
+
 		HashMap<String, Object> res = new HashMap<String, Object>();
-		
-		ArrayList<HashMap<String, Object>> list = dao.acceptTList(state);
-		
-		res.put("acceptList", list);
-		
-		
+		ArrayList<HashMap<String, Object>> list = dao.getMyTRequest((String) params.get("teacher"));
+
+		res.put("myTRequest", list);
+
 		return res;
 	}
-	
-	
+
+	public HashMap<String, Object> myRequest(HashMap<String, Object> params) {
+
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		ArrayList<HashMap<String, Object>> list = dao.getMyRequest((String) params.get("id"));
+
+		res.put("myRequest", list);
+
+		return res;
+	}
+
+	public HashMap<String, Object> getacceptList(int state) {
+		HashMap<String, Object> res = new HashMap<String, Object>();
+
+		ArrayList<HashMap<String, Object>> list = dao.acceptTList(state);
+
+		res.put("acceptList", list);
+
+		return res;
+	}
+
 	public int TeacherAccept(String id) {
-		
-		
-			
+
 		dao.TeacherAccept(id);
-		
+
 		return 0;
+	}
+
+	@Override
+	public int naver_id_chk(String id) {
+		HashMap<String, Object> result = dao.selectMember(id);
+//		System.out.println(result);
+		if (result == null) {
+			// 일치하는 아이디 없음 state 값 0 리턴
+			return 0;
+		} else {
+			// 아이디가 있을 경우 state 값을 리턴 (1,2,3중 하나)
+			int state = (int) result.get("state");
+			System.out.println("naver 아이디 체크 서비스 에서 리턴된 state:" + state);
+			return state;
+		}
+
+	}
+
+	@Override
+	public int naver_id_join(HashMap<String, Object> params) {
+		System.out.println("회원가입 service" + params);
+		String empty = "";
+
+		params.put("id", params.get("email"));
+		params.put("name", params.get("name"));
+		params.put("email", params.get("email"));
+		params.put("password", empty);
+		params.put("gender", params.get("gender"));
+
+		dao.insertMember(params);
+		System.out.println(params);
+		String id=(String) params.get("id");
+		
+		//int state = (int) params.get("state");
+		int state =naver_id_chk(id);
+		
+		System.out.println("naver 아이디 가입에서 리턴된 state 값:" + state);
+		return state;
+
 	}
 }

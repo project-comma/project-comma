@@ -47,4 +47,8 @@ public interface IMemberService {
 	public HashMap<String, Object> getacceptList(int state);
 	
 	public int TeacherAccept(String id); 
+	
+	public int naver_id_chk(String id);
+	
+	public int naver_id_join(HashMap<String, Object> params);
 }

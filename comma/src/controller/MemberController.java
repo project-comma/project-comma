@@ -44,7 +44,6 @@ public class MemberController {
 	public String t_ResistForm() {
 		return "t_ResistForm";
 	}
-	
 
 //	선생님등록 페이지
 	@RequestMapping(value = "t_Resist.do", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -92,12 +91,9 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 
 		String id = (String) session.getAttribute("id");
-		
-		
+
 		HashMap<String, Object> info = mService.MemberInfo(id);
-		
-		
-		
+
 		mav.addObject("info", info);
 
 		mav.setViewName("changeInfo_sForm");
@@ -136,66 +132,61 @@ public class MemberController {
 
 		HashMap<String, Object> info = mService.MemberInfo(id);
 
-		
-		//경력
-		String[] careers = ((String)info.get("t_career")).split("-");
-		
-		ArrayList<HashMap<String, Object>> c = new ArrayList<HashMap<String,Object>>();
-		for(String s : careers) {
+		// 경력
+		String[] careers = ((String) info.get("t_career")).split("-");
+
+		ArrayList<HashMap<String, Object>> c = new ArrayList<HashMap<String, Object>>();
+		for (String s : careers) {
 			HashMap<String, Object> car = new HashMap<String, Object>();
-			
+
 			String[] cars = s.split(":");
-			
+
 			car.put("cat", cars[0]);
 			car.put("car", cars[1]);
-			
+
 			c.add(car);
 		}
-		
+
 		info.put("careerList", c);
-		//경력END
-		
-		//학력ST
-		String[] educs = ((String)info.get("t_education")).split("-");
-		
-		ArrayList<HashMap<String, Object>> e = new ArrayList<HashMap<String,Object>>();
-		for(String s : educs) {
+		// 경력END
+
+		// 학력ST
+		String[] educs = ((String) info.get("t_education")).split("-");
+
+		ArrayList<HashMap<String, Object>> e = new ArrayList<HashMap<String, Object>>();
+		for (String s : educs) {
 			HashMap<String, Object> ed = new HashMap<String, Object>();
-			
+
 			String[] cars = s.split(":");
-			
+
 			ed.put("edu", cars[0]);
 			ed.put("part", cars[1]);
-			
+
 			e.add(ed);
 		}
-		
+
 		info.put("eduList", e);
-		//학력END
-		
-		//자격증ST
-		String[] lics = ((String)info.get("t_license")).split("-");
-		
-		ArrayList<HashMap<String, Object>> l = new ArrayList<HashMap<String,Object>>();
-		for(String s : lics) {
+		// 학력END
+
+		// 자격증ST
+		String[] lics = ((String) info.get("t_license")).split("-");
+
+		ArrayList<HashMap<String, Object>> l = new ArrayList<HashMap<String, Object>>();
+		for (String s : lics) {
 			HashMap<String, Object> lc = new HashMap<String, Object>();
-			
-			
-			
+
 			lc.put("lic", s);
-			
-			
+
 			l.add(lc);
 		}
-		
+
 		info.put("licList", l);
-		//자격증END
-		
+		// 자격증END
+
 		System.out.println(info);
 		mav.addAllObjects(info);
-		//mav.addObject("info", info);
+		// mav.addObject("info", info);
 
-		
 		mav.setViewName("changeInfo_tForm");
 		return mav;
 	}
@@ -205,7 +196,7 @@ public class MemberController {
 	public String changeInfo_t(HttpSession session, @RequestBody HashMap<String, Object> params) {
 		ModelAndView mav = new ModelAndView();
 		String session_id = (String) session.getAttribute("id");
-		System.out.println("controller"+params);
+		System.out.println("controller" + params);
 		System.out.println(session_id);
 
 		HashMap<String, Object> mId = mService.MemberInfo(session_id);
@@ -215,11 +206,11 @@ public class MemberController {
 		if (session_id != null && mState == 2) {
 			int result = mService.modifyMember(session_id, params);
 			System.out.println("컨트롤러에 리턴된값=" + result);
-			
+
 			return "redirect:mypage.do";
 
 		} else {
-			
+
 			return "redirect:mypage.do";
 
 		}
@@ -232,57 +223,53 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		String mode = (String) session.getAttribute("mode");
 
-		
 		System.out.println("모드!" + mode);
-		
-		if(mode==null) {
-			mav.setViewName("redirect:mainForm.do");
-			return mav;
-		}
-
 
 		if (mode == null) {
 			mav.setViewName("redirect:mainForm.do");
 			return mav;
 		}
 
+		if (mode == null) {
+			mav.setViewName("redirect:mainForm.do");
+			return mav;
+		}
 
 		if (mode.equals("st")) {
 			System.out.println("학생!");
-			
+
 			HashMap<String, Object> params = new HashMap<String, Object>();
-			
-			params.put("id", (String)session.getAttribute("id"));
-			
-			HashMap<String, Object> info = mService.MemberInfo((String)session.getAttribute("id"));
-			
+
+			params.put("id", (String) session.getAttribute("id"));
+
+			HashMap<String, Object> info = mService.MemberInfo((String) session.getAttribute("id"));
+
 			HashMap<String, Object> res = mService.myRequest(params);
-			
+
 			mav.addObject("info", info);
-			
+
 			mav.addAllObjects(res);
-			
+
 			mav.setViewName("mypage_s");
-			
+
 		} else if (mode.equals("tc")) {
 			System.out.println("선생님!");
-			
+
 			HashMap<String, Object> params = new HashMap<String, Object>();
-			
-			params.put("teacher", (String)session.getAttribute("id"));
-			HashMap<String, Object> info = mService.MemberInfo((String)session.getAttribute("id"));
+
+			params.put("teacher", (String) session.getAttribute("id"));
+			HashMap<String, Object> info = mService.MemberInfo((String) session.getAttribute("id"));
 			HashMap<String, Object> res = mService.myTRequest(params);
-			
+
 			mav.addObject("info", info);
 			mav.addAllObjects(res);
-			
+
 			mav.setViewName("mypage_t");
 		} else if (mode.equals("ad")) {
 			System.out.println("관리자!");
-			
-			
+
 			HashMap<String, Object> res = mService.getacceptList(5);
-			
+
 			mav.addAllObjects(res);
 			mav.setViewName("admin");
 		}
@@ -327,6 +314,111 @@ public class MemberController {
 
 		String resultStr = "{ \"result\" : " + result + "}";
 		response.getWriter().println(resultStr);
+
+	}
+
+//	@ResponseBody
+//	@RequestMapping("naver_login_chk.do")
+//	public ModelAndView naver_join(HttpSession session, @RequestParam HashMap<String, Object> params)
+//			throws IOException {
+//		ModelAndView mav = new ModelAndView();
+//
+//		System.out.println(params);
+//		String gender = (String) params.get("gender");
+//		if (gender.equals("F")) {
+//			params.put("gender", "2");
+//		} else if (gender.equals("M")) {
+//			params.put("gender", "1");
+//		}
+//		System.out.println("gender 값 바뀌었는지 확인!" + params);
+//		
+//		String email = (String) params.get("email");
+//		int state = mService.naver_id_chk(email);
+//		if (state == 0) {
+//			System.out.println("일치하는 아이디 없음");
+//			System.out.println("회원가입 진행");
+//
+//			int s_state = mService.naver_id_join(params);
+//			if (s_state == 1) {
+//				// service 에서 네이버 회원가입 잘됨
+//				// 강제 로그인
+//				force_login(session, s_state, email);
+//			} else {
+//				// service 에서 네이버 회원가입 문제 생김
+//				System.out.println("naver_id_join service 에 문제 있음");
+//			}
+//		} else {
+//			System.out.println("아이디 있음");
+//			// 강제 로그인
+//			force_login(session, state, email);
+//			
+//		}
+//		mav.setViewName("main");
+//		System.out.println("main GO!"+mav);
+//		return mav;
+//
+//	}
+	
+	@ResponseBody
+	@RequestMapping("naver_login_chk.do")
+	public void naver_join(HttpServletResponse response ,HttpSession session, @RequestParam HashMap<String, Object> params)
+			throws IOException {
+		
+
+		System.out.println(params);
+		String gender = (String) params.get("gender");
+		if (gender.equals("F")) {
+			params.put("gender", "2");
+		} else if (gender.equals("M")) {
+			params.put("gender", "1");
+		}
+		System.out.println("gender 값 바뀌었는지 확인!" + params);
+		
+		String email = (String) params.get("email");
+		int state = mService.naver_id_chk(email);
+		if (state == 0) {
+			System.out.println("일치하는 아이디 없음");
+			System.out.println("회원가입 진행");
+
+			int s_state = mService.naver_id_join(params);
+			if (s_state == 1) {
+				// service 에서 네이버 회원가입 잘됨
+				// 강제 로그인
+				force_login(session, s_state, email);
+			} else {
+				// service 에서 네이버 회원가입 문제 생김
+				System.out.println("naver_id_join service 에 문제 있음");
+			}
+		} else {
+			System.out.println("아이디 있음");
+			// 강제 로그인
+			force_login(session, state, email);
+			String result = "1";
+			String resultStr = "{\"result\" : " + result + "}";
+			response.getWriter().println(resultStr);
+		}
+		
+	
+		
+
+	}
+
+
+//네이버 강제 로그인 시키기
+
+	public void force_login(HttpSession session, int state, String id) {
+		System.out.println("강제 로그인 시킨다!!!");
+		session.setAttribute("id", id);
+		session.setAttribute("state", state);
+
+		if (state == 1) {
+			session.setAttribute("mode", "st");
+
+		} else if (state == 2) {
+			session.setAttribute("mode", "tc");
+		} else if (state == 3) {
+			session.setAttribute("mode", "ad");
+		}
 
 	}
 
@@ -449,8 +541,6 @@ public class MemberController {
 
 	}
 
-	
-
 	// 프로필사진 갖고오는 메소드
 	@RequestMapping("profile.do")
 	public ModelAndView profile(String id) {
@@ -470,7 +560,6 @@ public class MemberController {
 
 		int mode = Integer.parseInt((String) params.get("mode"));
 
-		
 		if (mode == 1) {
 
 			session.setAttribute("mode", "st");
@@ -479,79 +568,70 @@ public class MemberController {
 		}
 
 	}
-	
-	
-	
+
 	@ResponseBody
-	@RequestMapping(value="memberInfo.do")
-	public HashMap<String, Object> memberInfo(@RequestParam HashMap<String, Object> params){
-		
-		
-		String id = (String)params.get("id");
-		
+	@RequestMapping(value = "memberInfo.do")
+	public HashMap<String, Object> memberInfo(@RequestParam HashMap<String, Object> params) {
+
+		String id = (String) params.get("id");
+
 		HashMap<String, Object> res = mService.MemberInfo(id);
-		
+
 		return res;
 	}
-	
-	
+
 	@RequestMapping("myRequestList.do")
-	public ModelAndView myRequestList(HttpSession session){
-		
+	public ModelAndView myRequestList(HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		HashMap<String, Object> res = new HashMap<String, Object>();
-		
+
 		HashMap<String, Object> params = new HashMap<String, Object>();
-		
-		params.put("id", (String)session.getAttribute("id"));
-		
-		
+
+		params.put("id", (String) session.getAttribute("id"));
+
 		res = mService.myRequest(params);
-		
-		
+
 		System.out.println(res);
 		mav.addAllObjects(res);
-		
+
 		mav.setViewName("myReqList");
-		
+
 		return mav;
 	}
-	
-	
+
 	@RequestMapping("myTRequestList.do")
-	public ModelAndView myTRequestList(@RequestParam String teacher, HttpSession session){
-		
+	public ModelAndView myTRequestList(@RequestParam String teacher, HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		HashMap<String, Object> res = new HashMap<String, Object>();
-		
+
 		HashMap<String, Object> params = new HashMap<String, Object>();
-		
+
 		params.put("teacher", teacher);
-		
-		
+
 		res = mService.myTRequest(params);
-		
+
 		mav.addAllObjects(res);
-		
+
 		mav.setViewName("reqOfferList");
-		
+
 		System.out.println(res);
 		return mav;
 	}
-	
-	
+
 	@ResponseBody
-	@RequestMapping(value="teacherAccept.do")
-	public HashMap<String, Object> teacherAccept(@RequestParam HashMap<String, Object> params){
-		
+	@RequestMapping(value = "teacherAccept.do")
+	public HashMap<String, Object> teacherAccept(@RequestParam HashMap<String, Object> params) {
+
 		HashMap<String, Object> res = new HashMap<String, Object>();
-		
-		String id = (String)params.get("id");
-		
+
+		String id = (String) params.get("id");
+
 		mService.TeacherAccept(id);
-		
+
 		return res;
 	}
 }

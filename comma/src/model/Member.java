@@ -18,7 +18,12 @@ public class Member {
 	private String like;
 	private int outpoint;
 
+public void snsValue(String c_id,String c_pw,String c_email ) {
+	this.id=c_id;
+	this.password=c_pw;
+	this.email=c_email;
 
+}
 	public String getId() {
 		return id;
 	}
