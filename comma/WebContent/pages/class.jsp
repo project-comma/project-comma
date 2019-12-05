@@ -17,30 +17,48 @@
 	<div align="center"><!-- 전체 div -->
 	
 		<div align="left" style="width: 900px; display:inline-block; vertical-align:top;"> <!-- 메인 내용div -->
-			<div align="left"
-				style="width: 700px; height: 450px; margin-top: 50px;">
+			
+			<div align="left"style="width: 700px; height: 450px; margin-top: 50px;">
+				
 				<div id="demo" class="carousel slide" data-ride="carousel">
 
 					<!-- Indicators -->
 					<ul class="carousel-indicators">
+					
 						<li data-target="#demo" data-slide-to="0" class="active"></li>
 						<li data-target="#demo" data-slide-to="1"></li>
 						<li data-target="#demo" data-slide-to="2"></li>
+						
+						
 					</ul>
+<!-- 					<ul class="carousel-indicators"> -->
+<!-- 						<li data-target="#demo" data-slide-to="0" class="active"></li> -->
+<!-- 						<li data-target="#demo" data-slide-to="1"></li> -->
+<!-- 						<li data-target="#demo" data-slide-to="2"></li> -->
+<!-- 					</ul> -->
 
 					<!-- The slideshow -->
 					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img src="img/공방1.jpg" alt="Los Angeles" width="700"
-								height="450">
-						</div>
-						<div class="carousel-item">
-							<img src="img/공방2.jpg" alt="Chicago" width="700" height="450;">
-						</div>
-						<div class="carousel-item">
-							<img src="img/공방3.jpg" alt="New York" width="700;"
-								height="450">
-						</div>
+			<c:forEach items="${c_image }" var="ci">
+<!-- 						<div class="carousel-item active"> -->
+<!-- 							<img src="img/공방1.jpg" alt="Los Angeles" width="700" -->
+<!-- 								height="450"> -->
+<!-- 						</div> -->
+<!-- 						<div class="carousel-item"> -->
+<!-- 							<img src="img/공방2.jpg" alt="Chicago" width="700" height="450;"> -->
+<!-- 						</div> -->
+<!-- 						<div class="carousel-item"> -->
+<!-- 							<img src="img/공방3.jpg" alt="New York" width="700;" -->
+<!-- 								height="450"> -->
+<!-- 						</div> -->
+						
+							<div class="carousel-item active">
+							<img src="classImageView.do?c_image=${ci }" style="width:700px; height:450px;">
+							</div>	
+						
+			</c:forEach>
+						
+						
 					</div>
 
 					<!-- Left and right controls -->
@@ -51,15 +69,15 @@
 					</a>
 				</div>
 			</div>
+			
 			<div align="left">
+			<c:forEach items="${c_image }" var="ci">
 
-				<img data-target="#demo" data-slide-to="0" src="img/공방1.jpg"
-					class="smallimg"> <img data-target="#demo" data-slide-to="1"
-					src="img/공방2.jpg" class="smallimg"> <img
-					data-target="#demo" data-slide-to="2" src="img/공방3.jpg"
-					class="smallimg">
-
+				<img data-target="#demo" data-slide-to="0" src="classImageView.do?c_image=${ci }"
+					class="smallimg"> 
+			</c:forEach>
 			</div>
+			
 
 			<div style="width: 850px; margin-top: 50px">
 				<nav id="nav" class="navbar navbar-expand-sm bg-light navbar-light">

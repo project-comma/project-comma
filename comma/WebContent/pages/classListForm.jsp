@@ -151,11 +151,12 @@
 			<c:forEach var="c" items="${classList}">
 					
 					<a href='classForm.do?number=${c.c_number }' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>
+						<img src="classImageView.do?c_image=${c.c_image }" style="width: 300px; height: 200px;">
 						<div>${c.id }</div>
 						<div>${c.c_content }</div>
 						<div>${c.c_price }</div>
 						</a>
-					
+				
 			
 			</c:forEach>
 

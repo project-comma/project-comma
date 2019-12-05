@@ -1,11 +1,13 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import com.mysql.jdbc.PreparedStatement.ParseInfo;
 
@@ -33,6 +36,23 @@ public class ClassController {
 	private IClassService cService;
 	@Autowired
 	private IMemberService mService;
+	
+	//주소페이지
+	@RequestMapping("joosoApi.do")
+	public void joosoApi() {
+		
+	}
+	
+	//결제페이지
+	@RequestMapping("chargeApi.do")
+	public ModelAndView chargeApi(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		String session_id = (String) session.getAttribute("id");
+		
+		
+		return mav;
+	}
 
 	@RequestMapping("mainForm.do")
 	public ModelAndView main() {
@@ -132,6 +152,8 @@ public class ClassController {
 			}
 			
 			
+			
+			
 			mav.addAllObjects(res);
 			mav.addAllObjects(params);
 			
@@ -177,6 +199,12 @@ public class ClassController {
 		
 		String resultStr2 = (String) result.get("c_starttime");
 		String[] arr2 = resultStr2.split("@");
+		
+		String resultStr3 = (String) result.get("c_image");
+		String[] arr3 = resultStr3.split("-");
+		
+		
+		
 //		for (int i = 0; i < arr.length; i++) {
 //			
 //			res.put("c_startday", arr[i]);
@@ -187,6 +215,8 @@ public class ClassController {
 //		}
 		res.put("c_startday", arr);
 		res.put("c_starttime", arr2);
+		res.put("c_image", arr3);
+		
 		
 
 
@@ -209,7 +239,7 @@ public class ClassController {
 //			mav.addObject("c_starttime", c_starttime);
 //		}
 //				
-		mav.addObject("c_image", result.get("c_image"));
+	
 		mav.addObject("c_content", result.get("c_content"));
 		mav.addObject("c_classtime", result.get("c_classtime"));
 		mav.addObject("c_price", result.get("c_price"));
@@ -259,13 +289,7 @@ public class ClassController {
 			String resultStr = "{ \"result\" : " + result + "}";
 			response.getWriter().println(resultStr);
 		}
-		else if (params.get("c_image").equals("")) {
-			String result = (String) params.get("c_image");
-			result = "3";
-			
-			String resultStr = "{ \"result\" : " + result + "}";
-			response.getWriter().println(resultStr);
-		}
+		
 		else if (params.get("c_content").equals("")) {
 			String result = (String) params.get("c_content");
 			result = "4";
@@ -281,10 +305,10 @@ public class ClassController {
 			response.getWriter().println(resultStr);
 		}
 		else {
-			String c_location = (String) params.get("province");
-			c_location += "/"+params.get("city");
-			c_location += "/"+params.get("gu");
-			params.put("c_location", c_location);
+//			String c_location = (String) params.get("province");
+//			c_location += "/"+params.get("city");
+//			c_location += "/"+params.get("gu");
+//			params.put("c_location", c_location);
 			
 			params.put("id", session_id);
 			
@@ -357,6 +381,17 @@ public class ClassController {
 		cService.classFileUpload(fiReq, number);
 		
 		return res;
+	}
+	
+	@RequestMapping("classImageView.do")
+	public View classImageView(String c_image,HttpServletRequest request) {
+		
+		
+		
+		View view = new DownloadView(cService.getClassImage(c_image,request));
+		System.out.println("컨트롤러"+c_image);
+
+		return view;
 	}
 
 	// 클래스 등록폼
