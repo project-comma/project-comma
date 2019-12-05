@@ -1,8 +1,11 @@
 package service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -28,5 +31,6 @@ public interface IClassService {
 	public int addLog(HashMap<String, Object> params);
 	
 	public int classFileUpload(MultipartHttpServletRequest fiReq, int number);
+	public File getClassImage(String c_image,HttpServletRequest request);
 	public HashMap<String, Object> latestInfo();
 }

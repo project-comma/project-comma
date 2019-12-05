@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -55,14 +58,25 @@ public class ClassService implements IClassService{
 	@Override
 	public HashMap<String, Object> searchClass(HashMap<String, Object> params) {//검색클레스
 		
-		ArrayList<HashMap<String, Object>> list = dao.selectSearch(params);
 		
+		
+		ArrayList<HashMap<String, Object>> list = dao.selectSearch(params);
 		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		
+		for (HashMap<String, Object> m : list) {
+			
+			 String resultStr = (String) m.get("c_image");
+			 String[] arr = resultStr.split("-");
+			
+			
+			m.put("c_image", arr[0]);
+		}
 		
 		
 		res.put("classList", list);
 		
-		System.out.println(res);
+		System.out.println("서비스"+res);
 		// TODO Auto-generated method stub
 		return res;
 	}
@@ -114,6 +128,7 @@ public class ClassService implements IClassService{
 	
 	
 	
+	@Override
 	public int classFileUpload(MultipartHttpServletRequest fiReq, int number) {
 		
 		
@@ -165,6 +180,26 @@ public class ClassService implements IClassService{
 		dao.fileUpload(params);
 		
 		return 0;
+	}
+	@Override
+	public File getClassImage(String c_image,HttpServletRequest request) {
+
+		
+		
+
+		String fileName = c_image;
+		System.out.println(fileName);
+
+		if (fileName == null) {
+
+			System.out.println("클래스 사진이 없음");
+			String img = request.getRealPath("/img/");
+			return new File(img + "test2.jpg");
+		}
+
+		String path = "C:/image/classfile/";
+
+		return new File(path + fileName);
 	}
 	
 	

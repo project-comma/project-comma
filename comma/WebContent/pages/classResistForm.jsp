@@ -41,10 +41,10 @@
 
 	$(document).ready(function() {
 
-					
-
+		
 				$('#registBtn').click(function() {
 
+					$("#roadAddrPart1Hidden").val($("#roadAddrPart1").val())
 // 					var params = $('#classForm').serialize();
 					var params = $('#classForm').serializeObject();
 
@@ -57,8 +57,20 @@
 							
 							dataType : "json",
 							success : function(resultStr) {
-
-							
+								
+							if(resultStr.result =="1"){
+								alert("dddd")
+							}	
+							if(resultStr.result =="3"){
+								alert("d")
+							}	
+							if(resultStr.result =="4"){
+								alert("dd")
+							}	
+							if(resultStr.result =="5"){
+								alert("ddddddd")
+							}	
+								
 							if(resultStr.result == "6") {
 								alert("클래스 등록됨");
 								
@@ -139,8 +151,28 @@
 						$("#tableAdd2").append(tr);
 						
 					})
+					
+					
 })
 
+function goPopup() {
+		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+		var pop = window.open("joosoApi.do", "pop",
+				"width=570,height=420, scrollbars=yes, resizable=yes");
+
+		// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+		//var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");
+	}
+	/** API 서비스 제공항목 확대 (2017.02) **/
+	function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail,
+			roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn,
+			bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm,
+			rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+		document.form.roadAddrPart1.value = roadAddrPart1;
+// 		document.form.addrDetail.value = addrDetail;
+// 		document.form.zipNo.value = zipNo;
+	}
 
 
 </script>
@@ -155,8 +187,35 @@
 				<div align="center"
 					style="border-bottom: 1px solid #555; width: 1200px; margin-bottom: 15px;"></div>
 			</div>
+			
+			
+						
+			
+	</div>
+	
+	
+	
+	
+	
+	
+			<form name="form" id="form" method="post" style="width: 700px;">
+			
+			<div class="input-group mb-3 input-group-lg">
+							<div class="input-group-prepend">
+								<span class="input-group-text">주소</span>
+							</div>
+							<input type="hidden" id="confmKey" name="confmKey" value=""  >
+							<input type="text" id="roadAddrPart1" readonly class="form-control"
+								placeholder="주소를 입력해주세요">
+								<input type="button"  value="주소검색" onclick="goPopup();">
+						</div>
+						
+				
+					   		
+		
+			</form>
 
-
+			
 			<form action="classResistBtn.do" id="classForm" enctype="multipart/form-data" accept-charset="UTF-8">
 				<div align="center" style="margin-top: 50px;">
 					<div id="inputinput">
@@ -188,7 +247,7 @@
 						</div>
 						<br> <br> <br> <br> <br>
 
-						<input type="text" name="c_image" value="사진">
+<!-- 						<input type="text" name="c_image" value="사진"> -->
 						
 						<input type="button" id="addImage" value="추가"> <br>
 						<div>
@@ -223,45 +282,45 @@
 								placeholder="수업가격을 입력해 주세요">
 						</div>
 						<br> <br>
-						<div style="width: 500px;">
-							<div class="input-group-prepend"
-								style="display: inline-block; float: left;">
-								<span class="input-group-text">위치</span>
-							</div>
+<!-- 						<div style="width: 500px;"> -->
+<!-- 							<div class="input-group-prepend" -->
+<!-- 								style="display: inline-block; float: left;"> -->
+<!-- 								<span class="input-group-text">위치</span> -->
+<!-- 							</div> -->
 
-							<div style="display: inline-block; float: left; width: 100px;">
-								<select name="province" class="custom-select">
-									<option selected>도</option>
-									<option value="spec">특별시</option>
-									<option value="geonggi">경기도</option>
-									<option value="geongsangbuk">경상북도</option>
-									<option value="geongsangnam">경상남도</option>
-									<option value="chungcheongbuk">충청북도</option>
-									<option value="chungcheongnam">충청남도</option>
-									<option value="jeonlabuk">전라북도</option>
-									<option value="jeonlanam">전라남도</option>
-									<option value="jeju">제주도</option>
+<!-- 							<div style="display: inline-block; float: left; width: 100px;"> -->
+<!-- 								<select name="province" class="custom-select"> -->
+<!-- 									<option selected>도</option> -->
+<!-- 									<option value="spec">특별시</option> -->
+<!-- 									<option value="geonggi">경기도</option> -->
+<!-- 									<option value="geongsangbuk">경상북도</option> -->
+<!-- 									<option value="geongsangnam">경상남도</option> -->
+<!-- 									<option value="chungcheongbuk">충청북도</option> -->
+<!-- 									<option value="chungcheongnam">충청남도</option> -->
+<!-- 									<option value="jeonlabuk">전라북도</option> -->
+<!-- 									<option value="jeonlanam">전라남도</option> -->
+<!-- 									<option value="jeju">제주도</option> -->
 
 
-								</select>
-							</div>
+<!-- 								</select> -->
+<!-- 							</div> -->
 
-							<div style="display: inline-block; float: left; width: 100px;">
-								<select name="city" class="custom-select">
-									<option selected>시</option>
-									<option value="seoul">서울시</option>
+<!-- 							<div style="display: inline-block; float: left; width: 100px;"> -->
+<!-- 								<select name="city" class="custom-select"> -->
+<!-- 									<option selected>시</option> -->
+<!-- 									<option value="seoul">서울시</option> -->
 
-								</select>
-							</div>
+<!-- 								</select> -->
+<!-- 							</div> -->
 
-							<div style="display: inline-block; float: left; width: 100px;">
-								<select name="gu" class="custom-select">
-									<option selected>구</option>
-									<option value="jonglo">종로</option>
+<!-- 							<div style="display: inline-block; float: left; width: 100px;"> -->
+<!-- 								<select name="gu" class="custom-select"> -->
+<!-- 									<option selected>구</option> -->
+<!-- 									<option value="jonglo">종로</option> -->
 
-								</select>
-							</div>
-						</div>
+<!-- 								</select> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 
 
 						<br> <br> <br>
@@ -544,12 +603,19 @@
 							<button type="button" id="registBtn" class="btn btn-outline-secondary">클래스 등록</button>
 						</div>
 
+						<input type="hidden" id="zipNoHidden" value="">
+						<input type="hidden" name="c_location" id="roadAddrPart1Hidden" value="">
+						<input type="hidden" id="addrDetailHidden" value="">
 
 
 					</div>
 				</div>
 
 			</form>
+			
+			
+			
+			
 		</div>
 	</div>
 	</div>
