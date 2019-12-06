@@ -51,4 +51,6 @@ public interface IMemberService {
 	public int naver_id_chk(String id);
 	
 	public int naver_id_join(HashMap<String, Object> params);
+	
+	public int naver_id_drop(HashMap<String, Object> params);
 }

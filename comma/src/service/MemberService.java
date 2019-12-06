@@ -474,4 +474,10 @@ public class MemberService implements IMemberService {
 		return state;
 
 	}
+
+	@Override
+	public int naver_id_drop(HashMap<String, Object> params) {
+		dao.deleteMember(params);
+		return 1;
+	}
 }

@@ -69,7 +69,7 @@
 								class="btn btn-outline-secondary" id="modify_info" value="선생님등록"
 								onclick="location.href='t_ResistForm.do'"> <input
 								type="button" class="btn btn-outline-secondary" id="modify_info"
-								onclick="drop_member_open('${id}')" value="탈퇴">
+								onclick="drop_member_open()" value="탈퇴">
 
 						</div>
 					</td>

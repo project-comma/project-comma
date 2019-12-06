@@ -73,4 +73,27 @@ function st_emailCheck(me){
 		});
 		email.val("");
 	}
+	
+}
+
+function emailCheck(me){
+	
+	var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	
+	var email = $("#st_email");
+	
+	var res = pattern.test(email.val());
+	
+	var msg = $("#id_emailMsg");
+	
+	if(res==true){
+		msg.text("아이디는 이메일 형태로 사용하실수 없습니다");
+		msg.css({
+			"color":"red",
+			"display":"inline-block"
+		});
+		email.val("");
+		
+	}
+	
 }

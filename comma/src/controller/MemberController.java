@@ -358,12 +358,11 @@ public class MemberController {
 //		return mav;
 //
 //	}
-	
+
 	@ResponseBody
 	@RequestMapping("naver_login_chk.do")
-	public void naver_join(HttpServletResponse response ,HttpSession session, @RequestParam HashMap<String, Object> params)
-			throws IOException {
-		
+	public void naver_join(HttpServletResponse response, HttpSession session,
+			@RequestParam HashMap<String, Object> params) throws IOException {
 
 		System.out.println(params);
 		String gender = (String) params.get("gender");
@@ -373,7 +372,7 @@ public class MemberController {
 			params.put("gender", "1");
 		}
 		System.out.println("gender 값 바뀌었는지 확인!" + params);
-		
+
 		String email = (String) params.get("email");
 		int state = mService.naver_id_chk(email);
 		if (state == 0) {
@@ -385,6 +384,9 @@ public class MemberController {
 				// service 에서 네이버 회원가입 잘됨
 				// 강제 로그인
 				force_login(session, s_state, email);
+				String result = "1";
+				String resultStr = "{\"result\" : " + result + "}";
+				response.getWriter().println(resultStr);
 			} else {
 				// service 에서 네이버 회원가입 문제 생김
 				System.out.println("naver_id_join service 에 문제 있음");
@@ -397,12 +399,8 @@ public class MemberController {
 			String resultStr = "{\"result\" : " + result + "}";
 			response.getWriter().println(resultStr);
 		}
-		
-	
-		
 
 	}
-
 
 //네이버 강제 로그인 시키기
 
@@ -486,7 +484,12 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping("logout.do")
 	public String logout(HttpSession session) {
+		System.out.println(session.getAttribute("id"));
+		System.out.println(session.getAttribute("state"));
 		session.removeAttribute("id");
+		session.removeAttribute("state");
+		System.out.println("지운 세션 아이디" + session.getAttribute("id"));
+		System.out.println("지운 state" + session.getAttribute("state"));
 		return "main";
 	}
 
@@ -521,15 +524,40 @@ public class MemberController {
 
 	}
 
+	/*
+	 * // 회원탈퇴
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping("dropMember.do") public int dropMember(@RequestParam
+	 * HashMap<String, Object> params) { int result=1;
+	 * 
+	 * 
+	 * return result; }
+	 */
+	
+	
 	// 회원탈퇴
 	@ResponseBody
 	@RequestMapping("dropMember.do")
-	public Map dropMember(@RequestParam HashMap<String, Object> params) {
+	public int dropMember(HttpSession session,@RequestParam HashMap<String, Object> params) {
 
-		Map<String, Object> map = new HashMap<String, Object>();
+		String id = (String) params.get("id");
+		System.out.println("멤버 탈퇴할꺼얌" + id);
 
-		/* map.put("key", "leeyesol"); */
-		return map;
+		int result=mService.naver_id_drop(params);
+	
+		if(result==1) {
+			session.removeAttribute("id");
+			session.removeAttribute("state");
+			System.out.println("지운 세션 아이디" + session.getAttribute("id"));
+			System.out.println("지운 state" + session.getAttribute("state"));
+			
+		}else {
+		//탈퇴 성공시  return 1;
+		result = 0;
+		}
+		return result;
 	}
 
 	// 선생님 거부

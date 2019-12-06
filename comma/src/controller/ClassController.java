@@ -56,6 +56,7 @@ public class ClassController {
 
 	@RequestMapping("mainForm.do")
 	public ModelAndView main() {
+		System.out.println("mainForm.do 랍니다!!");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
 		return mav;
