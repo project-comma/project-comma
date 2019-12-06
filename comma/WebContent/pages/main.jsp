@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html>
 
@@ -30,42 +31,42 @@
 				
 										
 	
-	function main() {
-		$.ajax({
-			type : "get",
-			url : "mainList.do",
-			dataType : "json",
-			success : function (arr) {
+// 	function main() {
+// 		$.ajax({
+// 			type : "get",
+// 			url : "mainList.do",
+// 			dataType : "json",
+// 			success : function (arr) {
 				
 				
 				
-				for(var i = 0; i < arr.length; i++){
-					var number = $(arr[i].c_number);
-					var div = $("<a href='classForm.do?number="+arr[i].c_number+"' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
+// 				for(var i = 0; i < arr.length; i++){
+// 					var number = $(arr[i].c_number);
+// 					var div = $("<a href='classForm.do?number="+arr[i].c_number+"' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px'>")
 					
-
-					var img = $("<div>")
-					img.text(arr[i].c_image);
-					var name = $("<div>");
-					name.text(arr[i].c_name);
-					var price =$("<div>");
-					price.text(arr[i].c_price);
-					div.append(img).append(name).append(price);
-					$("#classList").append(div);
-				}
+// 					var img = $("<img src='classImageView.do?c_image='"${c_image }"' style='width: 300px; height: 200px;'>")
+// 					var content = $("<div>")
+// 					content.text(arr[i].c_content);
+// 					var name = $("<div>");
+// 					name.text(arr[i].c_name);
+// 					var price =$("<div>");
+// 					price.text(arr[i].c_price);
+// 					div.append(img).append(content).append(name).append(price);
+// 					$("#classList").append(div);
+// 				}
 				
-			},
-			error : function (xhrReq, status, error) {
-				alert("에러창")
-				console.log(xhrReq + ' / ' + status + ' / ' + error);
+// 			},
+// 			error : function (xhrReq, status, error) {
+// 				alert("에러창")
+// 				console.log(xhrReq + ' / ' + status + ' / ' + error);
 				
-			}
+// 			}
 			
 			
 			
-		})
-	}
-	main();
+// 		})
+// 	}
+// 	main();
 })
 </script>
 
@@ -183,15 +184,20 @@
 	</div>
 
 	<div align="center">
-		<div align="left" style="width: 1200px" id="classList">
-			<!-- 				<div style="width:300px; height: 400px;" id="classList"> -->
-			<!-- 					<img src="img/시간.png" width="300px" height="300px"> -->
-			<!-- 					<img src="img/시간.png" width="80px" height="80px"> -->
-			<!-- 					<div>이상훈 </div> -->
-			<!-- 					<div>내용내용내용내용내용내용내용내용</div> -->
-			<!-- 					<div>가격</div> -->
-			<!-- 				</div> -->
-
+		<div align="left" style="width: 1200px" id="mainList">
+			<c:forEach var="m" items="${mainList}">
+					
+					<a href='classForm.do?number=${m.c_number }' style='width:300px; height: 300px; float: left; border: 1px solid #ccc; margin-right: 100px; margin-bottom: 50px;'>
+						<img src="classImageView.do?c_image=${m.c_image }" style="width: 300px; height: 200px;">
+						
+						<img src="profileImageView.do?id=${m.id }" class="rounded-circle" style="float:left; width: 70px; height: 70px;">
+						
+						<div style="float: right; width: 210px; height: 35px;">${m.c_content }</div>
+						<div style="float: right; width: 210px; height: 35px;">${m.c_price }</div>
+						<div style="float:left; width: 80px; height: 30px;">${m.id }</div>
+						</a>
+				
+			</c:forEach>
 
 		</div>
 

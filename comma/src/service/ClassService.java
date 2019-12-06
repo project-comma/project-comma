@@ -88,10 +88,26 @@ public class ClassService implements IClassService{
 	}
 	
 	@Override
-	public ArrayList<HashMap<String, Object>> popList() {//인기클래스
+	public HashMap<String, Object> popList() {//인기클래스
 		ArrayList<HashMap<String, Object>> result = dao.popClass();
+		HashMap<String, Object> res = new HashMap<String, Object>();
 		
-		return result;
+		
+		for (HashMap<String, Object> m : result) {
+			
+			 String resultStr = (String) m.get("c_image");
+			 String[] arr = resultStr.split("-");
+			
+			
+			m.put("c_image", arr[0]);
+		}
+		
+		
+		res.put("mainList", result);
+		System.out.println(res);
+		
+		
+		return res;
 	}
 	
 
