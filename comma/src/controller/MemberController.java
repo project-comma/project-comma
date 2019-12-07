@@ -230,10 +230,9 @@ public class MemberController {
 			return mav;
 		}
 
-		if (mode == null) {
-			mav.setViewName("redirect:mainForm.do");
-			return mav;
-		}
+		/*
+		 * if (mode == null) { mav.setViewName("redirect:mainForm.do"); return mav; }
+		 */
 
 		if (mode.equals("st")) {
 			System.out.println("학생!");

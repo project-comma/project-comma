@@ -88,13 +88,13 @@
 				<!-- The slideshow -->
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="img/slide1.jpg" alt="Los Angeles" style="height: 600px;">
+						<img src="img/mainSlide.PNG" alt="Los Angeles" style="height: 600px;">
 					</div>
 					<div class="carousel-item">
-						<img src="img/slide2.jpg" alt="Chicago" style="height: 600px;">
+						<img src="img/mainSlide2.PNG" alt="Chicago" style="height: 600px;">
 					</div>
 					<div class="carousel-item">
-						<img src="img/slide3.jpg" alt="New York" style="height: 600px;">
+						<img src="img/mainSlide3.PNG" alt="New York" style="height: 600px;">
 					</div>
 				</div>
 
