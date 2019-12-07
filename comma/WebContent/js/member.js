@@ -37,24 +37,32 @@ function drop_member_close() {// 탈퇴창닫기
 
 }
 function drop_member_ajax(id) {// 탈퇴ajax
-
+	console.log("탈퇴 ajax 입니다" + id);
 	$.ajax({
-		url : "dropMember.do",
-		type : "post",
-		contentType : "application/json",
+		type : 'post',
+		dataType : 'json',
+		url : 'dropMember.do',
+		/* contentType : "application/json", */
 		data : {
-			id : id
+			'id' : id
 		},
 		dataType : "json",
 		success : function(data) {
+			if (data == 1) {
+				alert("탈퇴가 완료되었습니다!!!!")
+				drop_member_close();
+				location.href="mainForm.do";
 
-
+			}else{
+				alert("예기치 못한 문제로 탈퇴가 되지 않았습니다!")
+			}
 		},
-		error : function(request,status,error) {
-	console.log(request);
-	console.log(status);
-	console.log(error);
+		error : function(request, status, error) {
+			console.log(request);
+			console.log(status);
+			console.log(error);
 		}
 
 	});
+
 }

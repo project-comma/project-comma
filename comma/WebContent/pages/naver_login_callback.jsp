@@ -33,11 +33,10 @@
 				},
 				success : function(data) {
 					if (data.result == "1") {
-						alert(data);
-						console.log("ajax 성공")
 						alert("네이버 아이디로 로그인 성공!")
 						window.close();
-						location.href = "mainForm.do"
+						location.href="../mainForm.do";
+
 					}
 				},
 				error : function() {

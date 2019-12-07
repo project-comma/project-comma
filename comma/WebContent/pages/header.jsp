@@ -30,6 +30,8 @@
 
 <!-- JavaScript로드-->
 
+<script src="js/studentUpdate.js" type="text/javascript"></script>
+
 <script src="js/loginForm.js" type="text/javascript">
 	
 </script>
@@ -271,14 +273,40 @@
 					<div>
 						<input type="text" name="name" placeholder=" Name" class="text_1">
 					</div>
-					<div style="font-size: 12px">아이디는 이메일 형식으로 입력 할수 없습니다</div>
-					<div align="left" style="margin-left: 100px;">
-						<input type="text" id="joinid" name="id" placeholder=" ID"
-							class="text_1"><span id="idok" style="margin-left: 5px;">중복여부</span>
-					</div>
 					<div>
+						<div style="font-size: 12px">아이디는 이메일 형식으로 입력 할수 없습니다</div>
+						<div align="left" style="margin-left: 100px;">
+							<input type="text" id="joinid" name="id" placeholder=" ID"
+								class="text_1" onblur="emailCheck(this)"> <span
+								id="idok" style="margin-left: 5px;">중복여부</span>
+						</div>
+						<div>
+
+							<h5 id="id_emailMsg"
+								style="display: none; color: red; font-size: 11px;">안녕?</h5>
+						</div>
+					</div>
+
+					<!-- 		<div>
 						<input type="text" name="email" placeholder=" Email"
-							class="text_1">
+							class="text_1" onblur="st_emailCheck(this)">
+							<h5 id="st_emailMsg"
+							style="display: none; color: red; font-size: 10px;">안녕?</h5>
+					</div> -->
+
+					<div style="margin-bottom: 1px;">
+
+						<div>
+							<input type="text"
+								style="border-radius: 3px; width: 200px; height: 30px; margin-bottom: 1px;"
+								id="st_email" name="email" placeholder="E-mail"
+								onblur="st_emailCheck(this)">
+						</div>
+						<div>
+
+							<h5 id="st_emailMsg"
+								style="display: none; color: red; font-size: 11px;">안녕?</h5>
+						</div>
 					</div>
 					<div>
 						<input type="password" name="password" placeholder=" Password"
@@ -294,7 +322,7 @@
 						<input type="radio" name="gender" value="man"> 남자 <input
 							type="radio" name="gender" value="woman">여자
 					</div>
-					<pre style="font-size: 12px; height: 65px;"> 본 회원가입은 쉼의 학생으로 가입되는것입니다.
+					<pre style="font-size: 12px; height: 55px;"> 본 회원가입은 쉼의 학생으로 가입되는것입니다.
 쉼의 선생님 가입을 원할경우 학생 가입후
  마이페이지에서 선생님 가입을 해주세요.</pre>
 					<div>
@@ -364,7 +392,7 @@
 							naver_id_login.setPopup();
 							naver_id_login.init_naver_id_login();
 						</script>
-				
+
 					</div>
 					<div>
 						<button type="submit" class="btn btn-outline-secondary"
