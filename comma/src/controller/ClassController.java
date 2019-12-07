@@ -57,31 +57,38 @@ public class ClassController {
 	@RequestMapping("mainForm.do")
 	public ModelAndView main() {
 		ModelAndView mav = new ModelAndView();
+		
+		HashMap<String, Object> result = cService.popList();
+		
+		
+		mav.addAllObjects(result);
 		mav.setViewName("main");
 		return mav;
 	}
 
-	// 메인페이지
-	@RequestMapping("mainList.do")
-	public void main(HttpServletResponse response) throws IOException {
-		System.out.println("메인들어왓니 ?");
-//		List<HashMap<String, Object>> result = cService.popList();
-//		result.get(0);
-		ArrayList<HashMap<String, Object>> result = cService.popList();
-
-//		System.out.println(result);
-		JSONArray jarr = new JSONArray();
-		for (int i = 0; i < result.size(); i++) {
-			JSONObject jo = new JSONObject();
-			jo.put("c_name", result.get(i).get("c_name"));
-			jo.put("c_image", result.get(i).get("c_image"));
-			jo.put("c_price", result.get(i).get("c_price"));
-			jo.put("c_number", result.get(i).get("c_number"));
-			jarr.put(jo);
-		}
-		response.getWriter().println(jarr);
-
-	}
+//	// 메인페이지
+//	@RequestMapping("mainList.do")
+//	public void main(HttpServletResponse response) throws IOException {
+//		System.out.println("메인들어왓니 ?");
+////		List<HashMap<String, Object>> result = cService.popList();
+////		result.get(0);
+//		ArrayList<HashMap<String, Object>> result = cService.popList();
+//
+////		System.out.println(result);
+//		JSONArray jarr = new JSONArray();
+//		for (int i = 0; i < result.size(); i++) {
+//			JSONObject jo = new JSONObject();
+//			jo.put("c_name", result.get(i).get("c_name"));
+//			jo.put("c_image", result.get(i).get("c_image"));
+//			jo.put("c_price", result.get(i).get("c_price"));
+//			jo.put("c_number", result.get(i).get("c_number"));
+//			jo.put("c_content", result.get(i).get("c_content"));
+//			jarr.put(jo);
+//		}
+//		response.getWriter().println(jarr);
+//
+//	}
+	
 
 //	// 클래스폼페이지 이동
 //	@RequestMapping("classList.do")
@@ -200,45 +207,26 @@ public class ClassController {
 		String resultStr2 = (String) result.get("c_starttime");
 		String[] arr2 = resultStr2.split("@");
 		
+		
 		String resultStr3 = (String) result.get("c_image");
 		String[] arr3 = resultStr3.split("-");
 		
 		
 		
-//		for (int i = 0; i < arr.length; i++) {
-//			
-//			res.put("c_startday", arr[i]);
-//			System.out.println(arr[0]);
-//			System.out.println(arr[1]);
-//			System.out.println("hello");
-//			System.out.println(arr.length);
-//		}
 		res.put("c_startday", arr);
 		res.put("c_starttime", arr2);
 		res.put("c_image", arr3);
+		
+		
+		
+		mav.addObject("c_image1", arr3[0]);
 		
 		
 
 
 		mav.addAllObjects(res);		
 			
-		
-//		
-//		for (int i = 0; i < arr.length; i++) {
-//			
-//			String c_startday = arr[i];
-//			
-//			
-//			mav.addObject("c_startday", c_startday);
-//			
-//		}
-//		
-//		for (int i = 0; i < arr2.length; i++) {
-//			String c_starttime = arr2[i];
-//			
-//			mav.addObject("c_starttime", c_starttime);
-//		}
-//				
+			
 	
 		mav.addObject("c_content", result.get("c_content"));
 		mav.addObject("c_classtime", result.get("c_classtime"));

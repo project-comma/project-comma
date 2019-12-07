@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 
+
+
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	
@@ -20,40 +22,33 @@
 			
 			<div align="left"style="width: 700px; height: 450px; margin-top: 50px;">
 				
+				
 				<div id="demo" class="carousel slide" data-ride="carousel">
-
+				
 					<!-- Indicators -->
 					<ul class="carousel-indicators">
 					
 						<li data-target="#demo" data-slide-to="0" class="active"></li>
-						<li data-target="#demo" data-slide-to="1"></li>
-						<li data-target="#demo" data-slide-to="2"></li>
+						<c:forEach items="${c_image }" varStatus="status" var="ci">
+						<li data-target="#demo" data-slide-to="${status.count }" ></li>
+						</c:forEach>
 						
 						
 					</ul>
-<!-- 					<ul class="carousel-indicators"> -->
-<!-- 						<li data-target="#demo" data-slide-to="0" class="active"></li> -->
-<!-- 						<li data-target="#demo" data-slide-to="1"></li> -->
-<!-- 						<li data-target="#demo" data-slide-to="2"></li> -->
-<!-- 					</ul> -->
+					
+
 
 					<!-- The slideshow -->
 					<div class="carousel-inner">
-			<c:forEach items="${c_image }" var="ci">
-<!-- 						<div class="carousel-item active"> -->
-<!-- 							<img src="img/공방1.jpg" alt="Los Angeles" width="700" -->
-<!-- 								height="450"> -->
-<!-- 						</div> -->
-<!-- 						<div class="carousel-item"> -->
-<!-- 							<img src="img/공방2.jpg" alt="Chicago" width="700" height="450;"> -->
-<!-- 						</div> -->
-<!-- 						<div class="carousel-item"> -->
-<!-- 							<img src="img/공방3.jpg" alt="New York" width="700;" -->
-<!-- 								height="450"> -->
-<!-- 						</div> -->
+					<div class="carousel-item active">
+							<img src="classImageView.do?c_image=${c_image1}" style="width:700px; height:450px;">
+							</div>	
+			<c:forEach items="${c_image }" varStatus="status" var="ci">
+
 						
-							<div class="carousel-item active">
-							<img src="classImageView.do?c_image=${ci }" style="width:700px; height:450px;">
+							
+							<div class="carousel-item">
+							<img src="classImageView.do?c_image=${status.current }" style="width:700px; height:450px;">
 							</div>	
 						
 			</c:forEach>
@@ -71,11 +66,13 @@
 			</div>
 			
 			<div align="left">
-			<c:forEach items="${c_image }" var="ci">
-
-				<img data-target="#demo" data-slide-to="0" src="classImageView.do?c_image=${ci }"
+			<c:forEach items="${c_image }" varStatus="status" var="ci">
+				
+			
+				<img data-target="#demo" data-slide-to="${status.index }" src="classImageView.do?c_image=${ci.current }"
 					class="smallimg"> 
 			</c:forEach>
+					
 			</div>
 			
 
@@ -237,6 +234,8 @@
    				 
 			</div>
 			
+			<c:choose>
+			<c:when test="${sessionScope.id != null }">
 			<div style="height:150px;">
 				<input type="button" class="btn btn-secondary" style="width:250px;" value="문의 하기">
 			</div>
@@ -244,6 +243,8 @@
 			<div>
 				<input type="button" onclick="location.href='chargeApi.do'" class="btn btn-secondary" style="width:250px;" value="신청하기">
 			</div>
+			</c:when>
+			</c:choose>
 		</div><!-- 수업날짜, 문의하기, 신청하기 END -->
 		
 	</div><!-- 전체 div END -->
