@@ -85,6 +85,7 @@
 		<property name="mapperInterface" value="dao.ICommentDao"></property>
 	</bean>
 	
+	
 	<!-- <bean id="enrollDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>

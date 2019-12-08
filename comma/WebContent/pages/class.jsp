@@ -6,16 +6,135 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 
+<!-- JQuery로드 -->
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+	integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+	crossorigin="anonymous">
+	
+</script>
+<title>Insert title here</title>
+<script type="text/javascript">
+
+var number = ${c_number};
+
+function commentList(){
+	$.ajax({
+		url : "commentList.do",
+		type : "get",
+		data : {"number" : number},
+		dataType : "json",
+		success : function(jarr){
+			for(var i = 0; i < jarr.length; i++){
+				var tr = $("<tr>")
+				var id = $("<td>")
+				id.text(jarr[i].id)
+				
+				var content = $("<td>")
+				content.text(jarr[i].content)
+				
+				var date = $("<td>")
+				date.text(jarr[i].date)
+				var number = jarr[i].number
+			
+				var del = $("<td><input type='button' id='del"+number+"' onclick='commentdel("+number+");' value='삭제'>")
+//					var del = $("<button id ='del' onclick='commentdel("+number+");' name='삭제' >")
+				
+				tr.append(id).append(content).append(date).append(del);
+				
+				$(".commentList").append(tr);
+				
+			}
+		},
+		error : function(xhrReq, status, error) {
+			console.log(xhrReq + ' / ' + status + ' / ' + error);
+		}
+		
+	})
+}
+
+$(document).ready(function() {
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	$('#commentInsertBtn').click(function() {
+
+		var params = $('#commentInsertForm').serialize();
+		
+
+			$.ajax({
+				type : "post",
+				url : "commentWrite.do",
+				data : params,
+				dataType : "json",
+				success : function(resultStr) {
+
+					if (resultStr.result == "1") {
+						$(".commentList").empty();
+						
+						
+						
+						commentList();
+						
+					} else
+						alert("내용을 입력해주세요");
+
+				},
+				error : function(xhrReq, status, error) {
+					console.log(xhrReq + ' / ' + status + ' / ' + error);
+				}
+			})
+
+			
+
+	})
+	commentList();
+
+})
+
+function commentdel(number){
+	$.ajax({
+		url : "commentDelete.do",
+		data : {"number":number},
+		type: "get",
+		dataType : "json",
+		success : function(resultStr){
+			if(resultStr.result == "1"){
+				alert("삭제완료");
+				$(".commentList").empty();
+				commentList();
+			}
+			if(resultStr.result == "2"){
+				alert("삭제할 수 없는 댓글입니다.")
+			}
+			
+		},
+		erro : function(){
+			alert("에러");
+		}
+		
+		
+	});
+}
+
+
+</script>
+</head>
 
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	
 	
-
+	
+<input value="">
 	<div align="center"><!-- 전체 div -->
 	
 		<div align="left" style="width: 900px; display:inline-block; vertical-align:top;"> <!-- 메인 내용div -->
@@ -28,9 +147,10 @@
 					<!-- Indicators -->
 					<ul class="carousel-indicators">
 					
-						<li data-target="#demo" data-slide-to="0" class="active"></li>
+						
 						<c:forEach items="${c_image }" varStatus="status" var="ci">
-						<li data-target="#demo" data-slide-to="${status.count }" ></li>
+						<li data-target="#demo" data-slide-to="${status.index }" class="active"></li>
+						
 						</c:forEach>
 						
 						
@@ -40,18 +160,19 @@
 
 					<!-- The slideshow -->
 					<div class="carousel-inner">
-					<div class="carousel-item active">
-							<img src="classImageView.do?c_image=${c_image1}" style="width:700px; height:450px;">
-							</div>	
-			<c:forEach items="${c_image }" varStatus="status" var="ci">
+					
+							<div class="carousel-item active ">
+														</div>
+								
+					<c:forEach items="${c_image }" varStatus="status" var="ci">
 
 						
 							
-							<div class="carousel-item">
-							<img src="classImageView.do?c_image=${status.current }" style="width:700px; height:450px;">
-							</div>	
 						
-			</c:forEach>
+							<div class="carousel-item ">
+							<img data-slide-to="${status.index }" src="classImageView.do?c_image=${status.current }" style="width:700px; height:450px;">
+							</div>	
+					</c:forEach>
 						
 						
 					</div>
@@ -69,7 +190,7 @@
 			<c:forEach items="${c_image }" varStatus="status" var="ci">
 				
 			
-				<img data-target="#demo" data-slide-to="${status.index }" src="classImageView.do?c_image=${ci.current }"
+				<img data-target="#demo" data-slide-to="${status.index }" src="classImageView.do?c_image=${status.current}"
 					class="smallimg"> 
 			</c:forEach>
 					
@@ -173,31 +294,63 @@
 				<br>
 				<pre id="C-introduce">${c_content } </pre>
 			</div>
-
+			
 			<div align="center"
 				style="border-bottom: 1px solid #555; width: 800px;"></div>
-			<div style="margin-top: 50px">
-				<h3>리뷰</h3>
-				<br>
-				<div
-					class="grey-color"
-					style=" height: 100px; width: 700px; border-radius: 10px"
-					align="center">
-					<pre> 별점2</pre>
+			
+        <h3>리뷰</h3>
+			<div class="container">
+        <form id="commentInsertForm">
+            <div class="input-group" style="width: 800px;">
+               <input type="hidden" name="c_number" value="${c_number}"/>
+               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+               <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="commentInsertBtn">등록</button>
+               </span>
+              </div>
+        </form>
+    </div>
+    <br><br>
+    
+    <div class="container">
+        <table class="commentList">
+        <tr>
+        <td>이름</td>
+        <td>내용</td>
+        <td>날짜</td>
+        <td>삭제</td>
+        </tr>
+        </table>
+    </div>
 
-				</div>
 
-				<div class="CR_span1" align="center">
-					<img src="img/시간.png" id="profileP"
-						style="width: 100px; height: 100px; margin-top: 50px"> <br>
-					<a href="" class="">사용자</a>
-				</div>
 
-				<div style="display: inline-block">
-					<pre id="class_info">원데이클래스</pre>
-				</div>
+			
 
-			</div>
+<!-- 			<div align="center" -->
+<!-- 				style="border-bottom: 1px solid #555; width: 800px;"></div> -->
+<!-- 			<div style="margin-top: 50px"> -->
+<!-- 				<h3>리뷰</h3> -->
+<!-- 				<br> -->
+<!-- 				<div -->
+<!-- 					class="grey-color" -->
+<!-- 					style=" height: 100px; width: 700px; border-radius: 10px" -->
+<!-- 					align="center"> -->
+<!-- 					<pre> 별점2</pre> -->
+
+<!-- 				</div> -->
+
+<!-- 				<div class="CR_span1" align="center"> -->
+<!-- 					<img src="img/시간.png" id="profileP" -->
+<!-- 						style="width: 100px; height: 100px; margin-top: 50px"> <br> -->
+<!-- 					<a href="" class="">사용자</a> -->
+<!-- 				</div> -->
+
+<!-- 				<div style="display: inline-block"> -->
+<!-- 					<pre id="class_info">원데이클래스</pre> -->
+<!-- 				</div> -->
+
+<!-- 			</div> -->
 
 
 		</div><!-- 메인 내용 div END -->

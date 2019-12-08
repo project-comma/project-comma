@@ -3,6 +3,7 @@ package service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.ICommentDao;
@@ -10,16 +11,18 @@ import dao.ICommentDao;
 @Service
 public class CommentService implements ICommentService {
 
+	@Autowired
 	private ICommentDao dao;
 	
 	@Override
 	public int writeComment(HashMap<String, Object> params) {//댓글 쓰기
+		System.out.println("서비스"+params);
 		int result = dao.insertComment(params);
-		return 0;
+		return result;
 	}
 
 	@Override
-	public int delComment(String number) {//댓글 지우기(학생만)
+	public int delComment(int number) {//댓글 지우기(학생만)
 		int result = dao.deleteComment(number);
 		return result;
 	}
@@ -35,5 +38,13 @@ public class CommentService implements ICommentService {
 		ArrayList<HashMap<String, Object>> result = dao.selectList(params);
 		return result;
 	}
+
+	@Override
+	public HashMap<String, Object> selectOne(int number) {
+		HashMap<String, Object> result = dao.select(number);
+		return result;
+	}
+	
+	
 
 }
