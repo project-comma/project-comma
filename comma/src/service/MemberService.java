@@ -286,7 +286,7 @@ public class MemberService implements IMemberService {
 
 			System.out.println("프로필이 없어 ㅠㅠ");
 			String img = request.getRealPath("/img/");
-			return new File(img + "test2.jpg");
+			return new File(img + "no_detail_img.gif");
 		}
 
 		String path = "C:/image/";
@@ -479,5 +479,75 @@ public class MemberService implements IMemberService {
 	public int naver_id_drop(HashMap<String, Object> params) {
 		dao.deleteMember(params);
 		return 1;
+	}
+	
+	public HashMap<String, Object> rc_List(String id){
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		ArrayList<HashMap<String, Object>> list = dao.rclassList(id);
+		
+		res.put("rList", list);
+		
+		return res;
+	}
+
+	@Override
+	public HashMap<String, Object> com_List(String id) {
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		ArrayList<HashMap<String, Object>> list = dao.comclassList(id);
+		
+		res.put("cList", list);
+		
+		return res;
+	}
+	
+	public HashMap<String, Object> enroll(String id){
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		ArrayList<HashMap<String, Object>> list = dao.enrollClass(id);
+		
+		res.put("enroll", list);
+		
+		
+		return res;
+	}
+
+	@Override
+	public HashMap<String, Object> payClass(String id) {
+		// TODO Auto-generated method stub
+		
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		ArrayList<HashMap<String, Object>> list = dao.payClass(id);
+		
+		res.put("payClass", list);
+		
+		return res;
+	}
+
+	@Override
+	public HashMap<String, Object> refClass(String id) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		ArrayList<HashMap<String, Object>> list = dao.refundClass(id);
+		
+		res.put("refClass", list);
+		
+		return res;
+	}
+
+	@Override
+	public HashMap<String, Object> compClass(String id) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		
+		ArrayList<HashMap<String, Object>> list = dao.compClass(id);
+		
+		res.put("compClass", list);
+		
+		return res;
 	}
 }

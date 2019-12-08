@@ -163,15 +163,22 @@
 					<input type="button" class="btn btn-outline-secondary" value="로그아웃"
 						id="logout_btn" style="float: right; margin-left: 7px;"
 						onclick="location.href='logout.do'">
+					 <input
+								type="button" class="btn btn-light" id="modify_info" value="탈퇴"
+								onclick="drop_member_open(${id})">
 				</c:when>
 
 				<c:when test="${sessionScope.state==2 }">
 
+
+					<input type="button" class="btn btn-light" id="modify_info" value="탈퇴" style="float:right;"
+								onclick="drop_member_open(${id})">
 					<input type="button" class="btn btn-outline-secondary" value="로그아웃"
 						id="logout_btn" style="float: right; margin-left: 7px;"
 						onclick="location.href='logout.do'">
 					<div class="custom-control custom-switch"
 						style="float: right; margin-left: 7px;">
+						
 
 						<input type="checkbox" class="custom-control-input" id="tSwitch"
 							style="float: left;" onclick="modeChange(this)"> <label

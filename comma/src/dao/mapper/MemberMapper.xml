@@ -77,4 +77,28 @@
   	update member set state=2 where id=#{id}
   </update>
   
+  <select id="rclassList" resultType="java.util.HashMap" parameterType="String">
+  	select * from class where id=#{id} and c_state=2
+  </select>
+  
+  <select id="comclassList" resultType="java.util.HashMap" parameterType="String">
+  	select * from class where id=#{id} and c_state=4
+  </select>
+  
+  <select id="enrollClass" resultType="java.util.HashMap" parameterType="String">
+  
+  	select * from enroll where id=#{id}
+  </select>
+  
+  <select id="payClass" resultType="java.util.HashMap" parameterType="String">
+  	select * from paylog where id=#{id} and type=1
+  </select>
+  
+  <select id="refundClass" resultType="java.util.HashMap" parameterType="String">
+  	select * from paylog where id=#{id} and type=2
+  </select>
+  
+  <select id="compClass" resultType="java.util.HashMap" parameterType="String">
+  	select * from comp where id=#{id}
+  </select>  
   </mapper>

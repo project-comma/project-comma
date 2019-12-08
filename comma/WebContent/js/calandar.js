@@ -17,6 +17,7 @@ function calandar_view(YY, MM){//달력 출력
 	
 	$.each($("#myT_table tr td"), function(){
 		$(this).empty();
+		$(this).css('background-color','#FFFFFF');
 	})
 	$.each($("#myT_table tr td"),function(){
 		var index1 = $(this).parent().index();
@@ -40,17 +41,26 @@ function calandar_view(YY, MM){//달력 출력
 }
 
 
-function calandar_update(){
-	
-	var year = $("#myT_Year").val();
-	var month = $("#myT_Month").val();
-	
-	calandar_view(year, month);
-}
 
 
 function sc_add(date, time, cl){//일정 추가
 	
+	var year = $("#myT_Year").val();
+	var month = $("#myT_Month").val();
+	
+	$.each($("#myT_table tr td"), function(){
+		
+		var d = year + '-' + month + '-' + $(this).text();
+		
+		if(date==d){
+			
+			$(this).append('<br>');
+			$(this).append(time);
+			$(this).append('<br>');
+			$(this).append(cl);
+			$(this).css('background-color','#CC99FF');
+		}
+	});
 }
 
 

@@ -9,7 +9,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	
-	<div align="center" style="width:800px; margin-top:150px;"><!-- 전체 div -->
+	<div align="center" style="width:800px; margin-top:150px; margin-left:500px;"><!-- 전체 div -->
 		
 		<div><!-- 제목 -->
 			<h4>수강신청 현황</h4>

@@ -23,4 +23,10 @@ public interface IMemberDao {
 	public ArrayList<HashMap<String, Object>> getMyRequest(String id);
 	public ArrayList<HashMap<String, Object>> acceptTList(int state);
 	public int TeacherAccept(String id);
+	public ArrayList<HashMap<String, Object>> rclassList(String id);
+	public ArrayList<HashMap<String, Object>> comclassList(String id);
+	public ArrayList<HashMap<String, Object>> payClass(String id);
+	public ArrayList<HashMap<String, Object>> refundClass(String id);
+	public ArrayList<HashMap<String, Object>> enrollClass(String id);
+	public ArrayList<HashMap<String, Object>> compClass(String id);
 }

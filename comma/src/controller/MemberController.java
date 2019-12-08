@@ -245,6 +245,16 @@ public class MemberController {
 			HashMap<String, Object> info = mService.MemberInfo((String) session.getAttribute("id"));
 
 			HashMap<String, Object> res = mService.myRequest(params);
+			
+			HashMap<String, Object> payClass = mService.payClass((String) session.getAttribute("id"));
+			HashMap<String, Object> refundClass = mService.refClass((String) session.getAttribute("id"));
+			HashMap<String, Object> compClass = mService.compClass((String) session.getAttribute("id"));
+			HashMap<String, Object> enroll = mService.enroll((String) session.getAttribute("id"));
+			
+			mav.addAllObjects(enroll);
+			mav.addAllObjects(payClass);
+			mav.addAllObjects(refundClass);
+			mav.addAllObjects(compClass);
 
 			mav.addObject("info", info);
 
@@ -261,8 +271,14 @@ public class MemberController {
 			HashMap<String, Object> info = mService.MemberInfo((String) session.getAttribute("id"));
 			HashMap<String, Object> res = mService.myTRequest(params);
 
+			HashMap<String, Object> rList = mService.rc_List((String) session.getAttribute("id"));
+			HashMap<String, Object> cList = mService.com_List((String)session.getAttribute("id"));
+			
+			System.out.println(rList);
 			mav.addObject("info", info);
 			mav.addAllObjects(res);
+			mav.addAllObjects(rList);
+			mav.addAllObjects(cList);
 
 			mav.setViewName("mypage_t");
 		} else if (mode.equals("ad")) {

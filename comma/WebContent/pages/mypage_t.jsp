@@ -23,7 +23,27 @@
 		
 		$("#myT_phonenumber").text(phoneFormat($("#myT_phonenumber").text()));
 		calandar_view(date.getFullYear(), date.getMonth()+1);
+		
+		<c:forEach var="v" items="${rList}">
+			sc_add('${v.c_startday}일','${v.c_starttime}','${v.c_name}' )
+		
+		</c:forEach>
 	});
+	
+	
+	function calandar_update(){
+		
+		var year = $("#myT_Year").val();
+		var month = $("#myT_Month").val();
+		
+		calandar_view(year, month);
+		
+		<c:forEach var="v" items="${rList}">
+			sc_add('${v.c_startday}일','${v.c_starttime}','${v.c_name}' )
+
+		</c:forEach>
+	}
+
 </script>
 
 <style>
@@ -71,9 +91,7 @@
 							<input type="button" class="btn btn-light" id="modify_info"
 								value="경력사항변경" onclick="location.href='changeInfo_tForm.do'">
 							<input type="button" class="btn btn-light" id="modify_info"
-								value="실시간톡" onclick="location.href='talk.do'"> <input
-								type="button" class="btn btn-light" id="modify_info" value="탈퇴"
-								onclick="drop_member_open(${id})">
+								value="실시간톡" onclick="location.href='talk.do'">
 							<input type="button" class="btn btn-light" id="modify_info"
 								value="클래스 등록" onclick="location.href='classResist.do'">
 							<input type="button" class="btn btn-light"
@@ -122,11 +140,12 @@
 			<br>
 			<h3 style="font-weight: 800; font-size: 25px; margin-left: 22px;" id="t_nav1">등록된클래스</h3>
 			<br>
+			<c:forEach var="i" items="${rList }" begin="0" end="4">
 			<div align="left">
 				<div class=inlineArr>
 					<input type="checkbox"
 						style="width: 20px; height: 20px; vertical-align: top; margin-bottom: 15px;">
-					너만을 위한 마카롱 만들기 (2019-10-22 개설/ 원데이/ 30,000원)<br>
+					${i.c_name } (${i.c_startday } 개설/ 원데이/ ${i.c_price}원)<br>
 				</div>
 				<div class=inlineArr>
 					<button type="submit"
@@ -136,7 +155,7 @@
 					</button>
 					<button type="submit"
 						class="btn btn-outline-secondary mypageT_resisclass_btn"
-						onclick="del_conf('t_class_del','${c_name}')">
+						onclick="del_conf('t_class_del','${c_number}')">
 						<h6 style="font-size: 13px;">수업삭제</h6>
 					</button>
 					<button type="submit"
@@ -147,9 +166,11 @@
 				</div>
 			</div>
 			<br> <br>
+			
+			</c:forEach>
 
 
-			<div align="left">
+			<%-- <div align="left">
 				<div class=inlineArr>
 					<input type="checkbox"
 						style="width: 20px; height: 20px; vertical-align: top; margin-bottom: 15px;">
@@ -236,7 +257,7 @@
 
 
 
-			<br> <br>
+			<br> <br> --%>
 
 			<div align="right"></div>
 			<br>

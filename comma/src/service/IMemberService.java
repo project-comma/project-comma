@@ -53,4 +53,14 @@ public interface IMemberService {
 	public int naver_id_join(HashMap<String, Object> params);
 	
 	public int naver_id_drop(HashMap<String, Object> params);
+	
+	public HashMap<String, Object> rc_List(String id);
+	
+	public HashMap<String, Object> com_List(String id);
+	
+	public HashMap<String, Object> enroll(String id);
+	
+	public HashMap<String, Object> payClass(String id);
+	public HashMap<String, Object> refClass(String id);
+	public HashMap<String, Object> compClass(String id);
 }
