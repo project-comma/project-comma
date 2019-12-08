@@ -187,7 +187,7 @@ public class ClassController {
 		ModelAndView mav = new ModelAndView();
 		HashMap<String, Object> result = cService.viewClass(inumber);
 		String mid = (String) result.get("id");
-		System.out.println("아이디="+mid);
+		
 		HashMap<String, Object> result2 = mService.MemberInfo(mid);
 		
 		
@@ -195,8 +195,7 @@ public class ClassController {
 		mav.addObject("t_education", result2.get("t_education"));
 		mav.addObject("t_license", result2.get("t_license"));
 		
-		System.out.println(result.get("c_startday"));
-		System.out.println(result.get("c_starttime"));
+		
 		HashMap<String, Object> res = new HashMap<String, Object>();
 		HashMap<String, Object> res2 = new HashMap<String, Object>();
 		
@@ -219,8 +218,6 @@ public class ClassController {
 		
 		
 		
-		mav.addObject("c_image1", arr3[0]);
-		
 		
 
 
@@ -234,7 +231,7 @@ public class ClassController {
 		mav.addObject("c_location", result.get("c_location"));
 		mav.addObject("c_member", result.get("c_member"));
 		mav.addObject("id", result.get("id"));
-		
+		mav.addObject("c_number", result.get("c_number"));
 		
 		
 		mav.setViewName("class");
